@@ -4,10 +4,10 @@
  */
 package testcase.medium
 
-import com.github.francescojo.core.CoreKopringApplication
-import com.github.francescojo.core.CoreKopringApplicationImpl
-import com.github.francescojo.core.appconfig.LoggerConfig
-import com.github.francescojo.lib.annotation.MediumTest
+import com.flab.hsw.core.CoreKopringApplication
+import com.flab.hsw.core.CoreKopringApplicationImpl
+import com.flab.hsw.core.appconfig.LoggerConfig
+import com.flab.hsw.lib.annotation.MediumTest
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest
 import org.springframework.context.annotation.ComponentScan

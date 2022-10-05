@@ -4,9 +4,9 @@
  */
 package testcase.small.domain.user
 
-import com.github.francescojo.core.domain.user.repository.UserRepository
-import com.github.francescojo.core.domain.user.usecase.FindUserUseCase
-import com.github.francescojo.lib.annotation.SmallTest
+import com.flab.hsw.core.domain.user.repository.UserRepository
+import com.flab.hsw.core.domain.user.usecase.FindUserUseCase
+import com.flab.hsw.lib.annotation.SmallTest
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.CoreMatchers.nullValue

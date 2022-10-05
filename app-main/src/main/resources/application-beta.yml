@@ -6,6 +6,6 @@ spring:
 logging:
   level:
     ROOT: INFO
-    com.github.francescojo: TRACE
+    com.flab.hsw: TRACE
     org.springframework.web.servlet: DEBUG
     org.springframework.web.filter: DEBUG

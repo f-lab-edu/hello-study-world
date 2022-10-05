@@ -4,8 +4,8 @@
  */
 package test.domain.user
 
-import com.github.francescojo.core.domain.user.usecase.CreateUserUseCase
-import com.github.francescojo.core.domain.user.usecase.EditUserUseCase
+import com.flab.hsw.core.domain.user.usecase.CreateUserUseCase
+import com.flab.hsw.core.domain.user.usecase.EditUserUseCase
 import com.github.javafaker.Faker
 
 fun randomCreateUserMessage(

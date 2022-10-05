@@ -6,13 +6,13 @@ package testcase.medium
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.github.francescojo.KopringApplication
-import com.github.francescojo.appconfig.JacksonConfig
-import com.github.francescojo.appconfig.WebMvcConfig
-import com.github.francescojo.core.CoreKopringApplication
-import com.github.francescojo.core.appconfig.LoggerConfig
-import com.github.francescojo.endpoint.ErrorResponseEnvelope
-import com.github.francescojo.lib.annotation.MediumTest
+import com.flab.hsw.KopringApplication
+import com.flab.hsw.appconfig.JacksonConfig
+import com.flab.hsw.appconfig.WebMvcConfig
+import com.flab.hsw.core.CoreKopringApplication
+import com.flab.hsw.core.appconfig.LoggerConfig
+import com.flab.hsw.endpoint.ErrorResponseEnvelope
+import com.flab.hsw.lib.annotation.MediumTest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest

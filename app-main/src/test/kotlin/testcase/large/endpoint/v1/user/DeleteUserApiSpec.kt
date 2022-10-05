@@ -4,8 +4,8 @@
  */
 package testcase.large.endpoint.v1.user
 
-import com.github.francescojo.core.exception.ErrorCodes
-import com.github.francescojo.endpoint.common.response.SimpleResponse
+import com.flab.hsw.core.exception.ErrorCodes
+import com.flab.hsw.endpoint.common.response.SimpleResponse
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.DisplayName

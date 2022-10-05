@@ -4,7 +4,7 @@
  */
 package test.domain.user.aggregate
 
-import com.github.francescojo.core.domain.user.User
+import com.flab.hsw.core.domain.user.User
 import com.github.javafaker.Faker
 import java.time.Instant
 import java.util.*
