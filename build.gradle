@@ -54,7 +54,7 @@ buildscript {
     }
 }
 
-group "com.github.francescojo"
+group "com.flab.hsw"
 
 allprojects {
     apply plugin: "idea"

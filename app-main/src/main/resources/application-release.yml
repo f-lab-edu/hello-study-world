@@ -6,4 +6,4 @@ spring:
 logging:
   level:
     ROOT: INFO
-    com.github.francescojo: TRACE
+    com.flab.hsw: TRACE

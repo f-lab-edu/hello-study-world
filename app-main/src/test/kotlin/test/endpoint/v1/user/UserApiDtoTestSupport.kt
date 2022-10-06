@@ -4,8 +4,8 @@
  */
 package test.endpoint.v1.user
 
-import com.github.francescojo.endpoint.v1.user.create.CreateUserRequest
-import com.github.francescojo.endpoint.v1.user.edit.EditUserRequest
+import com.flab.hsw.endpoint.v1.user.create.CreateUserRequest
+import com.flab.hsw.endpoint.v1.user.edit.EditUserRequest
 import com.github.javafaker.Faker
 
 fun CreateUserRequest.Companion.random(

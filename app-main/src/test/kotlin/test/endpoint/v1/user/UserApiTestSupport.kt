@@ -4,10 +4,10 @@
  */
 package test.endpoint.v1.user
 
-import com.github.francescojo.endpoint.v1.ApiPathsV1
-import com.github.francescojo.endpoint.v1.user.common.UserResponse
-import com.github.francescojo.endpoint.v1.user.create.CreateUserRequest
-import com.github.francescojo.endpoint.v1.user.edit.EditUserRequest
+import com.flab.hsw.endpoint.v1.ApiPathsV1
+import com.flab.hsw.endpoint.v1.user.common.UserResponse
+import com.flab.hsw.endpoint.v1.user.create.CreateUserRequest
+import com.flab.hsw.endpoint.v1.user.edit.EditUserRequest
 import io.restassured.response.Response
 import org.springframework.restdocs.payload.FieldDescriptor
 import test.endpoint.v1.usersId

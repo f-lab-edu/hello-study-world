@@ -6,8 +6,8 @@ package testcase.small.appconfig
 
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.SerializerProvider
-import com.github.francescojo.appconfig.InstantResponseDecorator
-import com.github.francescojo.lib.annotation.SmallTest
+import com.flab.hsw.appconfig.InstantResponseDecorator
+import com.flab.hsw.lib.annotation.SmallTest
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.BeforeEach

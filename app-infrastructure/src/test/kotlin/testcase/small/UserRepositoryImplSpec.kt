@@ -4,10 +4,10 @@
  */
 package testcase.small
 
-import com.github.francescojo.core.jdbc.user.UserEntity
-import com.github.francescojo.core.jdbc.user.dao.UserEntityDao
-import com.github.francescojo.core.jdbc.user.repository.UserRepositoryImpl
-import com.github.francescojo.lib.annotation.SmallTest
+import com.flab.hsw.core.jdbc.user.UserEntity
+import com.flab.hsw.core.jdbc.user.dao.UserEntityDao
+import com.flab.hsw.core.jdbc.user.repository.UserRepositoryImpl
+import com.flab.hsw.lib.annotation.SmallTest
 import com.github.javafaker.Faker
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat

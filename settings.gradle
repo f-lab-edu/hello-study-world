@@ -1,4 +1,4 @@
-rootProject.name = "kopringboot-multimodule-template"
+rootProject.name = "hello-study-world"
 
 include ":app-lib",
         ":app-core",

@@ -4,9 +4,9 @@
  */
 package testcase.large.endpoint.v1.user
 
-import com.github.francescojo.core.exception.ErrorCodes
-import com.github.francescojo.endpoint.v1.user.common.UserResponse
-import com.github.francescojo.endpoint.v1.user.edit.EditUserRequest
+import com.flab.hsw.core.exception.ErrorCodes
+import com.flab.hsw.endpoint.v1.user.common.UserResponse
+import com.flab.hsw.endpoint.v1.user.edit.EditUserRequest
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.BeforeEach

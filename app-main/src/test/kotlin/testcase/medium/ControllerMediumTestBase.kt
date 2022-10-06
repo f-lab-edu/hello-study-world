@@ -4,15 +4,15 @@
  */
 package testcase.medium
 
-import com.github.francescojo.core.domain.user.usecase.CreateUserUseCase
-import com.github.francescojo.core.domain.user.usecase.DeleteUserUseCase
-import com.github.francescojo.core.domain.user.usecase.EditUserUseCase
-import com.github.francescojo.core.domain.user.usecase.FindUserUseCase
-import com.github.francescojo.endpoint.health.HealthControllerImpl
-import com.github.francescojo.endpoint.v1.user.create.CreateUserControllerImpl
-import com.github.francescojo.endpoint.v1.user.delete.DeleteUserControllerImpl
-import com.github.francescojo.endpoint.v1.user.edit.EditUserControllerImpl
-import com.github.francescojo.endpoint.v1.user.get.GetUserControllerImpl
+import com.flab.hsw.core.domain.user.usecase.CreateUserUseCase
+import com.flab.hsw.core.domain.user.usecase.DeleteUserUseCase
+import com.flab.hsw.core.domain.user.usecase.EditUserUseCase
+import com.flab.hsw.core.domain.user.usecase.FindUserUseCase
+import com.flab.hsw.endpoint.health.HealthControllerImpl
+import com.flab.hsw.endpoint.v1.user.create.CreateUserControllerImpl
+import com.flab.hsw.endpoint.v1.user.delete.DeleteUserControllerImpl
+import com.flab.hsw.endpoint.v1.user.edit.EditUserControllerImpl
+import com.flab.hsw.endpoint.v1.user.get.GetUserControllerImpl
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.bind.annotation.RestController
