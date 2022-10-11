@@ -3,6 +3,7 @@ version version_app
 apply plugin: "org.springframework.boot"
 apply plugin: "io.spring.dependency-management"
 apply plugin: "kotlin-spring"
+apply plugin: "org.asciidoctor.jvm.convert"
 
 jar.dependsOn bootJar
 
@@ -69,4 +70,8 @@ assemble.doLast {
 
     final outputPrefix = "$project.rootDir/build/${project.name}"
     new File("${outputPrefix}-${project.version}.jar").renameTo("${outputPrefix}-latest.jar")
+}
+
+asciidoctor {
+    dependsOn largeTest
 }
