@@ -23,7 +23,7 @@ jobs:
       run: chmod +x gradlew
         
     - name: Run detekt
-      run: ./gradlew app-core:detekt
+      run: ./gradlew detekt
 
     - name: Run test
-      run: ./gradlew app-core:test
+      run: ./gradlew test
