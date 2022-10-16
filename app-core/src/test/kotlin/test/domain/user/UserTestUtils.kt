@@ -10,16 +10,22 @@ import com.github.javafaker.Faker
 
 fun randomCreateUserMessage(
     nickname: String = Faker().name().fullName(),
-    email: String = Faker().internet().emailAddress()
+    email: String = Faker().internet().emailAddress(),
+    loginId: String = "",
+    password: String = ""
 ): CreateUserUseCase.CreateUserMessage {
     data class FakeCreateUserMessage(
         override val nickname: String,
-        override val email: String
+        override val email: String,
+        override val loginId: String,
+        override val password: String
     ) : CreateUserUseCase.CreateUserMessage
 
     return FakeCreateUserMessage(
         nickname = nickname,
-        email = email
+        email = email,
+        loginId = loginId,
+        password = password
     )
 }
 

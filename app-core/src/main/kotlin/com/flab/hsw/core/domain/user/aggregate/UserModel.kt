@@ -18,6 +18,8 @@ internal data class UserModel(
     override val id: UUID,
     override val nickname: String,
     override val email: String,
+    override val password: String,
+    override val loginId: String,
     override val registeredAt: Instant,
     override val lastActiveAt: Instant,
     override val deleted: Boolean
@@ -39,6 +41,8 @@ internal data class UserModel(
             id: UUID = UUID.randomUUID(),
             nickname: String,
             email: String,
+            loginId: String,
+            password: String,
             registeredAt: Instant? = null,
             lastActiveAt: Instant? = null,
             deleted: Boolean = false
@@ -49,6 +53,8 @@ internal data class UserModel(
                 id = id,
                 nickname = nickname,
                 email = email,
+                loginId = loginId,
+                password = password,
                 registeredAt = registeredAt ?: now,
                 lastActiveAt = lastActiveAt ?: now,
                 deleted = deleted
@@ -63,6 +69,8 @@ internal data class UserModel(
                     id = id,
                     nickname = nickname,
                     email = email,
+                    loginId = loginId,
+                    password = password,
                     registeredAt = registeredAt,
                     lastActiveAt = lastActiveAt,
                     deleted = deleted

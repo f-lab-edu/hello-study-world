@@ -13,6 +13,8 @@ fun randomUser(
     id: UUID = UUID.randomUUID(),
     nickname: String = Faker().name().fullName(),
     email: String = Faker().internet().emailAddress(),
+    loginId: String = FakeValuesService(Locale.ENGLISH, RandomService()).regexify(User.LOGIN_ID_REGEX),
+    password: String = FakeValuesService(Locale.ENGLISH, RandomService()).regexify(User.PASSWORD_REGEX),
     registeredAt: Instant = Instant.now(),
     lastActiveAt: Instant = Instant.now(),
     deleted: Boolean = false
@@ -20,6 +22,8 @@ fun randomUser(
     id = id,
     nickname = nickname,
     email = email,
+    loginId = loginId,
+    password = password,
     registeredAt = registeredAt,
     lastActiveAt = lastActiveAt,
     deleted = deleted

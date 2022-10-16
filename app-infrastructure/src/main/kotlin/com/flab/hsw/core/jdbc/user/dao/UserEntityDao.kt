@@ -83,12 +83,14 @@ internal class UserEntityDaoImpl(
                 `${UserEntity.COL_UUID}`,
                 `${UserEntity.COL_NICKNAME}`,
                 `${UserEntity.COL_EMAIL}`,
+                `${UserEntity.COL_LOGIN_ID}`,
+                `${UserEntity.COL_PASSWORD}`,
                 `${UserEntity.COL_DELETED}`,
                 `${UserEntity.COL_CREATED_AT}`,
                 `${UserEntity.COL_UPDATED_AT}`,
                 `${UserEntity.COL_VERSION}`
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """.trimIndent()
 
         return userEntity.apply {
@@ -97,10 +99,12 @@ internal class UserEntityDaoImpl(
                 setBinaryEx(1, userEntity.uuid.toByteArray())
                 setStringEx(2, userEntity.nickname)
                 setStringEx(3, userEntity.email)
-                setBooleanEx(4, userEntity.deleted)
-                setTimestampEx(5, userEntity.registeredAt)
-                setTimestampEx(6, userEntity.lastActiveAt)
-                setLongEx(7, userEntity.version)
+                setStringEx(4, userEntity.loginId)
+                setStringEx(5, userEntity.password)
+                setBooleanEx(6, userEntity.deleted)
+                setTimestampEx(7, userEntity.registeredAt)
+                setTimestampEx(8, userEntity.lastActiveAt)
+                setLongEx(9, userEntity.version)
             }.key!!.toLong()
         }
     }

@@ -19,6 +19,8 @@ interface CreateUserUseCase {
     interface CreateUserMessage {
         val nickname: String
         val email: String
+        val loginId: String
+        val password: String
     }
 
     companion object {
@@ -40,7 +42,9 @@ internal class CreateUserUseCaseImpl(
 
         val user = User.create(
             nickname = message.nickname,
-            email = message.email
+            email = message.email,
+            loginId = message.loginId,
+            password = message.password
         )
 
         return users.save(user)

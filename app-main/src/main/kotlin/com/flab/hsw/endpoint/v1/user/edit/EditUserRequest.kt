@@ -21,7 +21,7 @@ import javax.validation.constraints.Size
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class EditUserRequest(
     @field:Nullable
-    @field:Size(min = User.LENGTH_NAME_MIN, max = User.LENGTH_NAME_MAX)
+    @field:Size(min = User.LENGTH_NICKNAME_MIN, max = User.LENGTH_NICKNAME_MAX)
     @JsonProperty
     @JsonPropertyDescription(DESC_NAME)
     override val nickname: String?,
@@ -36,7 +36,7 @@ data class EditUserRequest(
     fun isEmpty() = nickname.isNullOrEmpty() && email.isNullOrEmpty()
 
     companion object {
-        const val DESC_NAME = ""
+        const val DESC_NAME = "This is user's nickname."
         const val DESC_EMAIL = ""
     }
 }

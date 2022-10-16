@@ -4,6 +4,8 @@ CREATE TABLE IF NOT EXISTS `users`
     `uuid`           BINARY(16)  NOT NULL,
     `nickname`       VARCHAR(64) NOT NULL,
     `email`          VARCHAR(64) NOT NULL,
+    `login_id`       VARCHAR(64) NOT NULL,
+    `password`       VARCHAR(128) NOT NULL,
     `deleted`        BOOLEAN     DEFAULT FALSE,
     `created_at`     DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`     DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,

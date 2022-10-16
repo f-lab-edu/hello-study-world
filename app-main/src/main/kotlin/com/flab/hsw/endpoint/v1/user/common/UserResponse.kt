@@ -29,6 +29,10 @@ data class UserResponse(
     val email: String,
 
     @JsonProperty
+    @JsonPropertyDescription(DESC_LOGIN_ID)
+    val loginId: String,
+
+    @JsonProperty
     @JsonPropertyDescription(DESC_REGISTERED_AT)
     val registeredAt: Instant,
 
@@ -37,17 +41,19 @@ data class UserResponse(
     val lastActiveAt: Instant
 ) {
     companion object {
-        const val DESC_ID = ""
-        const val DESC_NICKNAME = ""
-        const val DESC_EMAIL = ""
-        const val DESC_REGISTERED_AT = ""
-        const val DESC_LAST_ACTIVE_AT = ""
+        const val DESC_ID = "This is user's id."
+        const val DESC_NICKNAME = "This is user's nickname."
+        const val DESC_EMAIL = "This is user's email address"
+        const val DESC_LOGIN_ID = "This is user's id for login."
+        const val DESC_REGISTERED_AT = "This is time that user is registered as member of service."
+        const val DESC_LAST_ACTIVE_AT = "This is time that user's last active."
 
         fun from(src: User) = with(src) {
             UserResponse(
                 id = id,
                 nickname = nickname,
                 email = email,
+                loginId = loginId,
                 registeredAt = registeredAt,
                 lastActiveAt = lastActiveAt
             )

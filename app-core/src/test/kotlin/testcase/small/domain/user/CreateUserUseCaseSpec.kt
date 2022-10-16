@@ -51,6 +51,8 @@ class CreateUserUseCaseSpec {
         assertAll(
             { assertThat(createdUser.nickname, `is`(message.nickname)) },
             { assertThat(createdUser.email, `is`(message.email)) },
+            { assertThat(createdUser.loginId, `is`(message.loginId)) },
+            { assertThat(createdUser.password, `is`(message.password)) },
         )
     }
 
