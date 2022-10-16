@@ -5,6 +5,7 @@
 package testcase.small.domain.user
 
 import com.flab.hsw.core.domain.user.exception.SameEmailUserAlreadyExistException
+import com.flab.hsw.core.domain.user.exception.SameLoginIdUserAlreadyExistException
 import com.flab.hsw.core.domain.user.exception.SameNicknameUserAlreadyExistException
 import com.flab.hsw.core.domain.user.repository.UserRepository
 import com.flab.hsw.core.domain.user.usecase.CreateUserUseCase
@@ -81,4 +82,18 @@ class CreateUserUseCaseSpec {
         // then:
         assertThrows<SameEmailUserAlreadyExistException> { sut.createUser(message) }
     }
+
+    @DisplayName("Login Id must not be duplicated")
+    @Test
+    fun errorIfLoginIdIsDuplicated() {
+        // given:
+        val message = randomCreateUserMessage()
+
+        // and:
+        `when`(userRepository.findByLoginId(message.loginId)).thenReturn(randomUser(loginId = message.loginId))
+
+        // then:
+        assertThrows<SameLoginIdUserAlreadyExistException> { sut.createUser(message) }
+    }
+
 }

@@ -24,6 +24,8 @@ internal interface UserEntityDao {
 
     fun selectByEmail(email: String): UserEntity?
 
+    fun  selectByLoginId(loginId: String): UserEntity?
+
     fun insert(userEntity: UserEntity): UserEntity
 
     fun update(seq: Long, userEntity: UserEntity): UserEntity
@@ -75,6 +77,17 @@ internal class UserEntityDaoImpl(
         """.trimIndent()
 
         return selectOne(sql, email)
+    }
+
+    override fun selectByLoginId(loginId: String): UserEntity? {
+        val sql = """
+            SELECT *
+            FROM `${UserEntity.TABLE}` u
+            WHERE u.`${UserEntity.COL_LOGIN_ID}` = ?
+              AND u.`${UserEntity.COL_DELETED}` = FALSE
+        """.trimIndent()
+
+        return selectOne(sql, loginId)
     }
 
     override fun insert(userEntity: UserEntity): UserEntity {

@@ -29,7 +29,7 @@ interface ErrorCodesToHttpStatusMixin {
 
         // Domain error cases to HTTP status
         USER_BY_ID_NOT_FOUND -> HttpStatus.NOT_FOUND
-        USER_BY_EMAIL_DUPLICATED, USER_BY_NICKNAME_DUPLICATED -> HttpStatus.CONFLICT
+        USER_BY_EMAIL_DUPLICATED, USER_BY_NICKNAME_DUPLICATED, USER_BY_LOGIN_ID_DUPLICATED -> HttpStatus.CONFLICT
 
         UNHANDLED_EXCEPTION -> HttpStatus.INTERNAL_SERVER_ERROR
     }
