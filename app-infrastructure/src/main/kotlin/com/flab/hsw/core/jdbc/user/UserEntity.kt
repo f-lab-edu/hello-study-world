@@ -16,6 +16,7 @@ import java.util.*
  *
  * @since 2021-08-10
  */
+@SuppressWarnings("LongParameterList")  // 별도의 클래스로 추출할 프로퍼티가 존재하지 않습니다.
 internal class UserEntity(
     val uuid: UUID,
     var nickname: String,
