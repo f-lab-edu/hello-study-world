@@ -1,0 +1,7 @@
+== CreateUser
+=== Request
+include::{snippets}/v1/users/CreateUserApiSpec/userCreated/http-request.adoc[]
+include::{snippets}/v1/users/CreateUserApiSpec/userCreated/request-fields.adoc[]
+=== Response
+include::{snippets}/v1/users/CreateUserApiSpec/userCreated/http-response.adoc[]
+include::{snippets}/v1/users/CreateUserApiSpec/userCreated/response-fields.adoc[]

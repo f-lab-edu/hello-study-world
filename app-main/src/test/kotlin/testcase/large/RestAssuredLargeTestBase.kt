@@ -30,13 +30,13 @@ import org.springframework.restdocs.RestDocumentationContextProvider
 import org.springframework.restdocs.RestDocumentationExtension
 import org.springframework.restdocs.operation.preprocess.Preprocessors
 import org.springframework.restdocs.payload.FieldDescriptor
-import org.springframework.restdocs.payload.PayloadDocumentation
+import org.springframework.restdocs.payload.JsonFieldType
+import org.springframework.restdocs.payload.PayloadDocumentation.*
+import org.springframework.restdocs.payload.ResponseFieldsSnippet
 import org.springframework.restdocs.restassured3.RestAssuredRestDocumentation
 import org.springframework.restdocs.snippet.Snippet
 import org.springframework.test.context.ActiveProfiles
 import test.endpoint.v1.JsonRequestAssertionsMixin
-import java.util.ArrayList
-import java.util.HashMap
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.reflect.KClass
 
@@ -165,11 +165,24 @@ class RestAssuredLargeTestBase : JsonRequestAssertionsMixin {
                 ),
                 Preprocessors.preprocessResponse(Preprocessors.prettyPrint()),
                 *(ArrayList<Snippet>().apply {
-                    reqFields?.takeIf { it.isNotEmpty() }?.let { add(PayloadDocumentation.requestFields(it)) }
-                    respFields?.takeIf { it.isNotEmpty() }?.let { add(PayloadDocumentation.responseFields(it)) }
+                    reqFields?.takeIf { it.isNotEmpty() }?.let { add(requestFields(it)) }
+                    respFields?.takeIf { it.isNotEmpty() }?.let { add(envelopResponseFields(it)) }
                 }.toTypedArray())
             )
         )
+    }
+
+    private fun envelopResponseFields(respFields: List<FieldDescriptor>): ResponseFieldsSnippet {
+        return applyPathPrefix("body.", respFields).apply response@{
+            this@response.addAll(
+                listOf(
+                    fieldWithPath("type").type(JsonFieldType.STRING).description("응답 유형"),
+                    fieldWithPath("timestamp").type(JsonFieldType.STRING).description("응답 일시")
+                )
+            )
+        }.let {
+            responseFields(it)
+        }
     }
 
     fun request(userAgent: String? = null): RequestSpecification = RestAssured.given(

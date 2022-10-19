@@ -15,7 +15,7 @@ buildscript {
 
         // Spring + infrastructure
         version_springBoot = "2.7.3"
-        version_springBootTest="2.7.3"
+        version_springBootTest = "2.7.3"
         version_hikariCP = "5.0.1"
         version_h2database = "2.1.214"
 
@@ -33,6 +33,7 @@ buildscript {
         version_javaFaker = "1.0.2"
         version_testcontainers = "1.17.3"
         version_restDocs = "2.0.6.RELEASE"
+        version_asciidoctor = "3.3.2"
     }
 
     repositories {
@@ -51,6 +52,7 @@ buildscript {
 
         // Testing & Code quality
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$version_detekt"
+        classpath "org.asciidoctor.jvm.convert:org.asciidoctor.jvm.convert.gradle.plugin:$version_asciidoctor"
     }
 }
 
