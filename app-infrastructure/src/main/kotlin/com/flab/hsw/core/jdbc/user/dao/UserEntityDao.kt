@@ -24,6 +24,8 @@ internal interface UserEntityDao {
 
     fun selectByEmail(email: String): UserEntity?
 
+    fun  selectByLoginId(loginId: String): UserEntity?
+
     fun insert(userEntity: UserEntity): UserEntity
 
     fun update(seq: Long, userEntity: UserEntity): UserEntity
@@ -77,18 +79,31 @@ internal class UserEntityDaoImpl(
         return selectOne(sql, email)
     }
 
+    override fun selectByLoginId(loginId: String): UserEntity? {
+        val sql = """
+            SELECT *
+            FROM `${UserEntity.TABLE}` u
+            WHERE u.`${UserEntity.COL_LOGIN_ID}` = ?
+              AND u.`${UserEntity.COL_DELETED}` = FALSE
+        """.trimIndent()
+
+        return selectOne(sql, loginId)
+    }
+
     override fun insert(userEntity: UserEntity): UserEntity {
         val sql = """
             INSERT INTO `${UserEntity.TABLE}` (
                 `${UserEntity.COL_UUID}`,
                 `${UserEntity.COL_NICKNAME}`,
                 `${UserEntity.COL_EMAIL}`,
+                `${UserEntity.COL_LOGIN_ID}`,
+                `${UserEntity.COL_PASSWORD}`,
                 `${UserEntity.COL_DELETED}`,
                 `${UserEntity.COL_CREATED_AT}`,
                 `${UserEntity.COL_UPDATED_AT}`,
                 `${UserEntity.COL_VERSION}`
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """.trimIndent()
 
         return userEntity.apply {
@@ -97,10 +112,12 @@ internal class UserEntityDaoImpl(
                 setBinaryEx(1, userEntity.uuid.toByteArray())
                 setStringEx(2, userEntity.nickname)
                 setStringEx(3, userEntity.email)
-                setBooleanEx(4, userEntity.deleted)
-                setTimestampEx(5, userEntity.registeredAt)
-                setTimestampEx(6, userEntity.lastActiveAt)
-                setLongEx(7, userEntity.version)
+                setStringEx(4, userEntity.loginId)
+                setStringEx(5, userEntity.password)
+                setBooleanEx(6, userEntity.deleted)
+                setTimestampEx(7, userEntity.registeredAt)
+                setTimestampEx(8, userEntity.lastActiveAt)
+                setLongEx(9, userEntity.version)
             }.key!!.toLong()
         }
     }

@@ -92,12 +92,12 @@ class EditUserRequestSpec : ControllerMediumTestBase() {
         @JvmStatic
         fun badNicknames(): Stream<Arguments> = Stream.of(
             Arguments.of(
-                "shorter than ${User.LENGTH_NAME_MIN}",
-                Faker().letterify("?").repeat(User.LENGTH_NAME_MIN - 1),
+                "shorter than ${User.LENGTH_NICKNAME_MIN}",
+                Faker().letterify("?").repeat(User.LENGTH_NICKNAME_MIN - 1),
             ),
             Arguments.of(
-                "longer than ${User.LENGTH_NAME_MAX}",
-                Faker().letterify("?").repeat(User.LENGTH_NAME_MAX + 1),
+                "longer than ${User.LENGTH_NICKNAME_MAX}",
+                Faker().letterify("?").repeat(User.LENGTH_NICKNAME_MAX + 1),
             )
         )
 

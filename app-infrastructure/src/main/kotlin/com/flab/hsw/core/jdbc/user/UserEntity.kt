@@ -16,10 +16,13 @@ import java.util.*
  *
  * @since 2021-08-10
  */
+@SuppressWarnings("LongParameterList")  // 별도의 클래스로 추출할 프로퍼티가 존재하지 않습니다.
 internal class UserEntity(
     val uuid: UUID,
     var nickname: String,
     var email: String,
+    var loginId: String,
+    var password: String,
     var registeredAt: Instant,
     var lastActiveAt: Instant,
     var deleted: Boolean
@@ -32,6 +35,8 @@ internal class UserEntity(
         id = this.uuid,
         nickname = this.nickname,
         email = this.email,
+        loginId = this.loginId,
+        password = this.password,
         registeredAt = this.registeredAt,
         lastActiveAt = this.lastActiveAt,
         deleted = this.deleted
@@ -52,6 +57,8 @@ internal class UserEntity(
         const val COL_UUID = "uuid"
         const val COL_NICKNAME = "nickname"
         const val COL_EMAIL = "email"
+        const val COL_LOGIN_ID = "login_Id"
+        const val COL_PASSWORD = "password"
         const val COL_DELETED = "deleted"
         const val COL_CREATED_AT = "created_at"
         const val COL_UPDATED_AT = "updated_at"
@@ -62,6 +69,8 @@ internal class UserEntity(
                 uuid = id,
                 nickname = nickname,
                 email = email,
+                loginId = loginId,
+                password = password,
                 registeredAt = registeredAt,
                 lastActiveAt = lastActiveAt,
                 deleted = deleted
@@ -77,6 +86,8 @@ internal class UserEntity(
                 uuid = (map[prefix + COL_UUID] as ByteArray).toUUID(),
                 nickname = map[prefix + COL_NICKNAME] as String,
                 email = map[prefix + COL_EMAIL] as String,
+                loginId = map[prefix + COL_LOGIN_ID] as String,
+                password = map[prefix + COL_PASSWORD] as String,
                 registeredAt = map[prefix + COL_CREATED_AT]!!.coerceToInstant(),
                 lastActiveAt = map[prefix + COL_UPDATED_AT]!!.coerceToInstant(),
                 deleted = map[prefix + COL_DELETED] as Boolean

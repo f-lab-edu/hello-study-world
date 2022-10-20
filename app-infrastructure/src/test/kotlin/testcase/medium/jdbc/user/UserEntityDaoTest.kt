@@ -8,17 +8,12 @@ import com.flab.hsw.core.jdbc.user.UserEntity
 import com.flab.hsw.core.jdbc.user.dao.UserEntityDao
 import com.github.javafaker.Faker
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.`is`
-import org.hamcrest.Matchers.not
-import org.hamcrest.Matchers.nullValue
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertAll
+import org.hamcrest.Matchers.*
+import org.junit.jupiter.api.*
 import org.springframework.beans.factory.annotation.Autowired
 import test.domain.user.randomUserEntity
 import testcase.medium.JdbcTemplateMediumTestBase
+import java.util.*
 
 /**
  * @since 2021-08-10
@@ -109,6 +104,16 @@ class UserEntityDaoTest : JdbcTemplateMediumTestBase() {
         fun byEmail() {
             // when:
             val foundUser = sut.selectByEmail(savedUser.email)
+
+            // then:
+            assertThat(foundUser, `is`(savedUser))
+        }
+
+        @DisplayName("loginId")
+        @Test
+        fun byLoginID(){
+            // when:
+            val foundUser = sut.selectByLoginId(savedUser.loginId)
 
             // then:
             assertThat(foundUser, `is`(savedUser))

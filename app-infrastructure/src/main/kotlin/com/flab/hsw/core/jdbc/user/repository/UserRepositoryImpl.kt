@@ -29,6 +29,9 @@ internal class UserRepositoryImpl(
     @VisibleForTesting
     val emailToUserCache = FastCollectedLruCache.create<String, User>(CACHE_CAPACITY)
 
+    @VisibleForTesting
+    val loginIdToUserCache = FastCollectedLruCache.create<String, User>(CACHE_CAPACITY)
+
     override fun findByUuid(uuid: UUID): User? =
         (idToUserCache.get(uuid) ?: usersDao.selectByUuid(uuid)?.let { updateCache(it) })
 
@@ -37,6 +40,9 @@ internal class UserRepositoryImpl(
 
     override fun findByEmail(email: String): User? =
         (emailToUserCache.get(email) ?: usersDao.selectByEmail(email)?.let { updateCache(it) })
+
+    override fun findByLoginId(loginId: String): User? =
+        (loginIdToUserCache.get(loginId) ?: usersDao.selectByLoginId(loginId)?.let { updateCache(it) })
 
     override fun save(user: User): User {
         val savedUser = usersDao.selectByUuid(user.id)?.let {
@@ -52,6 +58,7 @@ internal class UserRepositoryImpl(
         idToUserCache.put(user.id, user)
         nicknameToUserCache.put(user.nickname, user)
         emailToUserCache.put(user.email, user)
+        loginIdToUserCache.put(user.loginId, user)
 
         return user
     }
