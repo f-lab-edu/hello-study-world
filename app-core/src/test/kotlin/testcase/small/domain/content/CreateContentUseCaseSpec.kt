@@ -1,9 +1,12 @@
 package testcase.small.domain.content
 
+import com.flab.hsw.core.domain.content.Content
+import com.flab.hsw.core.domain.content.CreateContent
 import com.flab.hsw.core.domain.content.repository.ContentRepository
 import com.flab.hsw.core.domain.content.usecase.CreateContentUseCase
-import com.flab.hsw.core.domain.user.repository.UserRepository
+import com.flab.hsw.core.domain.user.UserProfile
 import com.flab.hsw.lib.annotation.SmallTest
+import com.github.javafaker.Faker
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.BeforeEach
@@ -15,24 +18,36 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import test.domain.content.randomCreateContentMessage
 import test.domain.content.randomUrlIncludingKorean
-import test.domain.user.aggregate.randomUser
 import java.net.URLEncoder
+import java.time.Instant
 import java.util.*
 
 @SmallTest
 internal class CreateContentUseCaseSpec {
     private lateinit var sut: CreateContentUseCase
     private lateinit var contentRepository: ContentRepository
-    private lateinit var userRepository: UserRepository
 
     @BeforeEach
     fun setup() {
         contentRepository = mock()
-        userRepository = mock()
-        sut = CreateContentUseCase.newInstance(contentRepository, userRepository)
+        sut = CreateContentUseCase.newInstance(contentRepository)
 
-        `when`(contentRepository.save(any())).thenAnswer { return@thenAnswer it.arguments[0] }
-        `when`(userRepository.findByUuid(any())).thenAnswer { return@thenAnswer randomUser(id = it.arguments[0] as UUID) }
+        `when`(contentRepository.create(any())).thenAnswer {
+            val createContent = it.arguments[0] as CreateContent
+            val now = Instant.now()
+            return@thenAnswer Content.create(
+                id = createContent.id,
+                url = createContent.url,
+                description = createContent.description,
+                providerUserProfile = UserProfile.create(
+                    id = createContent.providerUserId,
+                    nickname = Faker(Locale.KOREAN).name().firstName(),
+                    email = Faker().internet().emailAddress()
+                ),
+                registeredAt = now,
+                lastUpdateAt = now,
+            )
+        }
     }
 
     @DisplayName("An user object that fully represents message, is created")

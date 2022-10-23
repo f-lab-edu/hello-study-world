@@ -5,13 +5,19 @@ import com.flab.hsw.core.domain.content.aggregate.ContentModel
 import com.flab.hsw.core.domain.user.User
 import com.github.javafaker.Faker
 import test.domain.user.aggregate.randomUser
+import java.time.Instant
+import java.util.*
 
 fun randomContent(
     url: String = Faker().internet().url(),
     description: String = Faker().lorem().word(),
     provider: User = randomUser()
-) : Content = ContentModel.create(
-    url = url ,
+): Content = ContentModel.create(
+    id = UUID.randomUUID(),
+    url = url,
     description = description,
-    provider = provider
+    providerUserProfile = provider,
+    registeredAt = Instant.now(),
+    lastUpdateAt = Instant.now(),
+    deleted = false,
 )

@@ -6,6 +6,7 @@ spring:
     init:
       mode: ALWAYS
       schema-locations: classpath:/sql/schema/*.sql
+      data-locations: classpath:/sql/data/*.sql
 
   datasource:
     driver-class-name: org.h2.Driver

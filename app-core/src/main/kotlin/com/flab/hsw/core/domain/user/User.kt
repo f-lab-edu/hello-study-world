@@ -12,12 +12,12 @@ import java.util.*
 /**
  * @since 2021-08-10
  */
-interface User : SoftDeletable {
-    val id: UUID
+interface User : UserProfile, SoftDeletable {
+    override val id: UUID
 
-    val nickname: String
+    override val nickname: String
 
-    val email: String
+    override val email: String
 
     val loginId: String
 

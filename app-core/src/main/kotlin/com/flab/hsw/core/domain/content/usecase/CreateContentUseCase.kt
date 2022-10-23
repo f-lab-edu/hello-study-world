@@ -2,10 +2,8 @@ package com.flab.hsw.core.domain.content.usecase
 
 import com.flab.hsw.core.annotation.UseCase
 import com.flab.hsw.core.domain.content.Content
-import com.flab.hsw.core.domain.content.aggregate.ContentModel
+import com.flab.hsw.core.domain.content.CreateContent
 import com.flab.hsw.core.domain.content.repository.ContentRepository
-import com.flab.hsw.core.domain.user.exception.UserByIdNotFoundException
-import com.flab.hsw.core.domain.user.repository.UserRepository
 import java.util.*
 
 interface CreateContentUseCase {
@@ -18,29 +16,25 @@ interface CreateContentUseCase {
 
     companion object {
         fun newInstance(
-            contents: ContentRepository,
-            users: UserRepository
-        ): CreateContentUseCase = CreateContentUseCaseImpl(
-            contents = contents,
-            users = users
-        )
+            contents: ContentRepository
+        ): CreateContentUseCase = CreateContentUseCaseImpl(contents = contents)
     }
 }
 
 @UseCase
 internal class CreateContentUseCaseImpl(
-    private val contents: ContentRepository,
-    private val users: UserRepository
+    private val contents: ContentRepository
 ) : CreateContentUseCase {
-    override fun createContent(providerUserId: UUID, message: CreateContentUseCase.CreateContentMessage): Content {
-        val provider = users.findByUuid(providerUserId) ?: throw UserByIdNotFoundException(providerUserId)
-
-        val content = ContentModel.create(
+    override fun createContent(
+        providerUserId: UUID,
+        message: CreateContentUseCase.CreateContentMessage
+    ): Content {
+        val createContent = CreateContent.create(
             url = message.url,
             description = message.description,
-            provider = provider
+            providerUserId = providerUserId
         )
 
-        return contents.save(content)
+        return contents.create(createContent)
     }
 }
