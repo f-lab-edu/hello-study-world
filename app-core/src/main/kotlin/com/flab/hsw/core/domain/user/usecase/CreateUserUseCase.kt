@@ -10,6 +10,7 @@ import com.flab.hsw.core.domain.user.exception.SameEmailUserAlreadyExistExceptio
 import com.flab.hsw.core.domain.user.exception.SameLoginIdUserAlreadyExistException
 import com.flab.hsw.core.domain.user.exception.SameNicknameUserAlreadyExistException
 import com.flab.hsw.core.domain.user.repository.UserRepository
+import org.mindrot.jbcrypt.BCrypt
 
 /**
  * @since 2021-08-10
@@ -46,7 +47,7 @@ internal class CreateUserUseCaseImpl(
             nickname = message.nickname,
             email = message.email,
             loginId = message.loginId,
-            password = message.password
+            password = BCrypt.hashpw(message.password, BCrypt.gensalt())
         )
 
         return users.save(user)

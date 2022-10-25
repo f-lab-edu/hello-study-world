@@ -17,6 +17,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
+import org.mindrot.jbcrypt.BCrypt
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
@@ -53,7 +54,7 @@ class CreateUserUseCaseSpec {
             { assertThat(createdUser.nickname, `is`(message.nickname)) },
             { assertThat(createdUser.email, `is`(message.email)) },
             { assertThat(createdUser.loginId, `is`(message.loginId)) },
-            { assertThat(createdUser.password, `is`(message.password)) },
+            { assertThat(BCrypt.checkpw(message.password, createdUser.password), `is`(true)) }
         )
     }
 
