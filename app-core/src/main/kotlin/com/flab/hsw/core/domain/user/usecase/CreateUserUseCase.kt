@@ -6,6 +6,7 @@ package com.flab.hsw.core.domain.user.usecase
 
 import com.flab.hsw.core.annotation.UseCase
 import com.flab.hsw.core.domain.user.User
+import com.flab.hsw.core.domain.user.aggregate.PasswordEncryptor
 import com.flab.hsw.core.domain.user.exception.SameEmailUserAlreadyExistException
 import com.flab.hsw.core.domain.user.exception.SameLoginIdUserAlreadyExistException
 import com.flab.hsw.core.domain.user.exception.SameNicknameUserAlreadyExistException
@@ -29,14 +30,16 @@ interface CreateUserUseCase {
         fun newInstance(
             userRepository: UserRepository
         ): CreateUserUseCase = CreateUserUseCaseImpl(
-            userRepository
+            userRepository,
+            passwordEncryptor = PasswordEncryptor.newInstance()
         )
     }
 }
 
 @UseCase
 internal class CreateUserUseCaseImpl(
-    private val users: UserRepository
+    private val users: UserRepository,
+    private val passwordEncryptor: PasswordEncryptor
 ) : CreateUserUseCase {
     override fun createUser(message: CreateUserUseCase.CreateUserMessage): User {
         users.findByLoginId(message.loginId)?.let { throw SameLoginIdUserAlreadyExistException(message.loginId) }
