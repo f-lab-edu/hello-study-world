@@ -50,7 +50,7 @@ internal class CreateUserUseCaseImpl(
             nickname = message.nickname,
             email = message.email,
             loginId = message.loginId,
-            password = BCrypt.hashpw(message.password, BCrypt.gensalt())
+            password = passwordEncryptor.encrypt(message.password)
         )
 
         return users.save(user)
