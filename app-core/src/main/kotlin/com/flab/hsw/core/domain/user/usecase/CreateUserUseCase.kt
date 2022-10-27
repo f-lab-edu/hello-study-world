@@ -28,10 +28,11 @@ interface CreateUserUseCase {
 
     companion object {
         fun newInstance(
-            userRepository: UserRepository
+            userRepository: UserRepository,
+            passwordEncryptor: PasswordEncryptor = PasswordEncryptor.newInstance()
         ): CreateUserUseCase = CreateUserUseCaseImpl(
             userRepository,
-            passwordEncryptor = PasswordEncryptor.newInstance()
+            passwordEncryptor
         )
     }
 }
