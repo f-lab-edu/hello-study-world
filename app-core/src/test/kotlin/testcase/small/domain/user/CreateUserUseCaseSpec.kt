@@ -4,6 +4,7 @@
  */
 package testcase.small.domain.user
 
+import com.flab.hsw.core.domain.user.aggregate.PasswordEncryptor
 import com.flab.hsw.core.domain.user.exception.SameEmailUserAlreadyExistException
 import com.flab.hsw.core.domain.user.exception.SameLoginIdUserAlreadyExistException
 import com.flab.hsw.core.domain.user.exception.SameNicknameUserAlreadyExistException
@@ -17,7 +18,6 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
-import org.mindrot.jbcrypt.BCrypt
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
@@ -54,7 +54,11 @@ class CreateUserUseCaseSpec {
             { assertThat(createdUser.nickname, `is`(message.nickname)) },
             { assertThat(createdUser.email, `is`(message.email)) },
             { assertThat(createdUser.loginId, `is`(message.loginId)) },
-            { assertThat(BCrypt.checkpw(message.password, createdUser.password), `is`(true)) }
+            { assertThat(
+                (PasswordEncryptor.newInstance().isMatched(message.password, createdUser.password)).or(
+                    message.password == createdUser.password),
+                `is`(true))
+            }
         )
     }
 
