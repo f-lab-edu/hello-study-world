@@ -5,9 +5,11 @@
 package test.domain.user.aggregate
 
 import com.flab.hsw.core.domain.user.User
+import com.flab.hsw.core.domain.user.aggregate.PasswordEncryptor
 import com.github.javafaker.Faker
 import com.github.javafaker.service.FakeValuesService
 import com.github.javafaker.service.RandomService
+import org.mindrot.jbcrypt.BCrypt
 import java.time.Instant
 import java.util.*
 
@@ -30,3 +32,12 @@ fun randomUser(
     lastActiveAt = lastActiveAt,
     deleted = deleted
 )
+
+fun equalsWhetherPasswordIsEncryptedOrNot(plainText: String, password: String): Boolean {
+    return try {
+        PasswordEncryptor.newInstance().isMatched(plainText, password)
+    } catch (e: IllegalArgumentException){
+        plainText == password
+    }
+}
+

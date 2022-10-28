@@ -17,11 +17,11 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
-import org.mindrot.jbcrypt.BCrypt
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import test.domain.user.aggregate.randomUser
+import test.domain.user.aggregate.equalsWhetherPasswordIsEncryptedOrNot
 import test.domain.user.randomCreateUserMessage
 
 /**
@@ -54,7 +54,7 @@ class CreateUserUseCaseSpec {
             { assertThat(createdUser.nickname, `is`(message.nickname)) },
             { assertThat(createdUser.email, `is`(message.email)) },
             { assertThat(createdUser.loginId, `is`(message.loginId)) },
-            { assertThat(BCrypt.checkpw(message.password, createdUser.password), `is`(true)) }
+            { assertThat(equalsWhetherPasswordIsEncryptedOrNot(message.password, createdUser.password), `is`(true))}
         )
     }
 
