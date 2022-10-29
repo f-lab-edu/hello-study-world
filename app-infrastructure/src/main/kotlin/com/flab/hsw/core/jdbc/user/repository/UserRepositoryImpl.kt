@@ -4,19 +4,19 @@
  */
 package com.flab.hsw.core.jdbc.user.repository
 
+import com.flab.hsw.core.annotation.InfrastructureService
 import com.flab.hsw.core.domain.user.User
 import com.flab.hsw.core.domain.user.repository.UserRepository
 import com.flab.hsw.core.jdbc.user.UserEntity
 import com.flab.hsw.core.jdbc.user.dao.UserEntityDao
 import com.flab.hsw.lib.annotation.VisibleForTesting
 import com.flab.hsw.lib.util.FastCollectedLruCache
-import org.springframework.stereotype.Service
 import java.util.*
 
 /**
  * @since 2021-08-10
  */
-@Service
+@InfrastructureService
 internal class UserRepositoryImpl(
     private val usersDao: UserEntityDao
 ) : UserRepository {
