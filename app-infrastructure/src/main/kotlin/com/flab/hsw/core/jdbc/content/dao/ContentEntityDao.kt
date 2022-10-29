@@ -29,7 +29,7 @@ internal class ContentEntityDaoImpl(
 
         @Suppress("MagicNumber")    // Not a magic number in this context
         return contentEntity.copy(
-            seq = super.doInsertAndGetId(UserEntity.COL_SEQ, sql) {
+            id = super.doInsertAndGetId(ContentEntity.COL_ID, sql) {
                 setStringEx(1, contentEntity.url)
                 setStringEx(2, contentEntity.description)
                 setLongEx(3, contentEntity.providerUserSeq)

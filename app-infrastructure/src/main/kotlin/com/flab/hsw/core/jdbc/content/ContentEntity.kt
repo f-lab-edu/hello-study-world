@@ -15,16 +15,16 @@ internal class ContentEntity(
     val registeredAt: Instant,
     val lastActiveAt: Instant,
     val deleted: Boolean,
-    val seq: Long = UNIDENTIFIABLE
+    val id: Long = UNIDENTIFIABLE
 ) {
     override fun equals(other: Any?): Boolean = when {
         this === other -> true
         other !is ContentEntity -> false
-        seq == UNIDENTIFIABLE -> false
-        else -> this.seq == other.seq
+        id == UNIDENTIFIABLE -> false
+        else -> this.id == other.id
     }
 
-    override fun hashCode(): Int = Objects.hash(this.seq)
+    override fun hashCode(): Int = Objects.hash(this.id)
 
     fun copy(
         url: String = this.url,
@@ -33,7 +33,7 @@ internal class ContentEntity(
         registeredAt: Instant = this.registeredAt,
         lastActiveAt: Instant = this.lastActiveAt,
         deleted: Boolean = this.deleted,
-        seq: Long = this.seq
+        id: Long = this.id
     ): ContentEntity = ContentEntity(
         url = url,
         description = description,
@@ -41,12 +41,12 @@ internal class ContentEntity(
         registeredAt = registeredAt,
         lastActiveAt = lastActiveAt,
         deleted = deleted,
-        seq = seq
+        id = id
     )
 
     fun toContent(providerUserEntity: UserEntity): Content {
         return Content.create(
-            id = seq,
+            id = id,
             url = url,
             description = description,
             provider = providerUserEntity.toUserProfile(),
@@ -58,7 +58,7 @@ internal class ContentEntity(
     companion object {
         const val TABLE = "contents"
 
-        const val COL_SEQ = "seq"
+        const val COL_ID = "id"
         const val COL_URL = "url"
         const val COL_DESCRIPTION = "description"
         const val COL_PROVIDER_USER_SEQ = "provider_user_seq"

@@ -32,6 +32,6 @@ class ContentEntityDaoTest : JdbcTemplateMediumTestBase() {
         val savedContent = sut.insert(randomContent)
 
         // expect:
-        assertThat(savedContent.seq, not(Matchers.nullValue()))
+        assertThat(savedContent.id, not(Matchers.nullValue()))
     }
 }
