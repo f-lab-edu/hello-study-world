@@ -6,10 +6,12 @@ package com.flab.hsw.core.domain.user.usecase
 
 import com.flab.hsw.core.annotation.UseCase
 import com.flab.hsw.core.domain.user.User
+import com.flab.hsw.core.domain.user.aggregate.PasswordEncryptor
 import com.flab.hsw.core.domain.user.exception.SameEmailUserAlreadyExistException
 import com.flab.hsw.core.domain.user.exception.SameLoginIdUserAlreadyExistException
 import com.flab.hsw.core.domain.user.exception.SameNicknameUserAlreadyExistException
 import com.flab.hsw.core.domain.user.repository.UserRepository
+import org.mindrot.jbcrypt.BCrypt
 
 /**
  * @since 2021-08-10
@@ -26,16 +28,19 @@ interface CreateUserUseCase {
 
     companion object {
         fun newInstance(
-            userRepository: UserRepository
+            userRepository: UserRepository,
+            passwordEncryptor: PasswordEncryptor = PasswordEncryptor.newInstance()
         ): CreateUserUseCase = CreateUserUseCaseImpl(
-            userRepository
+            userRepository,
+            passwordEncryptor
         )
     }
 }
 
 @UseCase
 internal class CreateUserUseCaseImpl(
-    private val users: UserRepository
+    private val users: UserRepository,
+    private val passwordEncryptor: PasswordEncryptor
 ) : CreateUserUseCase {
     override fun createUser(message: CreateUserUseCase.CreateUserMessage): User {
         users.findByLoginId(message.loginId)?.let { throw SameLoginIdUserAlreadyExistException(message.loginId) }
@@ -46,7 +51,7 @@ internal class CreateUserUseCaseImpl(
             nickname = message.nickname,
             email = message.email,
             loginId = message.loginId,
-            password = message.password
+            password = passwordEncryptor.encrypt(message.password)
         )
 
         return users.save(user)

@@ -11,4 +11,7 @@ dependencies {
     // region test dependencies
     testImplementation project(path: ":${MODULE_LIB}", configuration: "testArtifacts")
     // endregion
+
+    // encrypt password
+    implementation group: 'de.svenkubiak', name: 'jBCrypt', version: '0.4.1'
 }

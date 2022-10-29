@@ -4,6 +4,7 @@
  */
 package testcase.small.domain.user
 
+import com.flab.hsw.core.domain.user.aggregate.PasswordEncryptor
 import com.flab.hsw.core.domain.user.exception.SameEmailUserAlreadyExistException
 import com.flab.hsw.core.domain.user.exception.SameLoginIdUserAlreadyExistException
 import com.flab.hsw.core.domain.user.exception.SameNicknameUserAlreadyExistException
@@ -17,9 +18,11 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
+import org.mockito.Mockito.times
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import test.domain.user.aggregate.randomUser
 import test.domain.user.randomCreateUserMessage
 
@@ -30,11 +33,13 @@ import test.domain.user.randomCreateUserMessage
 class CreateUserUseCaseSpec {
     private lateinit var sut: CreateUserUseCase
     private lateinit var userRepository: UserRepository
+    private lateinit var passwordEncryptor: PasswordEncryptor
 
     @BeforeEach
     fun setup() {
         userRepository = mock()
-        sut = CreateUserUseCase.newInstance(userRepository)
+        passwordEncryptor = mock()
+        sut = CreateUserUseCase.newInstance(userRepository, passwordEncryptor)
 
         `when`(userRepository.save(any())).thenAnswer { return@thenAnswer it.arguments[0] }
     }
@@ -44,6 +49,7 @@ class CreateUserUseCaseSpec {
     fun userIsCreated() {
         // given:
         val message = randomCreateUserMessage()
+        `when`(passwordEncryptor.encrypt(any())).thenAnswer{ return@thenAnswer "givenPassword" }
 
         // when:
         val createdUser = sut.createUser(message)
@@ -53,7 +59,8 @@ class CreateUserUseCaseSpec {
             { assertThat(createdUser.nickname, `is`(message.nickname)) },
             { assertThat(createdUser.email, `is`(message.email)) },
             { assertThat(createdUser.loginId, `is`(message.loginId)) },
-            { assertThat(createdUser.password, `is`(message.password)) },
+            { assertThat(createdUser.password, `is`("givenPassword"))},
+            { verify(passwordEncryptor, times(1)).encrypt(message.password) }
         )
     }
 

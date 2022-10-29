@@ -33,12 +33,15 @@ class CreateUserApiSpec : EndpointLargeTestBase() {
             request,
             requestFields = listOf(
                 fieldWithPath("nickname").type(STRING).description("별명"),
-                fieldWithPath("email").type(STRING).description("이메일")
+                fieldWithPath("email").type(STRING).description("이메일"),
+                fieldWithPath("loginId").type(STRING).description("로그인 ID"),
+                fieldWithPath("password").type(STRING).description("비밀번호"),
             ),
             responseFields = listOf(
                 fieldWithPath("id").type(STRING).description("UUID"),
                 fieldWithPath("nickname").type(STRING).description("별명"),
                 fieldWithPath("email").type(STRING).description("이메일"),
+                fieldWithPath("loginId").type(STRING).description("로그인 ID"),
                 fieldWithPath("registeredAt").type(STRING).description("등록 일시"),
                 fieldWithPath("lastActiveAt").type(STRING).description("마지막 활성 일시")
             )
