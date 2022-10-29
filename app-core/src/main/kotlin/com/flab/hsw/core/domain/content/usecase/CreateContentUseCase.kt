@@ -30,7 +30,7 @@ internal class CreateContentUseCaseImpl(
         message: CreateContentUseCase.CreateContentMessage
     ): Content {
         val createContentCommand = CreateContentCommand.create(
-            encodedUrl = message.url,
+            url = message.url,
             description = message.description,
             providerUserId = providerUserId
         )

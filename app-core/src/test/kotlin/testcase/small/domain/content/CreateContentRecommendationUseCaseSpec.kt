@@ -2,6 +2,7 @@ package testcase.small.domain.content
 
 import com.flab.hsw.core.domain.content.exception.ContentByIdNotFoundException
 import com.flab.hsw.core.domain.content.exception.ContentRecommendationIsAlreadyExistException
+import com.flab.hsw.core.domain.content.query.Content
 import com.flab.hsw.core.domain.content.repository.ContentRecommendationRepository
 import com.flab.hsw.core.domain.content.repository.ContentRepository
 import com.flab.hsw.core.domain.content.usecase.CreateContentRecommendationUseCase
@@ -20,7 +21,7 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
-import test.domain.content.aggregate.randomContent
+import test.domain.content.aggregate.randomContentGeneratedNow
 import test.domain.content.randomCreateContentRecommendationMessage
 import test.domain.user.aggregate.randomUser
 import java.util.*
@@ -53,7 +54,7 @@ internal class CreateContentRecommendationUseCaseSpec {
 
         // and:
         `when`(userRepository.findByUuid(any())).thenAnswer { return@thenAnswer randomUser() }
-        `when`(contentRepository.findByUuid(any())).thenAnswer { return@thenAnswer randomContent() }
+        `when`(contentRepository.findByUuid(any())).thenAnswer { return@thenAnswer Content.randomContentGeneratedNow() }
         `when`(contentRecommendationRepository.findContentRecommendationByUserIdAndContentId(any()))
             .thenAnswer { return@thenAnswer null }
         `when`(contentRecommendationRepository.saveContentRecommendation(any()))
@@ -106,7 +107,7 @@ internal class CreateContentRecommendationUseCaseSpec {
 
         // and:
         `when`(userRepository.findByUuid(any())).thenAnswer { return@thenAnswer randomUser() }
-        `when`(contentRepository.findByUuid(any())).thenAnswer { return@thenAnswer randomContent() }
+        `when`(contentRepository.findByUuid(any())).thenAnswer { return@thenAnswer Content.randomContentGeneratedNow() }
         `when`(contentRecommendationRepository.findContentRecommendationByUserIdAndContentId(any()))
             .thenAnswer { return@thenAnswer it.arguments[0] }
 

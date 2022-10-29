@@ -1,7 +1,7 @@
 package com.flab.hsw.core.jdbc.content.repository
 
-import com.flab.hsw.core.domain.content.Content
-import com.flab.hsw.core.domain.content.CreateContent
+import com.flab.hsw.core.domain.content.command.CreateContentCommand
+import com.flab.hsw.core.domain.content.query.Content
 import com.flab.hsw.core.domain.content.repository.ContentRepository
 import com.flab.hsw.core.domain.user.exception.UserByIdNotFoundException
 import com.flab.hsw.core.jdbc.content.ContentEntity
@@ -16,20 +16,20 @@ internal class ContentRepositoryImpl(
         private val contentEntityDao: ContentEntityDao,
         private val userEntityDao: UserEntityDao
 ) : ContentRepository {
-    override fun create(createContent: CreateContent): Content {
+    override fun create(createContent: CreateContentCommand): Content {
         val provider = userEntityDao.selectByUuid(createContent.providerUserId)
                 ?: throw UserByIdNotFoundException(createContent.providerUserId)
 
-        return contentEntityDao.insert(ContentEntity.from(createContent, provider.seq!!))
+        return contentEntityDao.insert(ContentEntity.from(createContent, provider.seq))
                 .toContent(provider)
     }
 
     private fun ContentEntity.toContent(providerUserEntity: UserEntity): Content {
         return Content.create(
-                id = uuid,
+                id = seq,
                 url = url,
                 description = description,
-                providerUserProfile = providerUserEntity.toUserProfile(),
+                provider = providerUserEntity.toUserProfile(),
                 registeredAt = registeredAt,
                 lastUpdateAt = lastActiveAt,
         )

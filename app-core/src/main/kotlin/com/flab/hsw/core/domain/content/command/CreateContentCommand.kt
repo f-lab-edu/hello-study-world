@@ -14,11 +14,11 @@ interface CreateContentCommand {
 
         @SuppressWarnings("LongParameterList")      // Intended complexity to provide various Content creation cases
         fun create(
-            encodedUrl: String,
+            url: String,
             description: String,
             providerUserId: UUID,
         ): CreateContentCommand = CreateContentCommandModel(
-            url = encodedUrl,
+            url = url,
             description = description,
             providerUserId = providerUserId,
         )

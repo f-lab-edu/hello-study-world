@@ -18,7 +18,7 @@ internal class ContentCommandRepositoryImpl(
         val provider = userEntityDao.selectByUuid(createContentCommand.providerUserId)
             ?: throw UserByIdNotFoundException(createContentCommand.providerUserId)
 
-        return contentEntityDao.insert(ContentEntity.from(createContentCommand, provider.seq!!))
+        return contentEntityDao.insert(ContentEntity.from(createContentCommand, provider.seq))
             .toContent(provider)
     }
 }

@@ -46,7 +46,7 @@ internal class UserRepositoryImpl(
 
     override fun save(user: User): User {
         val savedUser = usersDao.selectByUuid(user.id)?.let {
-            usersDao.update(it.seq!!, UserEntity.from(user))
+            usersDao.update(it.seq, UserEntity.from(user))
         } ?: UserEntity.from(user)
 
         return updateCache(savedUser)

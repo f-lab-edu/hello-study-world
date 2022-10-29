@@ -20,13 +20,13 @@ class ContentEntityDaoTest : JdbcTemplateMediumTestBase() {
     @Autowired
     private lateinit var userEntityDao: UserEntityDao
 
-    @DisplayName("")
+    @DisplayName("A content is inserted into the database")
     @Test
     fun insertTest() {
         // given:
         val user = userEntityDao.selectByUuid(randomUuidFromUserEntityData())!!
 
-        val randomContent: ContentEntity = randomContentEntity(providerUserSeq = user.seq!!)
+        val randomContent: ContentEntity = randomContentEntity(providerUserSeq = user.seq)
 
         // then:
         val savedContent = sut.insert(randomContent)
