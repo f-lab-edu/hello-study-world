@@ -8,7 +8,9 @@ import com.flab.hsw.core.jdbc.user.dao.UserEntityDao
 import com.flab.hsw.lib.annotation.SmallTest
 import com.github.javafaker.Faker
 import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers
 import org.hamcrest.Matchers.`is`
+import org.hamcrest.Matchers.not
 import org.junit.jupiter.api.*
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
@@ -66,7 +68,7 @@ class ContentCommandRepositoryImplSpec {
 
         // then:
         assertAll(
-            { assertThat(createdContent.id, `is`(newContent.id)) },
+            { assertThat(createdContent.id, not(Matchers.nullValue())) },
             { assertThat(createdContent.url, `is`(newContent.url)) },
             { assertThat(createdContent.description, `is`(newContent.description)) },
             { assertThat(createdContent.provider.id, `is`(newContent.providerUserId)) },

@@ -1,5 +1,6 @@
 package com.flab.hsw.core.jdbc.content
 
+import com.flab.hsw.core.CoreKopringApplicationImpl.Companion.UNIDENTIFIABLE
 import com.flab.hsw.core.domain.content.command.CreateContentCommand
 import com.flab.hsw.core.domain.content.query.Content
 import com.flab.hsw.core.jdbc.user.UserEntity
@@ -8,27 +9,44 @@ import java.util.*
 
 @SuppressWarnings("LongParameterList")      // Intended complexity to provide various Content creation cases
 internal class ContentEntity(
-    val uuid: UUID,
     val url: String,
     val description: String,
     val providerUserSeq: Long,
     val registeredAt: Instant,
     val lastActiveAt: Instant,
-    val deleted: Boolean
+    val deleted: Boolean,
+    val seq: Long = UNIDENTIFIABLE
 ) {
-    var seq: Long? = null
-
     override fun equals(other: Any?): Boolean = when {
         this === other -> true
-        other !is UserEntity -> false
+        other !is ContentEntity -> false
+        seq == UNIDENTIFIABLE -> false
         else -> this.seq == other.seq
     }
 
     override fun hashCode(): Int = Objects.hash(this.seq)
 
+    fun copy(
+        url: String = this.url,
+        description: String = this.description,
+        providerUserSeq: Long = this.providerUserSeq,
+        registeredAt: Instant = this.registeredAt,
+        lastActiveAt: Instant = this.lastActiveAt,
+        deleted: Boolean = this.deleted,
+        seq: Long = this.seq
+    ): ContentEntity = ContentEntity(
+        url = url,
+        description = description,
+        providerUserSeq = providerUserSeq,
+        registeredAt = registeredAt,
+        lastActiveAt = lastActiveAt,
+        deleted = deleted,
+        seq = seq
+    )
+
     fun toContent(providerUserEntity: UserEntity): Content {
         return Content.create(
-            id = uuid,
+            id = seq,
             url = url,
             description = description,
             provider = providerUserEntity.toUserProfile(),
@@ -41,7 +59,6 @@ internal class ContentEntity(
         const val TABLE = "contents"
 
         const val COL_SEQ = "seq"
-        const val COL_UUID = "uuid"
         const val COL_URL = "url"
         const val COL_DESCRIPTION = "description"
         const val COL_PROVIDER_USER_SEQ = "provider_user_seq"
@@ -54,7 +71,6 @@ internal class ContentEntity(
                 val now = Instant.now()
 
                 return ContentEntity(
-                    uuid = id,
                     url = url,
                     description = description,
                     providerUserSeq = providerUserSeq,

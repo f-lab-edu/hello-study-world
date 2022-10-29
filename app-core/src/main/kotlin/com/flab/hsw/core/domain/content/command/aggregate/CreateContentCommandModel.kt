@@ -5,7 +5,6 @@ import java.net.URLDecoder
 import java.util.*
 
 internal class CreateContentCommandModel(
-    override val id: UUID,
     url: String,
     override val description: String,
     override val providerUserId: UUID,

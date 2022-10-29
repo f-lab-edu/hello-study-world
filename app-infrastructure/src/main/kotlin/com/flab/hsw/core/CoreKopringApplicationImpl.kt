@@ -10,4 +10,8 @@ import org.springframework.stereotype.Service
  * @since 2021-08-10
  */
 @Service
-internal class CoreKopringApplicationImpl : CoreKopringApplication
+internal class CoreKopringApplicationImpl : CoreKopringApplication {
+    companion object {
+        const val UNIDENTIFIABLE: Long = -1L
+    }
+}

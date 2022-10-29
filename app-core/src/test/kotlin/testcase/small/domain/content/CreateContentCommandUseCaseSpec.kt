@@ -36,7 +36,7 @@ internal class CreateContentCommandUseCaseSpec {
             val createContentCommand = it.arguments[0] as CreateContentCommand
             val now = Instant.now()
             return@thenAnswer Content.create(
-                id = createContentCommand.id,
+                id = Faker().number().randomNumber(),
                 url = createContentCommand.url,
                 description = createContentCommand.description,
                 provider = SimpleUserProfile.create(

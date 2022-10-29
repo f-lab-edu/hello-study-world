@@ -4,10 +4,9 @@ import com.flab.hsw.core.domain.SoftDeletable
 import com.flab.hsw.core.domain.content.query.aggregate.ContentModel
 import com.flab.hsw.core.domain.user.SimpleUserProfile
 import java.time.Instant
-import java.util.*
 
 interface Content : SoftDeletable {
-    val id: UUID
+    val id: Long
     val url: String
     val description: String
     val provider: SimpleUserProfile
@@ -17,7 +16,7 @@ interface Content : SoftDeletable {
     companion object {
         @SuppressWarnings("LongParameterList")      // Intended complexity to provide various Content creation cases
         fun create(
-            id: UUID,
+            id: Long,
             url: String,
             description: String,
             provider: SimpleUserProfile,

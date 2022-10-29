@@ -4,10 +4,9 @@ import com.flab.hsw.core.domain.content.query.Content
 import com.flab.hsw.core.domain.user.SimpleUserProfile
 import com.flab.hsw.core.domain.user.User
 import java.time.Instant
-import java.util.*
 
 internal data class ContentModel(
-    override val id: UUID,
+    override val id: Long,
     override val url: String,
     override val description: String,
     override val provider: SimpleUserProfile,

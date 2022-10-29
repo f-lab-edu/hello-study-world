@@ -12,12 +12,10 @@ import java.time.Instant
 import java.util.*
 
 fun CreateContentCommand.Companion.randomCreateContentCommand(
-    id: UUID = UUID.randomUUID(),
     url: String = randomUrlIncludingKorean(),
     description: String = randomDescriptionIncludingKorean(),
     providerUserId: UUID = UUID.randomUUID()
 ): CreateContentCommand = create(
-    id = id,
     encodedUrl = url,
     description = description,
     providerUserId = providerUserId
