@@ -15,7 +15,7 @@ import org.junit.jupiter.api.*
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
-import test.domain.content.aggregate.randomCreateContentCommand
+import test.domain.content.aggregate.random
 import test.domain.user.randomUserEntity
 import java.util.*
 
@@ -46,7 +46,7 @@ class ContentCommandRepositoryImplSpec {
         // then:
         assertThrows<UserByIdNotFoundException> {
             sut.create(
-                createContentCommand = CreateContentCommand.randomCreateContentCommand(providerUserId = contentProviderUserUuid)
+                createContentCommand = CreateContentCommand.random(providerUserId = contentProviderUserUuid)
             )
         }
     }
@@ -58,7 +58,7 @@ class ContentCommandRepositoryImplSpec {
         val contentProviderUser = randomUserEntity(id = UUID.randomUUID()).apply {
             seq = Faker().number().randomNumber()
         }
-        val newContent = CreateContentCommand.randomCreateContentCommand(providerUserId = contentProviderUser.uuid)
+        val newContent = CreateContentCommand.random(providerUserId = contentProviderUser.uuid)
 
         // and:
         `when`(usersDao.selectByUuid(contentProviderUser.uuid)).thenReturn(contentProviderUser)

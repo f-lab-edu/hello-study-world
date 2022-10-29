@@ -6,7 +6,7 @@ import com.github.javafaker.Faker
 import java.time.Instant
 import java.util.*
 
-internal fun randomContentEntity(
+internal fun ContentEntity.Companion.random(
     url: String = randomUrlIncludingKorean(),
     description: String = Faker(Locale.KOREAN).lorem()
         .characters(CreateContentCommand.LENGTH_DESCRIPTION_MIN, CreateContentCommand.LENGTH_DESCRIPTION_MAX),

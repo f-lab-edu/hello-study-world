@@ -5,11 +5,9 @@
 package test.domain.user.aggregate
 
 import com.flab.hsw.core.domain.user.User
-import com.flab.hsw.core.domain.user.aggregate.PasswordEncryptor
 import com.github.javafaker.Faker
 import com.github.javafaker.service.FakeValuesService
 import com.github.javafaker.service.RandomService
-import org.mindrot.jbcrypt.BCrypt
 import java.time.Instant
 import java.util.*
 

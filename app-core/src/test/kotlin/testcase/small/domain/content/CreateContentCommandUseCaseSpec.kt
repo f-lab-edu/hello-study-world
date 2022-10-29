@@ -15,10 +15,10 @@ import org.junit.jupiter.api.assertAll
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
-import test.domain.content.aggregate.randomContentGeneratedNow
+import test.domain.content.aggregate.randomGeneratedNow
 import test.domain.content.randomCreateContentMessage
 import test.domain.content.randomUrlIncludingKorean
-import test.domain.user.aggregate.randomSimpleUserProfile
+import test.domain.user.aggregate.random
 import java.net.URLEncoder
 import java.util.*
 
@@ -35,10 +35,10 @@ internal class CreateContentCommandUseCaseSpec {
         `when`(contentCommandRepository.create(any())).thenAnswer {
             val createContentCommand = it.arguments[0] as CreateContentCommand
 
-            return@thenAnswer Content.randomContentGeneratedNow(
+            return@thenAnswer Content.randomGeneratedNow(
                 url = createContentCommand.url,
                 description = createContentCommand.description,
-                provider = SimpleUserProfile.randomSimpleUserProfile(
+                provider = SimpleUserProfile.random(
                     id = createContentCommand.providerUserId
                 ),
             )

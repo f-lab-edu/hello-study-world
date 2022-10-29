@@ -9,7 +9,7 @@ import org.hamcrest.Matchers.not
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import test.domain.content.randomContentEntity
+import test.domain.content.random
 import testcase.medium.JdbcTemplateMediumTestBase
 import testcase.medium.MediumTestDataDeclarations.randomUuidFromUserEntityData
 
@@ -26,7 +26,7 @@ class ContentEntityDaoTest : JdbcTemplateMediumTestBase() {
         // given:
         val user = userEntityDao.selectByUuid(randomUuidFromUserEntityData())!!
 
-        val randomContent: ContentEntity = randomContentEntity(providerUserSeq = user.seq)
+        val randomContent: ContentEntity = ContentEntity.random(providerUserSeq = user.seq)
 
         // then:
         val savedContent = sut.insert(randomContent)

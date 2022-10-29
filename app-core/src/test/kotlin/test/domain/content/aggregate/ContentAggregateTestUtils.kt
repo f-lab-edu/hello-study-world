@@ -9,7 +9,7 @@ import test.domain.content.randomUrlIncludingKorean
 import java.time.Instant
 import java.util.*
 
-fun CreateContentCommand.Companion.randomCreateContentCommand(
+fun CreateContentCommand.Companion.random(
     url: String = randomUrlIncludingKorean(),
     description: String = randomDescriptionIncludingKorean(),
     providerUserId: UUID = UUID.randomUUID()
@@ -20,7 +20,7 @@ fun CreateContentCommand.Companion.randomCreateContentCommand(
 )
 
 
-fun Content.Companion.randomContentGeneratedNow(
+fun Content.Companion.randomGeneratedNow(
     id: Long = Faker().number().randomNumber(),
     url: String = randomUrlIncludingKorean(),
     description: String = randomDescriptionIncludingKorean(),
