@@ -32,12 +32,3 @@ fun randomUser(
     lastActiveAt = lastActiveAt,
     deleted = deleted
 )
-
-fun equalsWhetherPasswordIsEncryptedOrNot(plainText: String, password: String): Boolean {
-    return try {
-        PasswordEncryptor.newInstance().isMatched(plainText, password)
-    } catch (e: IllegalArgumentException){
-        plainText == password
-    }
-}
-
