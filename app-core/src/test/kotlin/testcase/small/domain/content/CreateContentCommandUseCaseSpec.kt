@@ -1,10 +1,10 @@
 package testcase.small.domain.content
 
-import com.flab.hsw.core.domain.content.Content
-import com.flab.hsw.core.domain.content.CreateContent
-import com.flab.hsw.core.domain.content.repository.ContentRepository
+import com.flab.hsw.core.domain.content.query.Content
+import com.flab.hsw.core.domain.content.command.CreateContentCommand
+import com.flab.hsw.core.domain.content.command.repository.ContentCommandRepository
 import com.flab.hsw.core.domain.content.usecase.CreateContentUseCase
-import com.flab.hsw.core.domain.user.UserProfile
+import com.flab.hsw.core.domain.user.SimpleUserProfile
 import com.flab.hsw.lib.annotation.SmallTest
 import com.github.javafaker.Faker
 import org.hamcrest.MatcherAssert.assertThat
@@ -23,24 +23,24 @@ import java.time.Instant
 import java.util.*
 
 @SmallTest
-internal class CreateContentUseCaseSpec {
+internal class CreateContentCommandUseCaseSpec {
     private lateinit var sut: CreateContentUseCase
-    private lateinit var contentRepository: ContentRepository
+    private lateinit var contentCommandRepository: ContentCommandRepository
 
     @BeforeEach
     fun setup() {
-        contentRepository = mock()
-        sut = CreateContentUseCase.newInstance(contentRepository)
+        contentCommandRepository = mock()
+        sut = CreateContentUseCase.newInstance(contentCommandRepository)
 
-        `when`(contentRepository.create(any())).thenAnswer {
-            val createContent = it.arguments[0] as CreateContent
+        `when`(contentCommandRepository.create(any())).thenAnswer {
+            val createContentCommand = it.arguments[0] as CreateContentCommand
             val now = Instant.now()
             return@thenAnswer Content.create(
-                id = createContent.id,
-                url = createContent.url,
-                description = createContent.description,
-                providerUserProfile = UserProfile.create(
-                    id = createContent.providerUserId,
+                id = createContentCommand.id,
+                url = createContentCommand.url,
+                description = createContentCommand.description,
+                provider = SimpleUserProfile.create(
+                    id = createContentCommand.providerUserId,
                     nickname = Faker(Locale.KOREAN).name().firstName(),
                     email = Faker().internet().emailAddress()
                 ),
@@ -75,6 +75,25 @@ internal class CreateContentUseCaseSpec {
         val message = randomCreateContentMessage(
             url = URLEncoder.encode(url, Charsets.UTF_8)
         )
+
+        // when:
+        val createdContent = sut.createContent(UUID.randomUUID(), message)
+
+        // then:
+        assertAll(
+            { assertThat(createdContent.url, `is`(url)) },
+            { assertThat(createdContent.description, `is`(message.description)) }
+        )
+    }
+
+
+    @DisplayName("If an already readable URL is received, it is returned as is.")
+    @Test
+    fun urlDoNotNeedToBeDecoded() {
+        // given:
+        val url = randomUrlIncludingKorean()
+
+        val message = randomCreateContentMessage(url = url)
 
         // when:
         val createdContent = sut.createContent(UUID.randomUUID(), message)

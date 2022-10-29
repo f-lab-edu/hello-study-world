@@ -5,7 +5,7 @@
 package com.flab.hsw.core.jdbc.user
 
 import com.flab.hsw.core.domain.user.User
-import com.flab.hsw.core.domain.user.UserProfile
+import com.flab.hsw.core.domain.user.SimpleUserProfile
 import com.flab.hsw.core.jdbc.JdbcTemplateHelper
 import com.flab.hsw.lib.util.toUUID
 import java.time.Instant
@@ -43,7 +43,7 @@ internal class UserEntity(
         deleted = this.deleted
     )
 
-    fun toUserProfile(): UserProfile = UserProfile.create(
+    fun toUserProfile(): SimpleUserProfile = SimpleUserProfile.create(
         id = this.uuid,
         nickname = this.nickname,
         email = this.email

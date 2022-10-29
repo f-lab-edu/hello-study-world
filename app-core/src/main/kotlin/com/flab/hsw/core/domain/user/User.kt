@@ -12,7 +12,7 @@ import java.util.*
 /**
  * @since 2021-08-10
  */
-interface User : UserProfile, SoftDeletable {
+interface User : SimpleUserProfile, SoftDeletable {
     override val id: UUID
 
     override val nickname: String

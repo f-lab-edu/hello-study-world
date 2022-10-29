@@ -1,8 +1,8 @@
 package test.domain.content
 
-import com.flab.hsw.core.domain.content.CreateContent
-import com.flab.hsw.core.domain.content.usecase.CreateContentRecommendationUseCase
+import com.flab.hsw.core.domain.content.command.CreateContentCommand
 import com.flab.hsw.core.domain.content.usecase.CreateContentUseCase
+import com.flab.hsw.core.domain.content.usecase.CreateContentRecommendationUseCase
 import com.github.javafaker.Faker
 import java.util.Locale
 import java.util.UUID
@@ -31,7 +31,7 @@ fun randomUrlIncludingKorean(): String {
 
 fun randomDescriptionIncludingKorean(): String {
     return Faker(Locale.KOREAN).lorem()
-        .characters(CreateContent.LENGTH_DESCRIPTION_MIN, CreateContent.LENGTH_DESCRIPTION_MAX)
+        .characters(CreateContentCommand.LENGTH_DESCRIPTION_MIN, CreateContentCommand.LENGTH_DESCRIPTION_MAX)
 }
 
 fun randomCreateContentRecommendationMessage(): CreateContentRecommendationUseCase.CreateContentRecommendationMessage {

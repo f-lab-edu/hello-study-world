@@ -1,9 +1,9 @@
-package com.flab.hsw.core.domain.content
+package com.flab.hsw.core.domain.content.command
 
-import com.flab.hsw.core.domain.content.aggregate.CreateContentModel
+import com.flab.hsw.core.domain.content.command.aggregate.CreateContentCommandModel
 import java.util.*
 
-interface CreateContent {
+interface CreateContentCommand {
     val id: UUID
     val url: String
     val description: String
@@ -16,12 +16,12 @@ interface CreateContent {
         @SuppressWarnings("LongParameterList")      // Intended complexity to provide various Content creation cases
         fun create(
             id: UUID = UUID.randomUUID(),
-            url: String,
+            encodedUrl: String,
             description: String,
             providerUserId: UUID,
-        ): CreateContent = CreateContentModel.create(
+        ): CreateContentCommand = CreateContentCommandModel(
             id = id,
-            url = url,
+            url = encodedUrl,
             description = description,
             providerUserId = providerUserId,
         )

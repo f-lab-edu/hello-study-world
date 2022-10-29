@@ -1,8 +1,8 @@
-package com.flab.hsw.core.domain.content
+package com.flab.hsw.core.domain.content.query
 
 import com.flab.hsw.core.domain.SoftDeletable
-import com.flab.hsw.core.domain.content.aggregate.ContentModel
-import com.flab.hsw.core.domain.user.UserProfile
+import com.flab.hsw.core.domain.content.query.aggregate.ContentModel
+import com.flab.hsw.core.domain.user.SimpleUserProfile
 import java.time.Instant
 import java.util.*
 
@@ -10,7 +10,7 @@ interface Content : SoftDeletable {
     val id: UUID
     val url: String
     val description: String
-    val providerUserProfile: UserProfile
+    val provider: SimpleUserProfile
     val registeredAt: Instant
     val lastUpdateAt: Instant
 
@@ -20,15 +20,15 @@ interface Content : SoftDeletable {
             id: UUID,
             url: String,
             description: String,
-            providerUserProfile: UserProfile,
+            provider: SimpleUserProfile,
             registeredAt: Instant,
             lastUpdateAt: Instant,
         ): Content {
-            return ContentModel.create(
+            return ContentModel(
                 id = id,
                 url = url,
                 description = description,
-                providerUserProfile = providerUserProfile,
+                provider = provider,
                 registeredAt = registeredAt,
                 lastUpdateAt = lastUpdateAt,
                 deleted = false,

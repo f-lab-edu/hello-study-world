@@ -1,6 +1,7 @@
 package com.flab.hsw.core.jdbc.content
 
-import com.flab.hsw.core.domain.content.CreateContent
+import com.flab.hsw.core.domain.content.command.CreateContentCommand
+import com.flab.hsw.core.domain.content.query.Content
 import com.flab.hsw.core.jdbc.user.UserEntity
 import java.time.Instant
 import java.util.*
@@ -25,6 +26,17 @@ internal class ContentEntity(
 
     override fun hashCode(): Int = Objects.hash(this.seq)
 
+    fun toContent(providerUserEntity: UserEntity): Content {
+        return Content.create(
+            id = uuid,
+            url = url,
+            description = description,
+            provider = providerUserEntity.toUserProfile(),
+            registeredAt = registeredAt,
+            lastUpdateAt = lastActiveAt,
+        )
+    }
+
     companion object {
         const val TABLE = "contents"
 
@@ -37,18 +49,19 @@ internal class ContentEntity(
         const val COL_UPDATED_AT = "updated_at"
         const val COL_DELETED = "deleted"
 
-        fun from(createContent: CreateContent, providerUserSeq: Long): ContentEntity = with(createContent) {
-            val now = Instant.now()
+        fun from(createContentCommand: CreateContentCommand, providerUserSeq: Long): ContentEntity =
+            with(createContentCommand) {
+                val now = Instant.now()
 
-            return ContentEntity(
-                uuid = id,
-                url = url,
-                description = description,
-                providerUserSeq = providerUserSeq,
-                registeredAt = now,
-                lastActiveAt = now,
-                deleted = false,
-            )
-        }
+                return ContentEntity(
+                    uuid = id,
+                    url = url,
+                    description = description,
+                    providerUserSeq = providerUserSeq,
+                    registeredAt = now,
+                    lastActiveAt = now,
+                    deleted = false,
+                )
+            }
     }
 }

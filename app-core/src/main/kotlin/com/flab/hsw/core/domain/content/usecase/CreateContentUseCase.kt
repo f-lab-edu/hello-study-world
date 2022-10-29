@@ -1,9 +1,9 @@
 package com.flab.hsw.core.domain.content.usecase
 
 import com.flab.hsw.core.annotation.UseCase
-import com.flab.hsw.core.domain.content.Content
-import com.flab.hsw.core.domain.content.CreateContent
-import com.flab.hsw.core.domain.content.repository.ContentRepository
+import com.flab.hsw.core.domain.content.query.Content
+import com.flab.hsw.core.domain.content.command.CreateContentCommand
+import com.flab.hsw.core.domain.content.command.repository.ContentCommandRepository
 import java.util.*
 
 interface CreateContentUseCase {
@@ -16,25 +16,25 @@ interface CreateContentUseCase {
 
     companion object {
         fun newInstance(
-            contents: ContentRepository
+            contents: ContentCommandRepository
         ): CreateContentUseCase = CreateContentUseCaseImpl(contents = contents)
     }
 }
 
 @UseCase
 internal class CreateContentUseCaseImpl(
-    private val contents: ContentRepository
+    private val contents: ContentCommandRepository
 ) : CreateContentUseCase {
     override fun createContent(
         providerUserId: UUID,
         message: CreateContentUseCase.CreateContentMessage
     ): Content {
-        val createContent = CreateContent.create(
-            url = message.url,
+        val createContentCommand = CreateContentCommand.create(
+            encodedUrl = message.url,
             description = message.description,
             providerUserId = providerUserId
         )
 
-        return contents.create(createContent)
+        return contents.create(createContentCommand)
     }
 }

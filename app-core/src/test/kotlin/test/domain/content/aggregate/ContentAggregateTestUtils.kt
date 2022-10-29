@@ -1,12 +1,27 @@
 package test.domain.content.aggregate
 
-import com.flab.hsw.core.domain.content.Content
-import com.flab.hsw.core.domain.content.aggregate.ContentModel
+import com.flab.hsw.core.domain.content.command.CreateContentCommand
+import com.flab.hsw.core.domain.content.query.Content
+import com.flab.hsw.core.domain.content.query.aggregate.ContentModel
 import com.flab.hsw.core.domain.user.User
 import com.github.javafaker.Faker
+import test.domain.content.randomDescriptionIncludingKorean
+import test.domain.content.randomUrlIncludingKorean
 import test.domain.user.aggregate.randomUser
 import java.time.Instant
 import java.util.*
+
+fun CreateContentCommand.Companion.randomCreateContentCommand(
+    id: UUID = UUID.randomUUID(),
+    url: String = randomUrlIncludingKorean(),
+    description: String = randomDescriptionIncludingKorean(),
+    providerUserId: UUID = UUID.randomUUID()
+): CreateContentCommand = create(
+    id = id,
+    encodedUrl = url,
+    description = description,
+    providerUserId = providerUserId
+)
 
 fun randomContent(
     url: String = Faker().internet().url(),
@@ -16,7 +31,7 @@ fun randomContent(
     id = UUID.randomUUID(),
     url = url,
     description = description,
-    providerUserProfile = provider,
+    provider = provider,
     registeredAt = Instant.now(),
     lastUpdateAt = Instant.now(),
     deleted = false,
