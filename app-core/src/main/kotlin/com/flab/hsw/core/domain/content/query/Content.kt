@@ -6,7 +6,7 @@ import com.flab.hsw.core.domain.user.SimpleUserProfile
 import java.time.Instant
 
 interface Content : SoftDeletable {
-    val id: Long
+    val seq: Long
     val url: String
     val description: String
     val provider: SimpleUserProfile
@@ -16,7 +16,7 @@ interface Content : SoftDeletable {
     companion object {
         @SuppressWarnings("LongParameterList")      // Intended complexity to provide various Content creation cases
         fun create(
-            id: Long,
+            seq: Long,
             url: String,
             description: String,
             provider: SimpleUserProfile,
@@ -24,7 +24,7 @@ interface Content : SoftDeletable {
             lastUpdateAt: Instant,
         ): Content {
             return ContentModel(
-                id = id,
+                seq = seq,
                 url = url,
                 description = description,
                 provider = provider,

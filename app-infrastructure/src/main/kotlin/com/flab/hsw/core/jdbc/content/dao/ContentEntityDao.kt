@@ -2,7 +2,6 @@ package com.flab.hsw.core.jdbc.content.dao
 
 import com.flab.hsw.core.jdbc.JdbcTemplateHelper
 import com.flab.hsw.core.jdbc.content.ContentEntity
-import com.flab.hsw.core.jdbc.user.UserEntity
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
 
@@ -29,7 +28,7 @@ internal class ContentEntityDaoImpl(
 
         @Suppress("MagicNumber")    // Not a magic number in this context
         return contentEntity.copy(
-            id = super.doInsertAndGetId(ContentEntity.COL_ID, sql) {
+            seq = super.doInsertAndGetId(ContentEntity.COL_SEQ, sql) {
                 setStringEx(1, contentEntity.url)
                 setStringEx(2, contentEntity.description)
                 setLongEx(3, contentEntity.providerUserSeq)

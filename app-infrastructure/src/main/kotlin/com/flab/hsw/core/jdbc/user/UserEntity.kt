@@ -8,6 +8,7 @@ import com.flab.hsw.core.CoreKopringApplicationImpl.Companion.UNIDENTIFIABLE
 import com.flab.hsw.core.domain.user.SimpleUserProfile
 import com.flab.hsw.core.domain.user.User
 import com.flab.hsw.core.jdbc.JdbcTemplateHelper
+import com.flab.hsw.core.jdbc.SequenceMixin
 import com.flab.hsw.lib.util.toUUID
 import java.time.Instant
 import java.util.*
@@ -28,8 +29,8 @@ internal class UserEntity(
     var registeredAt: Instant,
     var lastActiveAt: Instant,
     var deleted: Boolean
-) {
-    var seq: Long = UNIDENTIFIABLE
+): SequenceMixin {
+    override var seq: Long = UNIDENTIFIABLE
 
     var version: Long = 0L
 

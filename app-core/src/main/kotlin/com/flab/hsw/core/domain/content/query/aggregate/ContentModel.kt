@@ -5,7 +5,7 @@ import com.flab.hsw.core.domain.user.SimpleUserProfile
 import java.time.Instant
 
 internal data class ContentModel(
-    override val id: Long,
+    override val seq: Long,
     override val url: String,
     override val description: String,
     override val provider: SimpleUserProfile,

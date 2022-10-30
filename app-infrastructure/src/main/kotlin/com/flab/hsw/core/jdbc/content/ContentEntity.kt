@@ -3,6 +3,7 @@ package com.flab.hsw.core.jdbc.content
 import com.flab.hsw.core.CoreKopringApplicationImpl.Companion.UNIDENTIFIABLE
 import com.flab.hsw.core.domain.content.command.CreateContentCommand
 import com.flab.hsw.core.domain.content.query.Content
+import com.flab.hsw.core.jdbc.SequenceMixin
 import com.flab.hsw.core.jdbc.user.UserEntity
 import java.time.Instant
 import java.util.*
@@ -15,16 +16,15 @@ internal class ContentEntity(
     val registeredAt: Instant,
     val lastActiveAt: Instant,
     val deleted: Boolean,
-    val id: Long = UNIDENTIFIABLE
-) {
+    override val seq: Long = UNIDENTIFIABLE
+): SequenceMixin {
     override fun equals(other: Any?): Boolean = when {
         this === other -> true
         other !is ContentEntity -> false
-        id == UNIDENTIFIABLE -> false
-        else -> this.id == other.id
+        else -> this.seq == other.seq
     }
 
-    override fun hashCode(): Int = Objects.hash(this.id)
+    override fun hashCode(): Int = Objects.hash(this.seq)
 
     fun copy(
         url: String = this.url,
@@ -33,7 +33,7 @@ internal class ContentEntity(
         registeredAt: Instant = this.registeredAt,
         lastActiveAt: Instant = this.lastActiveAt,
         deleted: Boolean = this.deleted,
-        id: Long = this.id
+        seq: Long = this.seq
     ): ContentEntity = ContentEntity(
         url = url,
         description = description,
@@ -41,12 +41,12 @@ internal class ContentEntity(
         registeredAt = registeredAt,
         lastActiveAt = lastActiveAt,
         deleted = deleted,
-        id = id
+        seq = seq
     )
 
     fun toContent(providerUserEntity: UserEntity): Content {
         return Content.create(
-            id = id,
+            seq = seq,
             url = url,
             description = description,
             provider = providerUserEntity.toUserProfile(),
@@ -58,7 +58,7 @@ internal class ContentEntity(
     companion object {
         const val TABLE = "contents"
 
-        const val COL_ID = "id"
+        const val COL_SEQ = "seq"
         const val COL_URL = "url"
         const val COL_DESCRIPTION = "description"
         const val COL_PROVIDER_USER_SEQ = "provider_user_seq"

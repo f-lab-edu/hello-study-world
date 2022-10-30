@@ -21,7 +21,7 @@ fun CreateContentCommand.Companion.random(
 
 
 fun Content.Companion.randomGeneratedNow(
-    id: Long = Faker().number().randomNumber(),
+    seq: Long = Faker().number().randomNumber(),
     url: String = randomUrlIncludingKorean(),
     description: String = randomDescriptionIncludingKorean(),
     provider: SimpleUserProfile = SimpleUserProfile.create(
@@ -33,7 +33,7 @@ fun Content.Companion.randomGeneratedNow(
     val now = Instant.now()
 
     return create(
-        id = id,
+        seq = seq,
         url = url,
         description = description,
         provider = provider,

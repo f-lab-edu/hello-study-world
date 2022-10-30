@@ -14,7 +14,7 @@ internal fun ContentEntity.Companion.random(
     registeredAt: Instant = Instant.now(),
     lastActiveAt: Instant = Instant.now(),
     deleted: Boolean = false,
-    id: Long = Faker().number().randomNumber(),
+    seq: Long = Faker().number().randomNumber(),
 ): ContentEntity = ContentEntity(
     url = url,
     description = description,
@@ -22,5 +22,5 @@ internal fun ContentEntity.Companion.random(
     registeredAt = registeredAt,
     lastActiveAt = lastActiveAt,
     deleted = deleted,
-    id = id
+    seq = seq
 )

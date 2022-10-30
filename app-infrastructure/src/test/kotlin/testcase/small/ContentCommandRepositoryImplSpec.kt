@@ -68,7 +68,7 @@ class ContentCommandRepositoryImplSpec {
 
         // then:
         assertAll(
-            { assertThat(createdContent.id, not(Matchers.nullValue())) },
+            { assertThat(createdContent.seq, not(Matchers.nullValue())) },
             { assertThat(createdContent.url, `is`(newContent.url)) },
             { assertThat(createdContent.description, `is`(newContent.description)) },
             { assertThat(createdContent.provider.id, `is`(newContent.providerUserId)) },
