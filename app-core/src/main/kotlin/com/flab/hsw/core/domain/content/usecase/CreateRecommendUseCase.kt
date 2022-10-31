@@ -35,14 +35,20 @@ internal class CreateRecommendUseCaseImpl(
     private val userRepository: UserRepository
 ) : CreateRecommendUseCase {
     override fun createRecommend(message: CreateRecommendUseCase.CreateRecommendMessage): Recommend {
-        userRepository.findByUuid(message.recommenderId) ?: throw UserByIdNotFoundException(id = message.recommenderId)
-        contentRepository.findByUuid(message.recommendedContentId) ?: throw ContentByIdNotFoundException(contentId = message.recommenderId)
+        userRepository.findByUuid(message.recommenderId)
+            ?: throw UserByIdNotFoundException(id = message.recommenderId)
+
+        contentRepository.findByUuid(message.recommendedContentId)
+            ?: throw ContentByIdNotFoundException(contentId = message.recommenderId)
 
         val recommendModel = Recommend.create(
             userId = message.recommenderId,
             contentId = message.recommendedContentId
         )
-        contentRepository.findRecommendHistoryByUserIdAndContentId(recommendModel)?.let { throw RecommendHistoryIsAlreadyExistException() }
+
+        contentRepository.findRecommendHistoryByUserIdAndContentId(recommendModel)
+            ?.let { throw RecommendHistoryIsAlreadyExistException() }
+
         return contentRepository.saveRecommendHistory(recommendModel)
     }
 }
