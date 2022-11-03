@@ -13,10 +13,10 @@ interface CreateRecommendUseCase {
 
     fun createRecommend(message: CreateRecommendMessage): Recommend
 
-    interface CreateRecommendMessage {
-        val recommenderId: UUID
+    data class CreateRecommendMessage(
+        val recommenderId: UUID,
         val recommendedContentId: UUID
-    }
+    )
 
     companion object {
         fun newInstance(
