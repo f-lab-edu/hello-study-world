@@ -30,13 +30,8 @@ fun randomUrlIncludingKorean(): String {
 }
 
 fun randomRecommendContentMessage(): CreateRecommendUseCase.CreateRecommendMessage {
-    data class FakeRecommendContentMessage(
-        override val recommenderId: UUID,
-        override val recommendedContentId: UUID
-    ) : CreateRecommendUseCase.CreateRecommendMessage
-
-    return FakeRecommendContentMessage(
-        recommenderId = UUID.randomUUID(),
-        recommendedContentId = UUID.randomUUID()
+    return CreateRecommendUseCase.CreateRecommendMessage(
+        recommendedContentId = UUID.randomUUID(),
+        recommenderId = UUID.randomUUID()
     )
 }
