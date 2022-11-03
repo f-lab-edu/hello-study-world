@@ -4,7 +4,7 @@ import com.flab.hsw.core.exception.ErrorCodes
 import com.flab.hsw.core.exception.ExternalException
 
 class RecommendHistoryIsAlreadyExistException(
-    override val message: String = "You can only recommend one time of each content"
-) : ExternalException(ErrorCodes.CONTENT_IS_ALREADY_RECOMMENDED, message) {
+    override val message: String = "각 컨텐츠에 대해서는 한번의 추천만 가능합니다."
+) : ExternalException(ErrorCodes.CONTENT_ONLY_RECOMMENDED_ONCE, message) {
     override fun messageArguments(): Collection<String> = setOf(message)
 }
