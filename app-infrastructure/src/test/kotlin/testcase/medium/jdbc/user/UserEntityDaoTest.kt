@@ -57,7 +57,7 @@ class UserEntityDaoTest : JdbcTemplateMediumTestBase() {
         }
 
         // then:
-        val updatedUser = sut.update(foundUser.seq, foundUser)
+        val updatedUser = sut.update(foundUser.id, foundUser)
 
         // then:
         val retrievedUser = sut.selectByUuid(updatedUser.uuid)!!

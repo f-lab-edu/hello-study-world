@@ -3,7 +3,7 @@ package com.flab.hsw.core.domain.content.usecase
 import com.flab.hsw.core.annotation.UseCase
 import com.flab.hsw.core.domain.content.query.Content
 import com.flab.hsw.core.domain.content.command.CreateContentCommand
-import com.flab.hsw.core.domain.content.command.repository.ContentCommandRepository
+import com.flab.hsw.core.domain.content.repository.ContentRepository
 import java.util.*
 
 interface CreateContentUseCase {
@@ -16,14 +16,14 @@ interface CreateContentUseCase {
 
     companion object {
         fun newInstance(
-            contents: ContentCommandRepository
+            contents: ContentRepository
         ): CreateContentUseCase = CreateContentUseCaseImpl(contents = contents)
     }
 }
 
 @UseCase
 internal class CreateContentUseCaseImpl(
-    private val contents: ContentCommandRepository
+    private val contents: ContentRepository
 ) : CreateContentUseCase {
     override fun createContent(
         providerUserId: UUID,

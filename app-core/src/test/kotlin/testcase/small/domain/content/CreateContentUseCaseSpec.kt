@@ -1,9 +1,9 @@
 package testcase.small.domain.content
 
 import com.flab.hsw.core.domain.content.command.CreateContentCommand
-import com.flab.hsw.core.domain.content.command.repository.ContentCommandRepository
+import com.flab.hsw.core.domain.content.repository.ContentRepository
+import com.flab.hsw.core.domain.content.command.usecase.CreateContentUseCase
 import com.flab.hsw.core.domain.content.query.Content
-import com.flab.hsw.core.domain.content.usecase.CreateContentUseCase
 import com.flab.hsw.core.domain.user.SimpleUserProfile
 import com.flab.hsw.lib.annotation.SmallTest
 import org.hamcrest.MatcherAssert.assertThat
@@ -23,16 +23,16 @@ import java.net.URLEncoder
 import java.util.*
 
 @SmallTest
-internal class CreateContentCommandUseCaseSpec {
+internal class CreateContentUseCaseSpec {
     private lateinit var sut: CreateContentUseCase
-    private lateinit var contentCommandRepository: ContentCommandRepository
+    private lateinit var contentRepository: ContentRepository
 
     @BeforeEach
     fun setup() {
-        contentCommandRepository = mock()
-        sut = CreateContentUseCase.newInstance(contentCommandRepository)
+        contentRepository = mock()
+        sut = CreateContentUseCase.newInstance(contentRepository)
 
-        `when`(contentCommandRepository.create(any())).thenAnswer {
+        `when`(contentRepository.create(any())).thenAnswer {
             val createContentCommand = it.arguments[0] as CreateContentCommand
 
             return@thenAnswer Content.randomGeneratedNow(

@@ -108,7 +108,7 @@ internal class UserEntityDaoImpl(
 
         return userEntity.apply {
             @Suppress("MagicNumber")    // Not a magic number in this context
-            seq = super.doInsertAndGetId(UserEntity.COL_SEQ, sql) {
+            id = super.doInsertAndGetId(UserEntity.COL_SEQ, sql) {
                 setBinaryEx(1, userEntity.uuid.toByteArray())
                 setStringEx(2, userEntity.nickname)
                 setStringEx(3, userEntity.email)
@@ -144,7 +144,7 @@ internal class UserEntityDaoImpl(
             setTimestampEx(5, userEntity.registeredAt)
             setTimestampEx(6, userEntity.lastActiveAt)
             setLongEx(7, userEntity.version)
-            setLongEx(8, userEntity.seq)
+            setLongEx(8, userEntity.id)
         }
 
         return when (affectedRows) {

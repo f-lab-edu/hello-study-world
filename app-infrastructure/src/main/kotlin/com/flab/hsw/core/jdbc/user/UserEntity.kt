@@ -4,11 +4,11 @@
  */
 package com.flab.hsw.core.jdbc.user
 
-import com.flab.hsw.core.CoreKopringApplicationImpl.Companion.UNIDENTIFIABLE
 import com.flab.hsw.core.domain.user.SimpleUserProfile
 import com.flab.hsw.core.domain.user.User
 import com.flab.hsw.core.jdbc.JdbcTemplateHelper
-import com.flab.hsw.core.jdbc.SequenceMixin
+import com.flab.hsw.core.jdbc.LongIdentifiable
+import com.flab.hsw.core.jdbc.LongIdentifiable.Companion.UNIDENTIFIABLE
 import com.flab.hsw.lib.util.toUUID
 import java.time.Instant
 import java.util.*
@@ -29,8 +29,8 @@ internal class UserEntity(
     var registeredAt: Instant,
     var lastActiveAt: Instant,
     var deleted: Boolean
-): SequenceMixin {
-    override var seq: Long = UNIDENTIFIABLE
+) : LongIdentifiable {
+    override var id: Long = UNIDENTIFIABLE
 
     var version: Long = 0L
 
@@ -54,10 +54,10 @@ internal class UserEntity(
     override fun equals(other: Any?): Boolean = when {
         this === other -> true
         other !is UserEntity -> false
-        else -> this.seq == other.seq
+        else -> this.id == other.id
     }
 
-    override fun hashCode(): Int = Objects.hash(this.seq)
+    override fun hashCode(): Int = Objects.hash(this.id)
 
     companion object {
         const val TABLE = "users"
@@ -101,7 +101,7 @@ internal class UserEntity(
                 lastActiveAt = map[prefix + COL_UPDATED_AT]!!.coerceToInstant(),
                 deleted = map[prefix + COL_DELETED] as Boolean
             ).apply {
-                this.seq = map[prefix + COL_SEQ] as Long
+                this.id = map[prefix + COL_SEQ] as Long
                 this.version = map[prefix + COL_VERSION] as Long
             }
         }

@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `contents`
 (
-    `seq`               BIGINT        NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id`               BIGINT        NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `url`               VARCHAR(2000) NOT NULL,
     `description`       VARCHAR(200)  NOT NULL,
     `provider_user_seq` BIGINT        NOT NULL,
