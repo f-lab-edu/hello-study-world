@@ -22,6 +22,7 @@ import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.mock.web.MockHttpSession
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.web.WebAppConfiguration
@@ -107,7 +108,8 @@ class MockMvcMediumTestBase : JsonRequestAssertionsMixin {
         method: HttpMethod,
         endpoint: String,
         payload: Any? = null,
-        vararg queryParams: Pair<String, String?>
+        vararg queryParams: Pair<String, String?>,
+        session: MockHttpSession = MockHttpSession()
     ): MockHttpServletRequestBuilder {
         fun String.urlEncode() = URLEncoder.encode(this, StandardCharsets.UTF_8.toString())
         val requestEndpoint = if (queryParams.isEmpty()) {
@@ -142,6 +144,7 @@ class MockMvcMediumTestBase : JsonRequestAssertionsMixin {
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding(Charsets.UTF_8)
                 .content(jsonPayload)
+                .session(session)
         }
     }
 
