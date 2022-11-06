@@ -8,10 +8,4 @@ interface ContentRepository {
     fun save(content: Content): Content
 
     fun findByUuid(uuid: UUID): Content?
-
-    fun findContentRecommendationByUserIdAndContentId(
-        contentRecommendation: ContentRecommendation
-    ): ContentRecommendation?
-
-    fun saveContentRecommendation(contentRecommendation: ContentRecommendation): ContentRecommendation
 }

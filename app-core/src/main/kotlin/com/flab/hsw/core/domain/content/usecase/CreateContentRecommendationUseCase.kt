@@ -4,6 +4,7 @@ import com.flab.hsw.core.annotation.UseCase
 import com.flab.hsw.core.domain.content.ContentRecommendation
 import com.flab.hsw.core.domain.content.exception.ContentByIdNotFoundException
 import com.flab.hsw.core.domain.content.exception.ContentRecommendationIsAlreadyExistException
+import com.flab.hsw.core.domain.content.repository.ContentRecommendationRepository
 import com.flab.hsw.core.domain.content.repository.ContentRepository
 import com.flab.hsw.core.domain.user.exception.UserByIdNotFoundException
 import com.flab.hsw.core.domain.user.repository.UserRepository
@@ -21,9 +22,11 @@ interface CreateContentRecommendationUseCase {
     companion object {
         fun newInstance(
             contentRepository: ContentRepository,
+            contentRecommendationRepository: ContentRecommendationRepository,
             userRepository: UserRepository
         ): CreateContentRecommendationUseCase = CreateContentRecommendationUseCaseImpl(
             contentRepository = contentRepository,
+            contentRecommendationRepository = contentRecommendationRepository,
             userRepository = userRepository
         )
     }
@@ -32,6 +35,7 @@ interface CreateContentRecommendationUseCase {
 @UseCase
 internal class CreateContentRecommendationUseCaseImpl(
     private val contentRepository: ContentRepository,
+    private val contentRecommendationRepository: ContentRecommendationRepository,
     private val userRepository: UserRepository
 ) : CreateContentRecommendationUseCase {
     override fun createContentRecommendation(
@@ -48,9 +52,9 @@ internal class CreateContentRecommendationUseCaseImpl(
             contentId = message.recommendedContentId
         )
 
-        contentRepository.findContentRecommendationByUserIdAndContentId(contentRecommendation)
+        contentRecommendationRepository.findContentRecommendationByUserIdAndContentId(contentRecommendation)
             ?.let { throw ContentRecommendationIsAlreadyExistException() }
 
-        return contentRepository.saveContentRecommendation(contentRecommendation)
+        return contentRecommendationRepository.saveContentRecommendation(contentRecommendation)
     }
 }
