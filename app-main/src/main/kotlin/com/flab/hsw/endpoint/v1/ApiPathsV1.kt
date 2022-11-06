@@ -12,4 +12,10 @@ object ApiPathsV1 {
 
     const val USERS = "$V1/users"
     const val USERS_ID = "$USERS/${ApiVariableV1.PATH_ID}"
+
+    const val CONTENT = "$V1/content"
+
+    const val RECOMMEND = "recommend"
+    const val CONTENT_RECOMMENDATION = "${CONTENT}/${RECOMMEND}"
+
 }
