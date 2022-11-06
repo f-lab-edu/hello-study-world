@@ -34,6 +34,8 @@ interface ErrorCodesToHttpStatusMixin {
         CONTENT_BY_ID_NOT_FOUND -> HttpStatus.NOT_FOUND
         CONTENT_ONLY_RECOMMENDED_ONCE -> HttpStatus.CONFLICT
 
+        UNAUTHORIZED_STATUS_EXCEPTION -> HttpStatus.UNAUTHORIZED
+
         UNHANDLED_EXCEPTION -> HttpStatus.INTERNAL_SERVER_ERROR
     }
 }
