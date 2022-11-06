@@ -2,7 +2,7 @@ package test.domain.content
 
 import com.flab.hsw.core.domain.content.Content
 import com.flab.hsw.core.domain.content.usecase.CreateContentUseCase
-import com.flab.hsw.core.domain.content.usecase.CreateRecommendUseCase
+import com.flab.hsw.core.domain.content.usecase.CreateContentRecommendationUseCase
 import com.github.javafaker.Faker
 import java.util.*
 
@@ -29,8 +29,8 @@ fun randomUrlIncludingKorean(): String {
             "&company=" + Faker(Locale.KOREAN).company().name()
 }
 
-fun randomRecommendContentMessage(): CreateRecommendUseCase.CreateRecommendMessage {
-    return CreateRecommendUseCase.CreateRecommendMessage(
+fun randomCreateContentRecommendationMessage(): CreateContentRecommendationUseCase.CreateContentRecommendationMessage {
+    return CreateContentRecommendationUseCase.CreateContentRecommendationMessage(
         recommendedContentId = UUID.randomUUID(),
         recommenderId = UUID.randomUUID()
     )

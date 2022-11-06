@@ -1,19 +1,19 @@
 package com.flab.hsw.core.domain.content.usecase
 
 import com.flab.hsw.core.annotation.UseCase
-import com.flab.hsw.core.domain.content.Recommend
+import com.flab.hsw.core.domain.content.ContentRecommendation
 import com.flab.hsw.core.domain.content.exception.ContentByIdNotFoundException
-import com.flab.hsw.core.domain.content.exception.RecommendHistoryIsAlreadyExistException
+import com.flab.hsw.core.domain.content.exception.ContentRecommendationIsAlreadyExistException
 import com.flab.hsw.core.domain.content.repository.ContentRepository
 import com.flab.hsw.core.domain.user.exception.UserByIdNotFoundException
 import com.flab.hsw.core.domain.user.repository.UserRepository
 import java.util.*
 
-interface CreateRecommendUseCase {
+interface CreateContentRecommendationUseCase {
 
-    fun createRecommend(message: CreateRecommendMessage): Recommend
+    fun createContentRecommendation(message: CreateContentRecommendationMessage): ContentRecommendation
 
-    data class CreateRecommendMessage(
+    data class CreateContentRecommendationMessage(
         val recommenderId: UUID,
         val recommendedContentId: UUID
     )
@@ -22,7 +22,7 @@ interface CreateRecommendUseCase {
         fun newInstance(
             contentRepository: ContentRepository,
             userRepository: UserRepository
-        ): CreateRecommendUseCase = CreateRecommendUseCaseImpl(
+        ): CreateContentRecommendationUseCase = CreateContentRecommendationUseCaseImpl(
             contentRepository = contentRepository,
             userRepository = userRepository
         )
@@ -30,25 +30,27 @@ interface CreateRecommendUseCase {
 }
 
 @UseCase
-internal class CreateRecommendUseCaseImpl(
+internal class CreateContentRecommendationUseCaseImpl(
     private val contentRepository: ContentRepository,
     private val userRepository: UserRepository
-) : CreateRecommendUseCase {
-    override fun createRecommend(message: CreateRecommendUseCase.CreateRecommendMessage): Recommend {
+) : CreateContentRecommendationUseCase {
+    override fun createContentRecommendation(
+        message: CreateContentRecommendationUseCase.CreateContentRecommendationMessage
+    ): ContentRecommendation {
         userRepository.findByUuid(message.recommenderId)
             ?: throw UserByIdNotFoundException(id = message.recommenderId)
 
         contentRepository.findByUuid(message.recommendedContentId)
-            ?: throw ContentByIdNotFoundException(contentId = message.recommenderId)
+            ?: throw ContentByIdNotFoundException(contentId = message.recommendedContentId)
 
-        val recommendModel = Recommend.create(
+        val contentRecommendation = ContentRecommendation.create(
             userId = message.recommenderId,
             contentId = message.recommendedContentId
         )
 
-        contentRepository.findRecommendHistoryByUserIdAndContentId(recommendModel)
-            ?.let { throw RecommendHistoryIsAlreadyExistException() }
+        contentRepository.findContentRecommendationByUserIdAndContentId(contentRecommendation)
+            ?.let { throw ContentRecommendationIsAlreadyExistException() }
 
-        return contentRepository.saveRecommendHistory(recommendModel)
+        return contentRepository.saveContentRecommendation(contentRecommendation)
     }
 }

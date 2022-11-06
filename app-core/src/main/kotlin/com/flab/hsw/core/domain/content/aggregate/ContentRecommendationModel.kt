@@ -1,20 +1,20 @@
 package com.flab.hsw.core.domain.content.aggregate
 
-import com.flab.hsw.core.domain.content.Recommend
+import com.flab.hsw.core.domain.content.ContentRecommendation
 import java.time.Instant
 import java.util.UUID
 
-data class RecommendModel(
-    override val userId: UUID,
+data class ContentRecommendationModel(
+    override val recommenderUserId: UUID,
     override val contentId: UUID,
     override val registeredAt: Instant
-) : Recommend {
+) : ContentRecommendation {
     companion object {
         fun create(
-            userId: UUID,
+            recommenderUserId: UUID,
             contentId: UUID
-        ): RecommendModel = RecommendModel(
-            userId = userId,
+        ): ContentRecommendationModel = ContentRecommendationModel(
+            recommenderUserId = recommenderUserId,
             contentId = contentId,
             registeredAt = Instant.now()
         )

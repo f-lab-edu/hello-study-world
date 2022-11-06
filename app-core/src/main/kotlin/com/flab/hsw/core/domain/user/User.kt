@@ -39,6 +39,8 @@ interface User : SoftDeletable {
         const val LOGIN_ID_REGEX = "[a-z0-9]{${LENGTH_LOGIN_ID_MIN},${LENGTH_LOGIN_ID_MAX}}"
         const val PASSWORD_REGEX = "[a-z0-9]{${LENGTH_PASSWORD_MIN},${LENGTH_PASSWORD_MAX}}"
 
+        const val AUTHORIZED_USER_ALIAS = "authorizedUser"
+
         @SuppressWarnings("LongParameterList")      // Intended complexity to provide various User creation cases
         fun create(
             id: UUID = UUID.randomUUID(),

@@ -1,7 +1,7 @@
 package com.flab.hsw.core.domain.content.repository
 
 import com.flab.hsw.core.domain.content.Content
-import com.flab.hsw.core.domain.content.Recommend
+import com.flab.hsw.core.domain.content.ContentRecommendation
 import java.util.*
 
 interface ContentRepository {
@@ -9,7 +9,9 @@ interface ContentRepository {
 
     fun findByUuid(uuid: UUID): Content?
 
-    fun findRecommendHistoryByUserIdAndContentId(recommend: Recommend): Recommend?
+    fun findContentRecommendationByUserIdAndContentId(
+        contentRecommendation: ContentRecommendation
+    ): ContentRecommendation?
 
-    fun saveRecommendHistory(recommend: Recommend): Recommend
+    fun saveContentRecommendation(contentRecommendation: ContentRecommendation): ContentRecommendation
 }

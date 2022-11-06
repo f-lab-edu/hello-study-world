@@ -1,11 +1,11 @@
 package com.flab.hsw.core.domain.content
 
-import com.flab.hsw.core.domain.content.aggregate.RecommendModel
+import com.flab.hsw.core.domain.content.aggregate.ContentRecommendationModel
 import java.time.Instant
 import java.util.*
 
-interface Recommend {
-    val userId: UUID
+interface ContentRecommendation {
+    val recommenderUserId: UUID
 
     val contentId: UUID
 
@@ -15,8 +15,8 @@ interface Recommend {
         fun create(
             userId : UUID,
             contentId: UUID
-        ) : Recommend = RecommendModel.create(
-            userId = userId,
+        ) : ContentRecommendation = ContentRecommendationModel.create(
+            recommenderUserId = userId,
             contentId = contentId
         )
     }
