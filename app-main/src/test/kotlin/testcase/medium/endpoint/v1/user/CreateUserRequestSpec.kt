@@ -16,14 +16,14 @@ import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import testcase.medium.ControllerMediumTestBase
+import testcase.medium.UserControllerMediumTestBase
 import java.util.*
 import java.util.stream.Stream
 
 /**
  * @since 2021-08-10
  */
-class CreateUserRequestSpec : ControllerMediumTestBase() {
+class CreateUserRequestSpec : UserControllerMediumTestBase() {
     @ParameterizedTest(name = "Fails if it is {0} characters")
     @MethodSource("badNicknames")
     fun failIfNicknamesAreBad(
