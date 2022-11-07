@@ -22,6 +22,9 @@ enum class ErrorCodes(
     USER_BY_NICKNAME_DUPLICATED(1003, ""),
     USER_BY_LOGIN_ID_DUPLICATED(1004, ""),
 
+    CONTENT_BY_ID_NOT_FOUND(2001,""),
+    CONTENT_ONLY_RECOMMENDED_ONCE(2002,""),
+
     UNHANDLED_EXCEPTION(code = -1, "");
 
     val asMessageKey: String = "ERROR_${this.name}"
