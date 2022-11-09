@@ -1,9 +1,9 @@
 package testcase.small.domain.content
 
-import com.flab.hsw.core.domain.content.command.CreateContentCommand
+import com.flab.hsw.core.domain.content.CreateContentCommand
 import com.flab.hsw.core.domain.content.repository.ContentRepository
-import com.flab.hsw.core.domain.content.command.usecase.CreateContentUseCase
-import com.flab.hsw.core.domain.content.query.Content
+import com.flab.hsw.core.domain.content.usecase.CreateContentUseCase
+import com.flab.hsw.core.domain.content.Content
 import com.flab.hsw.core.domain.user.SimpleUserProfile
 import com.flab.hsw.lib.annotation.SmallTest
 import org.hamcrest.MatcherAssert.assertThat

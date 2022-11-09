@@ -1,6 +1,6 @@
 package test.domain.content
 
-import com.flab.hsw.core.domain.content.command.CreateContentCommand
+import com.flab.hsw.core.domain.content.CreateContentCommand
 import com.flab.hsw.core.domain.content.usecase.CreateContentUseCase
 import com.flab.hsw.core.domain.content.usecase.CreateContentRecommendationUseCase
 import com.github.javafaker.Faker

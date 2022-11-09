@@ -1,4 +1,4 @@
-package com.flab.hsw.core.domain.content.command
+package com.flab.hsw.core.domain.content
 
 import java.net.URLDecoder
 import java.util.*

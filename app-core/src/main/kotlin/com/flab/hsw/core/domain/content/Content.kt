@@ -1,4 +1,4 @@
-package com.flab.hsw.core.domain.content.query
+package com.flab.hsw.core.domain.content
 
 import com.flab.hsw.core.domain.SoftDeletable
 import com.flab.hsw.core.domain.user.SimpleUserProfile

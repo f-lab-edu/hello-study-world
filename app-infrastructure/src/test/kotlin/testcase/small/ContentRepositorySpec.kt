@@ -1,7 +1,7 @@
 package testcase.small
 
-import com.flab.hsw.core.domain.content.command.CreateContentCommand
-import com.flab.hsw.core.domain.content.query.Content
+import com.flab.hsw.core.domain.content.CreateContentCommand
+import com.flab.hsw.core.domain.content.Content
 import com.flab.hsw.core.domain.content.repository.ContentRepository
 import com.flab.hsw.core.domain.user.exception.UserByIdNotFoundException
 import com.flab.hsw.core.jdbc.content.dao.ContentEntityDao

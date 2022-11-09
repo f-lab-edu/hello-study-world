@@ -1,7 +1,7 @@
 package com.flab.hsw.core.jdbc.content
 
-import com.flab.hsw.core.domain.content.command.CreateContentCommand
-import com.flab.hsw.core.domain.content.query.Content
+import com.flab.hsw.core.domain.content.CreateContentCommand
+import com.flab.hsw.core.domain.content.Content
 import com.flab.hsw.core.jdbc.LongIdentifiable
 import com.flab.hsw.core.jdbc.LongIdentifiable.Companion.UNIDENTIFIABLE
 import com.flab.hsw.core.jdbc.user.UserEntity
