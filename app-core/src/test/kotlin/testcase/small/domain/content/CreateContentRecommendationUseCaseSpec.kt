@@ -54,7 +54,7 @@ internal class CreateContentRecommendationUseCaseSpec {
 
         // and:
         `when`(userRepository.findByUuid(any())).thenAnswer { return@thenAnswer randomUser() }
-        `when`(contentRepository.findByUuid(any())).thenAnswer { return@thenAnswer Content.randomGeneratedNow() }
+        `when`(contentRepository.findById(any())).thenAnswer { return@thenAnswer Content.randomGeneratedNow() }
         `when`(contentRecommendationRepository.findContentRecommendationByUserIdAndContentId(any()))
             .thenAnswer { return@thenAnswer null }
         `when`(contentRecommendationRepository.saveContentRecommendation(any()))
@@ -92,7 +92,7 @@ internal class CreateContentRecommendationUseCaseSpec {
 
         // and:
         `when`(userRepository.findByUuid(any())).thenAnswer { return@thenAnswer randomUser() }
-        `when`(contentRepository.findByUuid(any())).thenAnswer { return@thenAnswer null }
+        `when`(contentRepository.findById(any())).thenAnswer { return@thenAnswer null }
 
         // then:
         assertThrows<ContentByIdNotFoundException> { sut.createContentRecommendation(message) }
@@ -106,7 +106,7 @@ internal class CreateContentRecommendationUseCaseSpec {
 
         // and:
         `when`(userRepository.findByUuid(any())).thenAnswer { return@thenAnswer randomUser() }
-        `when`(contentRepository.findByUuid(any())).thenAnswer { return@thenAnswer Content.randomGeneratedNow() }
+        `when`(contentRepository.findById(any())).thenAnswer { return@thenAnswer Content.randomGeneratedNow() }
         `when`(contentRecommendationRepository.findContentRecommendationByUserIdAndContentId(any()))
             .thenAnswer { return@thenAnswer it.arguments[0] }
 

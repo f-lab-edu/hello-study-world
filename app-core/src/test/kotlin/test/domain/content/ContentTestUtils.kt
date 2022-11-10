@@ -36,7 +36,7 @@ fun randomDescriptionIncludingKorean(): String {
 
 fun randomCreateContentRecommendationMessage(): CreateContentRecommendationUseCase.CreateContentRecommendationMessage {
     return CreateContentRecommendationUseCase.CreateContentRecommendationMessage(
-        recommendedContentId = UUID.randomUUID(),
+        recommendedContentId = Faker().number().randomNumber(),
         recommenderId = UUID.randomUUID()
     )
 }

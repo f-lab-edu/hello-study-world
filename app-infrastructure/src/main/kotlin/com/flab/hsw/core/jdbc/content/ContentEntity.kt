@@ -2,6 +2,7 @@ package com.flab.hsw.core.jdbc.content
 
 import com.flab.hsw.core.domain.content.CreateContentCommand
 import com.flab.hsw.core.domain.content.Content
+import com.flab.hsw.core.jdbc.JdbcTemplateHelper
 import com.flab.hsw.core.jdbc.LongIdentifiable
 import com.flab.hsw.core.jdbc.LongIdentifiable.Companion.UNIDENTIFIABLE
 import com.flab.hsw.core.jdbc.user.UserEntity
@@ -10,14 +11,14 @@ import java.util.*
 
 @SuppressWarnings("LongParameterList")      // Intended complexity to provide various Content creation cases
 internal class ContentEntity(
-    val url: String,
-    val description: String,
+    var url: String,
+    var description: String,
     val providerUserSeq: Long,
     val registeredAt: Instant,
-    val lastActiveAt: Instant,
+    var lastUpdateAt: Instant,
     val deleted: Boolean,
     override val id: Long = UNIDENTIFIABLE
-): LongIdentifiable {
+) : LongIdentifiable {
     override fun equals(other: Any?): Boolean = when {
         this === other -> true
         other !is ContentEntity -> false
@@ -31,7 +32,7 @@ internal class ContentEntity(
         description: String = this.description,
         providerUserSeq: Long = this.providerUserSeq,
         registeredAt: Instant = this.registeredAt,
-        lastActiveAt: Instant = this.lastActiveAt,
+        lastActiveAt: Instant = this.lastUpdateAt,
         deleted: Boolean = this.deleted,
         id: Long = this.id
     ): ContentEntity = ContentEntity(
@@ -39,7 +40,7 @@ internal class ContentEntity(
         description = description,
         providerUserSeq = providerUserSeq,
         registeredAt = registeredAt,
-        lastActiveAt = lastActiveAt,
+        lastUpdateAt = lastActiveAt,
         deleted = deleted,
         id = id
     )
@@ -51,7 +52,7 @@ internal class ContentEntity(
             description = description,
             provider = providerUserEntity.toUserProfile(),
             registeredAt = registeredAt,
-            lastUpdateAt = lastActiveAt,
+            lastUpdateAt = lastUpdateAt,
         )
     }
 
@@ -75,9 +76,24 @@ internal class ContentEntity(
                     description = description,
                     providerUserSeq = providerUserSeq,
                     registeredAt = now,
-                    lastActiveAt = now,
+                    lastUpdateAt = now,
                     deleted = false,
                 )
             }
+
+        fun from(
+            deserialisationContext: JdbcTemplateHelper,
+            map: Map<String, Any?>,
+        ) = with(deserialisationContext) {
+            ContentEntity(
+                url = map[COL_URL] as String,
+                description = map[COL_DESCRIPTION] as String,
+                providerUserSeq = map[COL_PROVIDER_USER_SEQ] as Long,
+                registeredAt = map[COL_CREATED_AT]!!.coerceToInstant(),
+                lastUpdateAt = map[COL_UPDATED_AT]!!.coerceToInstant(),
+                deleted = map[COL_DELETED] as Boolean,
+                id = map[COL_ID] as Long,
+            )
+        }
     }
 }

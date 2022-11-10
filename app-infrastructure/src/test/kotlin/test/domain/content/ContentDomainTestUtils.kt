@@ -12,7 +12,7 @@ internal fun ContentEntity.Companion.random(
         .characters(CreateContentCommand.LENGTH_DESCRIPTION_MIN, CreateContentCommand.LENGTH_DESCRIPTION_MAX),
     providerUserSeq: Long = Faker().number().randomNumber(),
     registeredAt: Instant = Instant.now(),
-    lastActiveAt: Instant = Instant.now(),
+    lastUpdateAt: Instant = Instant.now(),
     deleted: Boolean = false,
     id: Long = Faker().number().randomNumber(),
 ): ContentEntity = ContentEntity(
@@ -20,7 +20,7 @@ internal fun ContentEntity.Companion.random(
     description = description,
     providerUserSeq = providerUserSeq,
     registeredAt = registeredAt,
-    lastActiveAt = lastActiveAt,
+    lastUpdateAt = lastUpdateAt,
     deleted = deleted,
     id = id
 )

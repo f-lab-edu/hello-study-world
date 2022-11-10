@@ -1,16 +1,17 @@
 package com.flab.hsw.core.domain.content
 
+import com.flab.hsw.core.domain.RecordedTimeMixin
 import com.flab.hsw.core.domain.SoftDeletable
 import com.flab.hsw.core.domain.user.SimpleUserProfile
 import java.time.Instant
 
-interface Content : SoftDeletable {
+interface Content : SoftDeletable, RecordedTimeMixin {
     val id: Long
     val url: String
     val description: String
     val provider: SimpleUserProfile
-    val registeredAt: Instant
-    val lastUpdateAt: Instant
+    override val registeredAt: Instant
+    override val lastUpdateAt: Instant
 
     private data class ContentModel(
         override val id: Long,

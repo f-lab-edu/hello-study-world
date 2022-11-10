@@ -1,39 +1,36 @@
-package testcase.small
+package testcase.medium.jdbc.content
 
-import com.flab.hsw.core.domain.content.CreateContentCommand
 import com.flab.hsw.core.domain.content.Content
+import com.flab.hsw.core.domain.content.CreateContentCommand
 import com.flab.hsw.core.domain.content.repository.ContentRepository
 import com.flab.hsw.core.domain.user.exception.UserByIdNotFoundException
 import com.flab.hsw.core.jdbc.content.dao.ContentEntityDao
 import com.flab.hsw.core.jdbc.content.repository.ContentRepositoryImpl
 import com.flab.hsw.core.jdbc.user.dao.UserEntityDao
-import com.flab.hsw.lib.annotation.SmallTest
 import com.github.javafaker.Faker
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.not
 import org.junit.jupiter.api.*
-import org.mockito.Mockito.`when`
-import org.mockito.kotlin.any
-import org.mockito.kotlin.mock
+import org.springframework.beans.factory.annotation.Autowired
 import test.domain.content.aggregate.random
 import test.domain.user.randomUserEntity
+import testcase.medium.JdbcTemplateMediumTestBase
 import java.util.*
 
-@SmallTest
-class ContentRepositorySpec {
+class ContentRepositorySpec : JdbcTemplateMediumTestBase() {
     private lateinit var sut: ContentRepository
+
+    @Autowired
     private lateinit var contentsDao: ContentEntityDao
+
+    @Autowired
     private lateinit var usersDao: UserEntityDao
 
     @BeforeEach
     fun setup() {
-        this.contentsDao = mock()
-        this.usersDao = mock()
         this.sut = ContentRepositoryImpl(contentsDao, usersDao)
-
-        `when`(contentsDao.insert(any())).thenAnswer { return@thenAnswer it.arguments[0] }
     }
 
     @DisplayName("컨텐츠를 생성 시 제공자의 ID를 DAO에서 찾을 수 없으면 예외를 발생시킵니다..")
@@ -41,9 +38,6 @@ class ContentRepositorySpec {
     fun errorIfUserNotFoundWhenCreatingContent() {
         // given:
         val contentProviderUserUuid = UUID.randomUUID()
-
-        // and:
-        `when`(usersDao.selectByUuid(contentProviderUserUuid)).thenReturn(null)
 
         // then:
         assertThrows<UserByIdNotFoundException> {
@@ -57,15 +51,14 @@ class ContentRepositorySpec {
     @Test
     fun successWhenCreatingContent() {
         // given:
-        val contentProviderUser = randomUserEntity(id = UUID.randomUUID()).apply {
-            id = Faker().number().randomNumber()
-        }
-        val newContent = CreateContentCommand.random(providerUserId = contentProviderUser.uuid)
-
-        // and:
-        `when`(usersDao.selectByUuid(contentProviderUser.uuid)).thenReturn(contentProviderUser)
+        val contentProviderUser = usersDao.insert(
+            userEntity = randomUserEntity(id = UUID.randomUUID()).apply {
+                id = Faker().number().randomNumber()
+            }
+        )
 
         // when:
+        val newContent = CreateContentCommand.random(providerUserId = contentProviderUser.uuid)
         val createdContent: Content = sut.create(newContent)
 
         // then:

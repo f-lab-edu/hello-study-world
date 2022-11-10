@@ -7,14 +7,14 @@ import java.util.*
 interface ContentRecommendation {
     val recommenderUserId: UUID
 
-    val contentId: UUID
+    val contentId: Long
 
     val registeredAt: Instant
 
     companion object {
         fun create(
             userId : UUID,
-            contentId: UUID
+            contentId: Long
         ) : ContentRecommendation = ContentRecommendationModel.create(
             recommenderUserId = userId,
             contentId = contentId
