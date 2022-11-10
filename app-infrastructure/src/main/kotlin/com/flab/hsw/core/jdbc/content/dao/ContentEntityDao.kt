@@ -20,7 +20,7 @@ internal class ContentEntityDaoImpl(
             INSERT INTO `${ContentEntity.TABLE}` (
                 `${ContentEntity.COL_URL}`,
                 `${ContentEntity.COL_DESCRIPTION}`,
-                `${ContentEntity.COL_PROVIDER_USER_SEQ}`,
+                `${ContentEntity.COL_PROVIDER_USER_ID}`,
                 `${ContentEntity.COL_DELETED}`,
                 `${ContentEntity.COL_CREATED_AT}`,
                 `${ContentEntity.COL_UPDATED_AT}`
@@ -33,7 +33,7 @@ internal class ContentEntityDaoImpl(
             id = super.doInsertAndGetId(ContentEntity.COL_ID, sql) {
                 setStringEx(1, contentEntity.url)
                 setStringEx(2, contentEntity.description)
-                setLongEx(3, contentEntity.providerUserSeq)
+                setLongEx(3, contentEntity.providerUserId)
                 setBooleanEx(4, contentEntity.deleted)
                 setTimestampEx(5, contentEntity.registeredAt)
                 setTimestampEx(6, contentEntity.lastUpdateAt)

@@ -13,7 +13,7 @@ import java.util.*
 internal class ContentEntity(
     var url: String,
     var description: String,
-    val providerUserSeq: Long,
+    val providerUserId: Long,
     val registeredAt: Instant,
     var lastUpdateAt: Instant,
     val deleted: Boolean,
@@ -30,7 +30,7 @@ internal class ContentEntity(
     fun copy(
         url: String = this.url,
         description: String = this.description,
-        providerUserSeq: Long = this.providerUserSeq,
+        providerUserId: Long = this.providerUserId,
         registeredAt: Instant = this.registeredAt,
         lastActiveAt: Instant = this.lastUpdateAt,
         deleted: Boolean = this.deleted,
@@ -38,7 +38,7 @@ internal class ContentEntity(
     ): ContentEntity = ContentEntity(
         url = url,
         description = description,
-        providerUserSeq = providerUserSeq,
+        providerUserId = providerUserId,
         registeredAt = registeredAt,
         lastUpdateAt = lastActiveAt,
         deleted = deleted,
@@ -62,19 +62,19 @@ internal class ContentEntity(
         const val COL_ID = "id"
         const val COL_URL = "url"
         const val COL_DESCRIPTION = "description"
-        const val COL_PROVIDER_USER_SEQ = "provider_user_seq"
+        const val COL_PROVIDER_USER_ID = "provider_user_id"
         const val COL_CREATED_AT = "created_at"
         const val COL_UPDATED_AT = "updated_at"
         const val COL_DELETED = "deleted"
 
-        fun from(createContentCommand: CreateContentCommand, providerUserSeq: Long): ContentEntity =
+        fun from(createContentCommand: CreateContentCommand, providerUserId: Long): ContentEntity =
             with(createContentCommand) {
                 val now = Instant.now()
 
                 return ContentEntity(
                     url = url,
                     description = description,
-                    providerUserSeq = providerUserSeq,
+                    providerUserId = providerUserId,
                     registeredAt = now,
                     lastUpdateAt = now,
                     deleted = false,
@@ -88,7 +88,7 @@ internal class ContentEntity(
             ContentEntity(
                 url = map[COL_URL] as String,
                 description = map[COL_DESCRIPTION] as String,
-                providerUserSeq = map[COL_PROVIDER_USER_SEQ] as Long,
+                providerUserId = map[COL_PROVIDER_USER_ID] as Long,
                 registeredAt = map[COL_CREATED_AT]!!.coerceToInstant(),
                 lastUpdateAt = map[COL_UPDATED_AT]!!.coerceToInstant(),
                 deleted = map[COL_DELETED] as Boolean,

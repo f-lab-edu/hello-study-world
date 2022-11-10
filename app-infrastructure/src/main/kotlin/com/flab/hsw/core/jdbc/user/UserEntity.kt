@@ -62,7 +62,7 @@ internal class UserEntity(
     companion object {
         const val TABLE = "users"
 
-        const val COL_SEQ = "seq"
+        const val COL_ID = "id"
         const val COL_UUID = "uuid"
         const val COL_NICKNAME = "nickname"
         const val COL_EMAIL = "email"
@@ -101,7 +101,7 @@ internal class UserEntity(
                 lastActiveAt = map[prefix + COL_UPDATED_AT]!!.coerceToInstant(),
                 deleted = map[prefix + COL_DELETED] as Boolean
             ).apply {
-                this.id = map[prefix + COL_SEQ] as Long
+                this.id = map[prefix + COL_ID] as Long
                 this.version = map[prefix + COL_VERSION] as Long
             }
         }

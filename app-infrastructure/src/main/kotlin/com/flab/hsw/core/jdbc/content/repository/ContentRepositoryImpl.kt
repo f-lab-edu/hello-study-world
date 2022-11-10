@@ -25,7 +25,7 @@ internal class ContentRepositoryImpl(
 
     override fun findById(id: Long): Content? {
         return contentEntityDao.selectById(id)?.let { contentEntity ->
-            val provider = userEntityDao.selectById(contentEntity.providerUserSeq)
+            val provider = userEntityDao.selectById(contentEntity.providerUserId)
                 ?: throw ContentProviderNotFoundException(id)
 
             contentEntity.toContent(provider)

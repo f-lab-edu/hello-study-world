@@ -10,7 +10,7 @@ internal fun ContentEntity.Companion.random(
     url: String = randomUrlIncludingKorean(),
     description: String = Faker(Locale.KOREAN).lorem()
         .characters(CreateContentCommand.LENGTH_DESCRIPTION_MIN, CreateContentCommand.LENGTH_DESCRIPTION_MAX),
-    providerUserSeq: Long = Faker().number().randomNumber(),
+    providerUserId: Long = Faker().number().randomNumber(),
     registeredAt: Instant = Instant.now(),
     lastUpdateAt: Instant = Instant.now(),
     deleted: Boolean = false,
@@ -18,7 +18,7 @@ internal fun ContentEntity.Companion.random(
 ): ContentEntity = ContentEntity(
     url = url,
     description = description,
-    providerUserSeq = providerUserSeq,
+    providerUserId = providerUserId,
     registeredAt = registeredAt,
     lastUpdateAt = lastUpdateAt,
     deleted = deleted,

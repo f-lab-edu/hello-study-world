@@ -37,7 +37,7 @@ class ContentEntityDaoTest : JdbcTemplateMediumTestBase() {
         // given:
         val user = userEntityDao.selectByUuid(providerUserUuid)!!
 
-        val randomContent: ContentEntity = ContentEntity.random(providerUserSeq = user.id)
+        val randomContent: ContentEntity = ContentEntity.random(providerUserId = user.id)
 
         // then:
         val savedContent = sut.insert(randomContent)
