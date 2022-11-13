@@ -1,4 +1,27 @@
-= kotpringboot-multimodule-template
+= Hello-Study-World
+
+사용자 추천 기반 학습 컨텐츠 제공 시스템 'Hello-Study-World'입니다.
+
+== 프로젝트 목표
+
+> ***이 소프트웨어는 세상에 어떤 가치를 줄 수 있나요?***
+
+우리에게 지금 당장 필요한 것이 무엇인지 고민했고, 결론은 **학습과 이를 통한 성장**이었습니다. 여러 요소들이 필요했지만 소프트웨어로 빠르게 제공 가능한 요소는 양질의 학습 자료였습니다. 
+  
+정보의 홍수에서 질 좋은 학습 자료를 발견하는게 쉽지 않았습니다. 학습할 시간도 없는데 자료를 찾는데에 시간을 투여하는 것이 '학습의 오버헤드'라고 느꼈습니다.
+  
+같은 고민을 하는 개발자들이 힘을 합쳐 **서로에게 도움을 주는 공간**을 만들고 싶었습니다. 개발자 특유의 공유 문화를 활용해 먼저 걸어갔던 누군가가 **무엇이, 왜 좋은지**를 알려주면 좋지 않을까? 생각했습니다. 그래서 저희는 양질의 자료와 그 이유까지 빠르게 얻어가는 시스템을 만들기로 했습니다.			
+
+
+== 기술적 고민
+
+> ***프로젝트를 진행하며 고민했던 요소와 왜 선택하게 됐는지?***
+
+- **테스트를 Small, Medium, Large로 나눈 이유는 무엇인가요?**
+
+Spring Boot에서 제공하는 슬라이스 테스트처럼 **테스트별 검증 단위를 그룹핑하고 나누기 위함** 입니다. 레이어에 맞는 테스트를 격리하고 병렬로 실행하여 개발 생산성을 향상시키려는 의도가 담겨져 있습니다. 2010년에 작성된 link:https://testing.googleblog.com/2010/12/test-sizes.html[Google Testing Blog - Test Sizes]를 참고했습니다.
+
+
 // Metadata:
 :description: Spring boot multimodule project with Kotlin language
 :keywords: kotlin, spring
@@ -8,22 +31,3 @@
 :toclevels: 4
 :sectlinks:
 :icons: font
-
-[[overview]]
-== Overview
-
-
-[[howto-run]]
-== How to run
-
-Run with profiles:
-
-Note that default spring profile would be set to `local` if
-`spring.profiles.active` option is omitted.
-
-[source, shell]
-----
-$ java -jar build/app-main.jar --spring.profiles.active=[local,alpha,beta,release]
-----
-
-
