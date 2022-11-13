@@ -25,6 +25,8 @@ enum class ErrorCodes(
     CONTENT_BY_ID_NOT_FOUND(2001,""),
     CONTENT_ONLY_RECOMMENDED_ONCE(2002,""),
 
+    UNAUTHORIZED_STATUS_EXCEPTION(3001,""),
+
     UNHANDLED_EXCEPTION(code = -1, "");
 
     val asMessageKey: String = "ERROR_${this.name}"

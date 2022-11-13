@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController
         DeleteUserControllerImpl::class,
     ],
 )
-class ControllerMediumTestBase : MockMvcMediumTestBase() {
+class UserControllerMediumTestBase : MockMvcMediumTestBase() {
     @MockBean
     protected lateinit var createUserUseCase: CreateUserUseCase
 
