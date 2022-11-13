@@ -19,7 +19,7 @@
 
 - **테스트를 Small, Medium, Large로 나눈 이유는 무엇인가요?**
 
-Spring Boot에서 제공하는 슬라이스 테스트처럼 **레이어에 맞는 테스트를 격리하고 병렬로 실행하여 개발 생산성을 향상시키려는 의도**가 담겨져 있습니다. 2010년에 작성된 link:https://testing.googleblog.com/2010/12/test-sizes.html[Google Testing Blog - Test Sizes]를 참고했습니다.
+Spring Boot에서 제공하는 슬라이스 테스트처럼 **계층별로 테스트를 격리하고, 병렬로 실행하여 개발 생산성을 향상시키려는 의도**가 담겨져 있습니다. 2010년에 작성된 link:https://testing.googleblog.com/2010/12/test-sizes.html[Google Testing Blog - Test Sizes]를 참고했습니다.
 
 
 // Metadata:
