@@ -162,8 +162,10 @@ class CreateUserRequestSpec : UserControllerMediumTestBase() {
             Arguments.of("emptyValue", ""),
             Arguments.of(
                 "Do not matched in given expression",
-                FakeValuesService(Locale.ENGLISH, RandomService()).regexify("[a-z0-9]{${User.LENGTH_NICKNAME_MAX+1},}"),
-                FakeValuesService(Locale.ENGLISH, RandomService()).regexify("[a-z0-9]{1,${User.LENGTH_LOGIN_ID_MIN}}")
+                FakeValuesService(Locale.ENGLISH,
+                    RandomService()).regexify("[a-z0-9]{${User.LENGTH_LOGIN_ID_MAX + 1},}"),
+                FakeValuesService(Locale.ENGLISH,
+                    RandomService()).regexify("[a-z0-9]{1,${User.LENGTH_LOGIN_ID_MIN - 1}}")
             )
         )
 
@@ -172,8 +174,10 @@ class CreateUserRequestSpec : UserControllerMediumTestBase() {
             Arguments.of("emptyValue", ""),
             Arguments.of(
                 "Do not matched in given expression",
-                FakeValuesService(Locale.ENGLISH, RandomService()).regexify("[a-z0-9]{1,${User.LENGTH_PASSWORD_MIN}}"),
-                FakeValuesService(Locale.ENGLISH, RandomService()).regexify("[a-z0-9]{${User.LENGTH_PASSWORD_MAX+1}}")
+                FakeValuesService(Locale.ENGLISH,
+                    RandomService()).regexify("[a-z0-9]{1,${User.LENGTH_PASSWORD_MIN - 1}}"),
+                FakeValuesService(Locale.ENGLISH,
+                    RandomService()).regexify("[a-z0-9]{${User.LENGTH_PASSWORD_MAX + 1}}")
             )
         )
     }
