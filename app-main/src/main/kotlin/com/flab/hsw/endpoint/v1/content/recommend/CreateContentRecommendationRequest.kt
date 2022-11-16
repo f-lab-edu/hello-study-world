@@ -10,5 +10,5 @@ data class CreateContentRecommendationRequest(
 
     @field:NotEmpty
     @JsonProperty
-    val contentId: UUID
+    val contentId: Long
 )

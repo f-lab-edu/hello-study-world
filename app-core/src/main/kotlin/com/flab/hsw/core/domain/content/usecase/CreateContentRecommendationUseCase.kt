@@ -16,7 +16,7 @@ interface CreateContentRecommendationUseCase {
 
     data class CreateContentRecommendationMessage(
         val recommenderId: UUID,
-        val recommendedContentId: UUID
+        val recommendedContentId: Long
     )
 
     companion object {
@@ -44,7 +44,7 @@ internal class CreateContentRecommendationUseCaseImpl(
         userRepository.findByUuid(message.recommenderId)
             ?: throw UserByIdNotFoundException(id = message.recommenderId)
 
-        contentRepository.findByUuid(message.recommendedContentId)
+        contentRepository.findById(message.recommendedContentId)
             ?: throw ContentByIdNotFoundException(contentId = message.recommendedContentId)
 
         val contentRecommendation = ContentRecommendation.create(

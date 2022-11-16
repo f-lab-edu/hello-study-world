@@ -6,13 +6,13 @@ import java.util.UUID
 
 data class ContentRecommendationModel(
     override val recommenderUserId: UUID,
-    override val contentId: UUID,
+    override val contentId: Long,
     override val registeredAt: Instant
 ) : ContentRecommendation {
     companion object {
         fun create(
             recommenderUserId: UUID,
-            contentId: UUID
+            contentId: Long
         ): ContentRecommendationModel = ContentRecommendationModel(
             recommenderUserId = recommenderUserId,
             contentId = contentId,

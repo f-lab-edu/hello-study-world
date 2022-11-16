@@ -4,8 +4,11 @@
  */
 package com.flab.hsw.core.jdbc.user
 
+import com.flab.hsw.core.domain.user.SimpleUserProfile
 import com.flab.hsw.core.domain.user.User
 import com.flab.hsw.core.jdbc.JdbcTemplateHelper
+import com.flab.hsw.core.jdbc.LongIdentifiable
+import com.flab.hsw.core.jdbc.LongIdentifiable.Companion.UNIDENTIFIABLE
 import com.flab.hsw.lib.util.toUUID
 import java.time.Instant
 import java.util.*
@@ -26,8 +29,8 @@ internal class UserEntity(
     var registeredAt: Instant,
     var lastActiveAt: Instant,
     var deleted: Boolean
-) {
-    var seq: Long? = null
+) : LongIdentifiable {
+    override var id: Long = UNIDENTIFIABLE
 
     var version: Long = 0L
 
@@ -42,18 +45,24 @@ internal class UserEntity(
         deleted = this.deleted
     )
 
+    fun toUserProfile(): SimpleUserProfile = SimpleUserProfile.create(
+        id = this.uuid,
+        nickname = this.nickname,
+        email = this.email
+    )
+
     override fun equals(other: Any?): Boolean = when {
         this === other -> true
         other !is UserEntity -> false
-        else -> this.seq == other.seq
+        else -> this.id == other.id
     }
 
-    override fun hashCode(): Int = Objects.hash(this.seq)
+    override fun hashCode(): Int = Objects.hash(this.id)
 
     companion object {
         const val TABLE = "users"
 
-        const val COL_SEQ = "seq"
+        const val COL_ID = "id"
         const val COL_UUID = "uuid"
         const val COL_NICKNAME = "nickname"
         const val COL_EMAIL = "email"
@@ -92,7 +101,7 @@ internal class UserEntity(
                 lastActiveAt = map[prefix + COL_UPDATED_AT]!!.coerceToInstant(),
                 deleted = map[prefix + COL_DELETED] as Boolean
             ).apply {
-                this.seq = map[prefix + COL_SEQ] as Long
+                this.id = map[prefix + COL_ID] as Long
                 this.version = map[prefix + COL_VERSION] as Long
             }
         }

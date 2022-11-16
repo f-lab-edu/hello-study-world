@@ -11,7 +11,6 @@ import com.flab.hsw.core.domain.user.exception.SameEmailUserAlreadyExistExceptio
 import com.flab.hsw.core.domain.user.exception.SameLoginIdUserAlreadyExistException
 import com.flab.hsw.core.domain.user.exception.SameNicknameUserAlreadyExistException
 import com.flab.hsw.core.domain.user.repository.UserRepository
-import org.mindrot.jbcrypt.BCrypt
 
 /**
  * @since 2021-08-10

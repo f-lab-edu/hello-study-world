@@ -4,19 +4,19 @@
  */
 package com.flab.hsw.core.jdbc.user.repository
 
+import com.flab.hsw.core.annotation.InfrastructureService
 import com.flab.hsw.core.domain.user.User
 import com.flab.hsw.core.domain.user.repository.UserRepository
 import com.flab.hsw.core.jdbc.user.UserEntity
 import com.flab.hsw.core.jdbc.user.dao.UserEntityDao
 import com.flab.hsw.lib.annotation.VisibleForTesting
 import com.flab.hsw.lib.util.FastCollectedLruCache
-import org.springframework.stereotype.Service
 import java.util.*
 
 /**
  * @since 2021-08-10
  */
-@Service
+@InfrastructureService
 internal class UserRepositoryImpl(
     private val usersDao: UserEntityDao
 ) : UserRepository {
@@ -46,7 +46,7 @@ internal class UserRepositoryImpl(
 
     override fun save(user: User): User {
         val savedUser = usersDao.selectByUuid(user.id)?.let {
-            usersDao.update(it.seq!!, UserEntity.from(user))
+            usersDao.update(it.id, UserEntity.from(user))
         } ?: UserEntity.from(user)
 
         return updateCache(savedUser)
