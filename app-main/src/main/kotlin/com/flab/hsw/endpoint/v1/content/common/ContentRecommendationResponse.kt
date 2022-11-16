@@ -12,7 +12,7 @@ data class ContentRecommendationResponse(
     val userId: UUID,
 
     @JsonProperty
-    val contentId: UUID,
+    val contentId: Long,
 
     @JsonProperty
     val registeredAt: Instant

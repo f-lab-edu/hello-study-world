@@ -12,7 +12,7 @@ import test.domain.user.aggregate.randomUser
 import java.util.*
 
 fun randomCreateContentRecommendationRequest(
-    contentId: UUID = UUID.fromString(Faker().internet().uuid())
+    contentId: Long = Faker().number().randomNumber(),
 ) : CreateContentRecommendationRequest = CreateContentRecommendationRequest(contentId)
 
 fun createMockSessionThatContainAuthorizedUser(): MockHttpSession = MockHttpSession().apply {
