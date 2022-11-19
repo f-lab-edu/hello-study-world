@@ -4,6 +4,7 @@
  */
 package com.flab.hsw.advice.errorhandler
 
+import com.flab.hsw.core.domain.user.exception.UserByLoginIDNotFoundException
 import com.flab.hsw.core.exception.ErrorCodes
 import com.flab.hsw.core.exception.ErrorCodes.*
 import com.flab.hsw.core.exception.KopringException
@@ -28,7 +29,7 @@ interface ErrorCodesToHttpStatusMixin {
         GENERAL_HTTP_EXCEPTION -> HttpStatus.BAD_REQUEST
 
         // Domain error cases to HTTP status
-        USER_BY_ID_NOT_FOUND -> HttpStatus.NOT_FOUND
+        USER_BY_ID_NOT_FOUND, USER_BY_LOGIN_ID_NOT_FOUND -> HttpStatus.NOT_FOUND
         USER_BY_EMAIL_DUPLICATED, USER_BY_NICKNAME_DUPLICATED, USER_BY_LOGIN_ID_DUPLICATED -> HttpStatus.CONFLICT
 
         CONTENT_BY_ID_NOT_FOUND, CONTENT_PROVIDER_NOT_FOUND -> HttpStatus.NOT_FOUND
