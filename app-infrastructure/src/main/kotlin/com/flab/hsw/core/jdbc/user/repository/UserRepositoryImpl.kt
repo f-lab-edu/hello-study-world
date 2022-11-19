@@ -52,6 +52,10 @@ internal class UserRepositoryImpl(
         return updateCache(savedUser)
     }
 
+    override fun update(user: User): User {
+        TODO("Not yet implemented")
+    }
+
     private fun updateCache(userEntity: UserEntity): User {
         val user = userEntity.toUser()
 

@@ -21,7 +21,7 @@ internal data class UserModel(
     override val password: String,
     override val loginId: String,
     override val registeredAt: Instant,
-    override val lastActiveAt: Instant,
+    override var lastActiveAt: Instant,
     override val deleted: Boolean
 ) : User {
     fun applyValues(values: EditUserUseCase.EditUserMessage): User = this.copy(
