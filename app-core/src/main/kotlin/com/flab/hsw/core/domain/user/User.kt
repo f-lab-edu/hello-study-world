@@ -25,7 +25,7 @@ interface User : SimpleUserProfile, SoftDeletable {
 
     val registeredAt: Instant
 
-    val lastActiveAt: Instant
+    var lastActiveAt: Instant
 
     companion object {
         const val LENGTH_NICKNAME_MIN = 2
@@ -61,5 +61,9 @@ interface User : SimpleUserProfile, SoftDeletable {
             lastActiveAt = lastActiveAt,
             deleted = deleted
         )
+    }
+
+    fun updateLastActiveTimeToNow(){
+        lastActiveAt = Instant.now();
     }
 }
