@@ -12,7 +12,7 @@ import java.util.*
 /**
  * @since 2021-08-10
  */
-interface User : SimpleUserProfile, SoftDeletable {
+interface User : SimpleUserProfile, SoftDeletable, DateTimeAuditable {
     override val id: UUID
 
     override val nickname: String
@@ -22,8 +22,6 @@ interface User : SimpleUserProfile, SoftDeletable {
     val loginId: String
 
     val password: String
-
-    val registeredAt: Instant
 
     var lastActiveAt: Instant
 
@@ -48,7 +46,7 @@ interface User : SimpleUserProfile, SoftDeletable {
             email: String,
             loginId: String,
             password: String,
-            registeredAt: Instant? = null,
+            createdAt: Instant? = null,
             lastActiveAt: Instant? = null,
             deleted: Boolean = false
         ): User = UserModel.create(
@@ -57,13 +55,11 @@ interface User : SimpleUserProfile, SoftDeletable {
             email = email,
             loginId = loginId,
             password = password,
-            registeredAt = registeredAt,
+            createdAt = createdAt,
             lastActiveAt = lastActiveAt,
             deleted = deleted
         )
     }
 
-    fun updateLastActiveTimeToNow(){
-        lastActiveAt = Instant.now();
-    }
+    fun updateLastActiveTimeToNow()
 }
