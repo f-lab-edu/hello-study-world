@@ -37,10 +37,13 @@ internal class UserLoginUseCaseImpl(
         val findUser = userRepository.findByLoginId(message.loginId)
             ?: throw UserByLoginIDNotFoundException(message.loginId)
 
-        findUser.updateLastActiveTimeToNow()
-        userRepository.update(findUser)
+        return findUser.also {
+            if(!passwordEncryptor.isMatched(message.password, findUser.password)){
+                throw InvalidUserPasswordException()
+            }
+            findUser.updateLastActiveTimeToNow()
+            userRepository.update(findUser)
+        }
 
-        return if(passwordEncryptor.isMatched(message.password, findUser.password)) findUser
-                else throw InvalidUserPasswordException()
     }
 }
