@@ -53,7 +53,11 @@ internal class UserRepositoryImpl(
     }
 
     override fun update(user: User): User {
-        TODO("Not yet implemented")
+        val updatedUser = usersDao.selectByUuid(user.id)?.let {
+            usersDao.update(it.id, UserEntity.from(user))
+        } ?: UserEntity.from(user)
+
+        return updateCache(updatedUser)
     }
 
     private fun updateCache(userEntity: UserEntity): User {
