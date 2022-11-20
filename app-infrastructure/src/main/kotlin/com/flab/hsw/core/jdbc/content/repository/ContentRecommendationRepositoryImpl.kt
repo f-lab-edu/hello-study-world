@@ -6,17 +6,21 @@ import com.flab.hsw.core.domain.content.repository.ContentRecommendationReposito
 import com.flab.hsw.core.jdbc.content.ContentRecommendationEntity
 import com.flab.hsw.core.jdbc.content.dao.ContentRecommendationEntityDao
 
-@Service
+@InfrastructureService
 internal class ContentRecommendationRepositoryImpl(
     val contentRecommendationEntityDao: ContentRecommendationEntityDao
 ) : ContentRecommendationRepository {
     override fun findContentRecommendationByUserIdAndContentId(
         contentRecommendation: ContentRecommendation
     ): ContentRecommendation? {
-        TODO("Not yet implemented")
+        return contentRecommendationEntityDao.selectByUserIdAndContentId(
+            userId = contentRecommendation.recommenderUserId,
+            contentId = contentRecommendation.contentId
+        )?.toContentRecommendation()
     }
 
-        TODO("Not yet implemented")
     override fun save(contentRecommendation: ContentRecommendation): ContentRecommendation {
+        return contentRecommendationEntityDao.insert(ContentRecommendationEntity.from(contentRecommendation))
+            .toContentRecommendation()
     }
 }
