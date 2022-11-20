@@ -55,6 +55,6 @@ internal class CreateContentRecommendationUseCaseImpl(
         contentRecommendationRepository.findContentRecommendationByUserIdAndContentId(contentRecommendation)
             ?.let { throw ContentRecommendationIsAlreadyExistException() }
 
-        return contentRecommendationRepository.saveContentRecommendation(contentRecommendation)
+        return contentRecommendationRepository.save(contentRecommendation)
     }
 }
