@@ -42,7 +42,7 @@ internal class UserLoginUseCaseImpl(
                 throw InvalidUserPasswordException()
             }
             findUser.updateLastActiveTimeToNow()
-            userRepository.update(findUser)
+            userRepository.save(findUser)
         }
 
     }

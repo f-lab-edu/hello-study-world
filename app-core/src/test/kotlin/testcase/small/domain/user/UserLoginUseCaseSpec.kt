@@ -75,7 +75,7 @@ class UserLoginUseCaseSpec {
         // then:
         assertAll(
             { assertThat(loginUser.lastActiveAt.isAfter(timeBeforeLogin), `is`(true)) },
-            { verify(userRepository, times(1)).update(user) }
+            { verify(userRepository, times(1)).save(user) }
         )
     }
 }
