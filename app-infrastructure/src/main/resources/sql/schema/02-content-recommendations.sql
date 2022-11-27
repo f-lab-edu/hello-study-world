@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `contentrecommendations`
+CREATE TABLE IF NOT EXISTS `content_recommendations`
 (
     `id`                    BIGINT        NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `recommender_user_id`   BINARY(16)    NOT NULL,

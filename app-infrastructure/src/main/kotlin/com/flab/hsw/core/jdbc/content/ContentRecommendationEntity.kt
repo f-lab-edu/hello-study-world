@@ -30,7 +30,7 @@ internal class ContentRecommendationEntity(
     )
 
     companion object {
-        const val TABLE = "contentrecommendations"
+        const val TABLE = "content_recommendations"
 
         const val COL_ID = "id"
         const val COL_RECOMMENDER_USER_ID = "recommender_user_id"
