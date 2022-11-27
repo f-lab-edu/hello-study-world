@@ -10,7 +10,7 @@ import com.flab.hsw.core.jdbc.content.dao.ContentRecommendationEntityDao
 internal class ContentRecommendationRepositoryImpl(
     val contentRecommendationEntityDao: ContentRecommendationEntityDao
 ) : ContentRecommendationRepository {
-    override fun findContentRecommendationByUserIdAndContentId(
+    override fun findByUserIdAndContentId(
         contentRecommendation: ContentRecommendation
     ): ContentRecommendation? {
         return contentRecommendationEntityDao.selectByUserIdAndContentId(
