@@ -8,4 +8,3 @@ interface ContentRecommendationRepository {
     
     fun save(contentRecommendation: ContentRecommendation): ContentRecommendation
 }
-    
