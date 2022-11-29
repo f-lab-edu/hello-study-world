@@ -42,7 +42,7 @@ class CreateUserApiSpec : EndpointLargeTestBase() {
                 fieldWithPath("nickname").type(STRING).description("별명"),
                 fieldWithPath("email").type(STRING).description("이메일"),
                 fieldWithPath("loginId").type(STRING).description("로그인 ID"),
-                fieldWithPath("registeredAt").type(STRING).description("등록 일시"),
+                fieldWithPath("createdAt").type(STRING).description("등록 일시"),
                 fieldWithPath("lastActiveAt").type(STRING).description("마지막 활성 일시")
             )
         ).expect2xx(UserResponse::class)

@@ -1,21 +1,26 @@
 package com.flab.hsw.core.jdbc.content.repository
 
+import com.flab.hsw.core.annotation.InfrastructureService
 import com.flab.hsw.core.domain.content.ContentRecommendation
 import com.flab.hsw.core.domain.content.repository.ContentRecommendationRepository
-import com.flab.hsw.core.jdbc.content.dao.ContentEntityDao
-import org.springframework.stereotype.Service
+import com.flab.hsw.core.jdbc.content.ContentRecommendationEntity
+import com.flab.hsw.core.jdbc.content.dao.ContentRecommendationEntityDao
 
-@Service
+@InfrastructureService
 internal class ContentRecommendationRepositoryImpl(
-    val contentEntityDao: ContentEntityDao
+    val contentRecommendationEntityDao: ContentRecommendationEntityDao
 ) : ContentRecommendationRepository {
-    override fun findContentRecommendationByUserIdAndContentId(
-        recommendation: ContentRecommendation
+    override fun findByUserIdAndContentId(
+        contentRecommendation: ContentRecommendation
     ): ContentRecommendation? {
-        TODO("Not yet implemented")
+        return contentRecommendationEntityDao.selectByUserIdAndContentId(
+            userId = contentRecommendation.recommenderUserId,
+            contentId = contentRecommendation.contentId
+        )?.toContentRecommendation()
     }
 
-    override fun saveContentRecommendation(recommendation: ContentRecommendation): ContentRecommendation {
-        TODO("Not yet implemented")
+    override fun save(contentRecommendation: ContentRecommendation): ContentRecommendation {
+        return contentRecommendationEntityDao.insert(ContentRecommendationEntity.from(contentRecommendation))
+            .toContentRecommendation()
     }
 }

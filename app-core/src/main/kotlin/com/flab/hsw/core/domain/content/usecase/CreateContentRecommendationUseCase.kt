@@ -52,9 +52,9 @@ internal class CreateContentRecommendationUseCaseImpl(
             contentId = message.recommendedContentId
         )
 
-        contentRecommendationRepository.findContentRecommendationByUserIdAndContentId(contentRecommendation)
+        contentRecommendationRepository.findByUserIdAndContentId(contentRecommendation)
             ?.let { throw ContentRecommendationIsAlreadyExistException() }
 
-        return contentRecommendationRepository.saveContentRecommendation(contentRecommendation)
+        return contentRecommendationRepository.save(contentRecommendation)
     }
 }

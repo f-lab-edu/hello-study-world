@@ -20,8 +20,8 @@ internal data class UserModel(
     override val email: String,
     override val password: String,
     override val loginId: String,
-    override val registeredAt: Instant,
-    override val lastActiveAt: Instant,
+    override val createdAt: Instant,
+    override var lastActiveAt: Instant,
     override val deleted: Boolean
 ) : User {
     fun applyValues(values: EditUserUseCase.EditUserMessage): User = this.copy(
@@ -35,6 +35,12 @@ internal data class UserModel(
         lastActiveAt = Instant.now()
     )
 
+    override fun updateLastActiveTimeToNow() = changeTimeToNow()
+    
+    override fun changeTimeToNow(time: Instant) {
+        lastActiveAt = time
+    }
+
     companion object {
         @SuppressWarnings("LongParameterList")      // Intended complexity to provide various User creation cases
         fun create(
@@ -43,7 +49,7 @@ internal data class UserModel(
             email: String,
             loginId: String,
             password: String,
-            registeredAt: Instant? = null,
+            createdAt: Instant? = null,
             lastActiveAt: Instant? = null,
             deleted: Boolean = false
         ): UserModel {
@@ -55,7 +61,7 @@ internal data class UserModel(
                 email = email,
                 loginId = loginId,
                 password = password,
-                registeredAt = registeredAt ?: now,
+                createdAt = createdAt ?: now,
                 lastActiveAt = lastActiveAt ?: now,
                 deleted = deleted
             )
@@ -71,7 +77,7 @@ internal data class UserModel(
                     email = email,
                     loginId = loginId,
                     password = password,
-                    registeredAt = registeredAt,
+                    createdAt = createdAt,
                     lastActiveAt = lastActiveAt,
                     deleted = deleted
                 )

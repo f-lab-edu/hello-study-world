@@ -55,9 +55,9 @@ internal class CreateContentRecommendationUseCaseSpec {
         // and:
         `when`(userRepository.findByUuid(any())).thenAnswer { return@thenAnswer randomUser() }
         `when`(contentRepository.findById(any())).thenAnswer { return@thenAnswer Content.randomGeneratedNow() }
-        `when`(contentRecommendationRepository.findContentRecommendationByUserIdAndContentId(any()))
+        `when`(contentRecommendationRepository.findByUserIdAndContentId(any()))
             .thenAnswer { return@thenAnswer null }
-        `when`(contentRecommendationRepository.saveContentRecommendation(any()))
+        `when`(contentRecommendationRepository.save(any()))
             .thenAnswer { return@thenAnswer it.arguments[0] }
 
         // when:
@@ -67,7 +67,7 @@ internal class CreateContentRecommendationUseCaseSpec {
         assertAll(
             { assertThat(message.recommenderId, `is`(recommend.recommenderUserId)) },
             { assertThat(message.recommendedContentId, `is`(recommend.contentId)) },
-            { verify(contentRecommendationRepository, times(1)).saveContentRecommendation(any()) }
+            { verify(contentRecommendationRepository, times(1)).save(any()) }
         )
     }
 
@@ -107,7 +107,7 @@ internal class CreateContentRecommendationUseCaseSpec {
         // and:
         `when`(userRepository.findByUuid(any())).thenAnswer { return@thenAnswer randomUser() }
         `when`(contentRepository.findById(any())).thenAnswer { return@thenAnswer Content.randomGeneratedNow() }
-        `when`(contentRecommendationRepository.findContentRecommendationByUserIdAndContentId(any()))
+        `when`(contentRecommendationRepository.findByUserIdAndContentId(any()))
             .thenAnswer { return@thenAnswer it.arguments[0] }
 
         // then:

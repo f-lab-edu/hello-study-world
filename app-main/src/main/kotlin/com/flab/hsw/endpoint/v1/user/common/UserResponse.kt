@@ -33,8 +33,8 @@ data class UserResponse(
     val loginId: String,
 
     @JsonProperty
-    @JsonPropertyDescription(DESC_REGISTERED_AT)
-    val registeredAt: Instant,
+    @JsonPropertyDescription(DESC_CREATED_AT)
+    val createdAt: Instant,
 
     @JsonProperty
     @JsonPropertyDescription(DESC_LAST_ACTIVE_AT)
@@ -45,7 +45,7 @@ data class UserResponse(
         const val DESC_NICKNAME = "This is user's nickname."
         const val DESC_EMAIL = "This is user's email address"
         const val DESC_LOGIN_ID = "This is user's id for login."
-        const val DESC_REGISTERED_AT = "This is time that user is registered as member of service."
+        const val DESC_CREATED_AT = "This is time that user is registered as member of service."
         const val DESC_LAST_ACTIVE_AT = "This is time that user's last active."
 
         fun from(src: User) = with(src) {
@@ -54,7 +54,7 @@ data class UserResponse(
                 nickname = nickname,
                 email = email,
                 loginId = loginId,
-                registeredAt = registeredAt,
+                createdAt = createdAt,
                 lastActiveAt = lastActiveAt
             )
         }

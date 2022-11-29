@@ -26,7 +26,7 @@ internal class UserEntity(
     var email: String,
     var loginId: String,
     var password: String,
-    var registeredAt: Instant,
+    var createdAt: Instant,
     var lastActiveAt: Instant,
     var deleted: Boolean
 ) : LongIdentifiable {
@@ -40,7 +40,7 @@ internal class UserEntity(
         email = this.email,
         loginId = this.loginId,
         password = this.password,
-        registeredAt = this.registeredAt,
+        createdAt = this.createdAt,
         lastActiveAt = this.lastActiveAt,
         deleted = this.deleted
     )
@@ -80,7 +80,7 @@ internal class UserEntity(
                 email = email,
                 loginId = loginId,
                 password = password,
-                registeredAt = registeredAt,
+                createdAt = createdAt,
                 lastActiveAt = lastActiveAt,
                 deleted = deleted
             )
@@ -97,7 +97,7 @@ internal class UserEntity(
                 email = map[prefix + COL_EMAIL] as String,
                 loginId = map[prefix + COL_LOGIN_ID] as String,
                 password = map[prefix + COL_PASSWORD] as String,
-                registeredAt = map[prefix + COL_CREATED_AT]!!.coerceToInstant(),
+                createdAt = map[prefix + COL_CREATED_AT]!!.coerceToInstant(),
                 lastActiveAt = map[prefix + COL_UPDATED_AT]!!.coerceToInstant(),
                 deleted = map[prefix + COL_DELETED] as Boolean
             ).apply {

@@ -4,7 +4,7 @@ import com.flab.hsw.core.domain.content.ContentRecommendation
 
 interface ContentRecommendationRepository {
 
-    fun findContentRecommendationByUserIdAndContentId(recommendation: ContentRecommendation): ContentRecommendation?
-
-    fun saveContentRecommendation(recommendation: ContentRecommendation): ContentRecommendation
+    fun findByUserIdAndContentId(contentRecommendation: ContentRecommendation): ContentRecommendation?
+    
+    fun save(contentRecommendation: ContentRecommendation): ContentRecommendation
 }

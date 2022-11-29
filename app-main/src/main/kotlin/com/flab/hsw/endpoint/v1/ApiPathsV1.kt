@@ -18,4 +18,6 @@ object ApiPathsV1 {
     const val RECOMMEND = "recommend"
     const val CONTENT_RECOMMENDATION = "${CONTENT}/${RECOMMEND}"
 
+    const val USER_LOGIN = "${USERS}/login"
+
 }

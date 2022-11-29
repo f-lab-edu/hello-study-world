@@ -17,7 +17,7 @@ fun randomUser(
     email: String = Faker().internet().emailAddress(),
     loginId: String = FakeValuesService(Locale.ENGLISH, RandomService()).regexify(User.LOGIN_ID_REGEX),
     password: String = FakeValuesService(Locale.ENGLISH, RandomService()).regexify(User.PASSWORD_REGEX),
-    registeredAt: Instant = Instant.now(),
+    createdAt: Instant = Instant.now(),
     lastActiveAt: Instant = Instant.now(),
     deleted: Boolean = false
 ) = User.create(
@@ -26,7 +26,7 @@ fun randomUser(
     email = email,
     loginId = loginId,
     password = password,
-    registeredAt = registeredAt,
+    createdAt = createdAt,
     lastActiveAt = lastActiveAt,
     deleted = deleted
 )

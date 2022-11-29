@@ -11,13 +11,13 @@ import javax.servlet.http.HttpSession
 
 @RestController
 internal class CreateContentRecommendationControllerImpl(
-    override val useCase: CreateContentRecommendationUseCase
+    override val createRecommendUseCase: CreateContentRecommendationUseCase
 ) : CreateContentRecommendationController {
     override fun createContentRecommendation(
         session: HttpSession,
         request: CreateContentRecommendationRequest
     ): ContentRecommendationResponse = ContentRecommendationResponse.from(
-        useCase.createContentRecommendation(
+        createRecommendUseCase.createContentRecommendation(
             CreateContentRecommendationMessage(
                 recommendedContentId = request.contentId,
                 recommenderId = findAuthorizedUserIn(session)?.id ?: throw UnAuthorizedExecutingException()

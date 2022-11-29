@@ -5,10 +5,7 @@
 package com.flab.hsw.appconfig.bean
 
 import com.flab.hsw.core.domain.user.repository.UserRepository
-import com.flab.hsw.core.domain.user.usecase.CreateUserUseCase
-import com.flab.hsw.core.domain.user.usecase.DeleteUserUseCase
-import com.flab.hsw.core.domain.user.usecase.EditUserUseCase
-import com.flab.hsw.core.domain.user.usecase.FindUserUseCase
+import com.flab.hsw.core.domain.user.usecase.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -42,6 +39,13 @@ class UserBeans {
     fun deleteUserUseCase(
         userRepository: UserRepository
     ) = DeleteUserUseCase.newInstance(
+        userRepository
+    )
+
+    @Bean
+    fun userLoginUseCase(
+        userRepository: UserRepository
+    ) = UserLoginUseCase.newInstance(
         userRepository
     )
 }

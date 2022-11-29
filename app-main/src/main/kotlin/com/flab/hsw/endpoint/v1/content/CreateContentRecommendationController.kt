@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession
     produces = [MediaType.APPLICATION_JSON_VALUE],
 )
 interface CreateContentRecommendationController {
-    val useCase: CreateContentRecommendationUseCase
+    val createRecommendUseCase: CreateContentRecommendationUseCase
 
     @RequestMapping(
         path = [ApiPathsV1.CONTENT_RECOMMENDATION],
