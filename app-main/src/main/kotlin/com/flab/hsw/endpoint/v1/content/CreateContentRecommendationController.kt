@@ -1,6 +1,7 @@
 package com.flab.hsw.endpoint.v1.content
 
 import com.flab.hsw.core.domain.content.usecase.CreateContentRecommendationUseCase
+import com.flab.hsw.core.domain.user.repository.UserRepository
 import com.flab.hsw.endpoint.MustAuthenticated
 import com.flab.hsw.endpoint.v1.ApiPathsV1
 import com.flab.hsw.endpoint.v1.content.common.ContentRecommendationResponse
@@ -9,6 +10,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
+import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpSession
 
 /**
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpSession
 )
 interface CreateContentRecommendationController {
     val createRecommendUseCase: CreateContentRecommendationUseCase
+    val userRepository: UserRepository
 
     @MustAuthenticated
     @RequestMapping(
@@ -32,7 +35,7 @@ interface CreateContentRecommendationController {
         method = [RequestMethod.POST]
     )
     fun createContentRecommendation(
-        session: HttpSession,
+        servletRequest: HttpServletRequest,
         @RequestBody request: CreateContentRecommendationRequest
     ): ContentRecommendationResponse
 }
