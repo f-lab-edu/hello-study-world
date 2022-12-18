@@ -4,14 +4,18 @@
  */
 package test.endpoint.v1.user
 
+import com.flab.hsw.endpoint.ApiPaths
+import com.flab.hsw.endpoint.common.response.SimpleResponse
 import com.flab.hsw.endpoint.v1.ApiPathsV1
 import com.flab.hsw.endpoint.v1.user.common.UserResponse
 import com.flab.hsw.endpoint.v1.user.create.CreateUserRequest
 import com.flab.hsw.endpoint.v1.user.edit.EditUserRequest
 import com.flab.hsw.endpoint.v1.user.login.UserLoginRequest
+import io.restassured.RestAssured.request
 import io.restassured.response.Response
 import org.springframework.restdocs.payload.FieldDescriptor
 import test.endpoint.v1.usersId
+import testcase.large.RestAssuredLargeTestBase
 import testcase.large.endpoint.EndpointLargeTestBase
 import java.net.URI
 import java.util.*
@@ -92,3 +96,5 @@ fun EndpointLargeTestBase.createRandomUser(
 ): UserResponse {
     return createUserApi(request).expect2xx(UserResponse::class)
 }
+
+fun EndpointLargeTestBase.getPublicKeyApi(): String = request().get(ApiPaths.PUBLIC_KEY).path("body.result")
