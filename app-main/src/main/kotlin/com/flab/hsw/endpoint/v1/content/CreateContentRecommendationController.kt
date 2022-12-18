@@ -1,6 +1,7 @@
 package com.flab.hsw.endpoint.v1.content
 
 import com.flab.hsw.core.domain.content.usecase.CreateContentRecommendationUseCase
+import com.flab.hsw.endpoint.MustAuthenticated
 import com.flab.hsw.endpoint.v1.ApiPathsV1
 import com.flab.hsw.endpoint.v1.content.common.ContentRecommendationResponse
 import com.flab.hsw.endpoint.v1.content.recommend.CreateContentRecommendationRequest
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpSession
 interface CreateContentRecommendationController {
     val createRecommendUseCase: CreateContentRecommendationUseCase
 
+    @MustAuthenticated
     @RequestMapping(
         path = [ApiPathsV1.CONTENT_RECOMMENDATION],
         method = [RequestMethod.POST]
