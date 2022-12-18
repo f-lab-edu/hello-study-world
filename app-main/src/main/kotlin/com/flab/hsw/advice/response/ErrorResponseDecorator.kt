@@ -19,6 +19,7 @@ import com.flab.hsw.endpoint.ResponseEnvelope
 import com.flab.hsw.exception.GeneralHttpException
 import com.flab.hsw.util.originalRequestUri
 import com.flab.hsw.util.toHttpStatus
+import io.jsonwebtoken.JwtException
 import org.slf4j.Logger
 import org.springframework.boot.web.servlet.error.ErrorController
 import org.springframework.http.HttpStatus
@@ -30,6 +31,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.client.HttpStatusCodeException
+import javax.security.auth.login.CredentialException
+import javax.security.auth.login.CredentialNotFoundException
 import javax.servlet.RequestDispatcher
 import javax.servlet.ServletException
 import javax.servlet.http.HttpServletRequest
@@ -39,9 +42,12 @@ import javax.servlet.http.HttpServletRequest
  *
  * @since 2021-08-10
  */
+@SuppressWarnings("LongParameterList") // 전역에서 사용될 핸들러 추가를 위해 추가합니다.
 @RestController
 @RestControllerAdvice
 class ErrorResponseDecorator(
+    private val jwtExceptionHandler: ExceptionHandlerContract<JwtException>,
+    private val credentialExceptionHandler: ExceptionHandlerContract<CredentialException>,
     private val kopringExceptionHandler: ExceptionHandlerContract<KopringException>,
     private val servletExceptionHandler: ExceptionHandlerContract<ServletException>,
     private val localeProvider: LocaleProvider,
@@ -77,6 +83,9 @@ class ErrorResponseDecorator(
     ): Pair<KopringException, HttpStatus>? =
         when (exception) {
             is KopringException -> kopringExceptionHandler.onException(req, exception)
+
+            is CredentialException -> credentialExceptionHandler.onException(req, exception)
+            is JwtException -> jwtExceptionHandler.onException(req, exception)
 
             is BindException -> kopringExceptionHandler.onException(
                 req, WrongInputException(
