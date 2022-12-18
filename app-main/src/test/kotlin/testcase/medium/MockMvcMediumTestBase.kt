@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.flab.hsw.KopringApplication
 import com.flab.hsw.appconfig.JacksonConfig
 import com.flab.hsw.appconfig.WebMvcConfig
+import com.flab.hsw.appconfig.bean.AuthenticationBeans
 import com.flab.hsw.core.CoreKopringApplication
 import com.flab.hsw.core.appconfig.LoggerConfig
 import com.flab.hsw.endpoint.ErrorResponseEnvelope
@@ -18,11 +19,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.ComponentScan
+import org.springframework.context.annotation.PropertySource
+import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.mock.web.MockHttpSession
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.web.WebAppConfiguration
@@ -47,13 +49,15 @@ import java.nio.charset.StandardCharsets
     classes = [
         LoggerConfig::class,
         WebMvcConfig::class,
-        JacksonConfig::class
+        JacksonConfig::class,
+        AuthenticationBeans::class
     ],
 )
 @ComponentScan(
     basePackages = [
         CoreKopringApplication.PACKAGE_NAME,
-        "${KopringApplication.PACKAGE_NAME}.advice"
+        "${KopringApplication.PACKAGE_NAME}.advice",
+        "${KopringApplication.PACKAGE_NAME}.interceptor",
     ]
 )
 @AutoConfigureMockMvc(addFilters = false)
@@ -109,7 +113,7 @@ class MockMvcMediumTestBase : JsonRequestAssertionsMixin {
         endpoint: String,
         payload: Any? = null,
         vararg queryParams: Pair<String, String?>,
-        session: MockHttpSession = MockHttpSession()
+        headers: HttpHeaders = HttpHeaders()
     ): MockHttpServletRequestBuilder {
         fun String.urlEncode() = URLEncoder.encode(this, StandardCharsets.UTF_8.toString())
         val requestEndpoint = if (queryParams.isEmpty()) {
@@ -143,8 +147,8 @@ class MockMvcMediumTestBase : JsonRequestAssertionsMixin {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding(Charsets.UTF_8)
+                .headers(headers)
                 .content(jsonPayload)
-                .session(session)
         }
     }
 
