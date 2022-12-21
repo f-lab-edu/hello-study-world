@@ -16,7 +16,6 @@ class AuthenticationBeans {
     private lateinit var publicKey: String
 
     @Value("\${auth.rsa.private}")
-
     private lateinit var privateKey: String
 
     @Bean
