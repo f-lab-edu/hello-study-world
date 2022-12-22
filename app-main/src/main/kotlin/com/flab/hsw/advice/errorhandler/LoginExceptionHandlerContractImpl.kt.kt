@@ -5,6 +5,7 @@ import com.flab.hsw.exception.UnauthorizedException
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.InvalidClaimException
 import io.jsonwebtoken.JwtException
+import io.jsonwebtoken.MalformedJwtException
 import org.slf4j.Logger
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
@@ -23,6 +24,7 @@ internal class JwtExceptionHandlerContractImpl (
     ): Pair<KopringException, HttpStatus>? = when(exception) {
         is ExpiredJwtException -> UnauthorizedException(message = EXPIRED_TOKEN_DESC)
         is InvalidClaimException -> UnauthorizedException(message = INVALID_TOKEN_DESC)
+        is MalformedJwtException -> UnauthorizedException(message = MALFORMED_TOKEN_DESC)
         else -> UnauthorizedException()
     }.let { kopringException: KopringException ->
         log.debug("JWT Exception: {}", kopringException.message)
@@ -32,6 +34,7 @@ internal class JwtExceptionHandlerContractImpl (
     companion object {
         const val EXPIRED_TOKEN_DESC = "만료된 토큰입니다."
         const val INVALID_TOKEN_DESC = "유효하지 않은 토큰입니다."
+        const val MALFORMED_TOKEN_DESC = "잘못된 형식의 토큰입니다."
     }
 }
 
