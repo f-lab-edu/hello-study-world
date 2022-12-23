@@ -25,6 +25,7 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.mock.web.MockHttpSession
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.TestPropertySource
 import org.springframework.test.context.web.WebAppConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultActions
@@ -58,6 +59,7 @@ import java.nio.charset.StandardCharsets
 )
 @AutoConfigureMockMvc(addFilters = false)
 @WebAppConfiguration
+@TestPropertySource("classpath:application.yml")
 @ActiveProfiles("mediumTest")
 @MediumTest
 class MockMvcMediumTestBase : JsonRequestAssertionsMixin {
