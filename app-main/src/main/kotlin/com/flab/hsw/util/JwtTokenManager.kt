@@ -48,6 +48,5 @@ class JwtTokenManager(
         const val BEARER_PREFIX = "Bearer "
 
         private val expireTime: Instant = Instant.now().plusSeconds(7200L)
-        private val encoder: Base64.Encoder = Base64.getEncoder()
     }
 }
