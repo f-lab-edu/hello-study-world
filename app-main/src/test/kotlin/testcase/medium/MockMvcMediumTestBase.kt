@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.flab.hsw.KopringApplication
 import com.flab.hsw.appconfig.JacksonConfig
 import com.flab.hsw.appconfig.WebMvcConfig
+import com.flab.hsw.appconfig.bean.AuthenticationBeans
 import com.flab.hsw.core.CoreKopringApplication
 import com.flab.hsw.core.appconfig.LoggerConfig
 import com.flab.hsw.endpoint.ErrorResponseEnvelope
@@ -47,13 +48,15 @@ import java.nio.charset.StandardCharsets
     classes = [
         LoggerConfig::class,
         WebMvcConfig::class,
-        JacksonConfig::class
+        JacksonConfig::class,
+        AuthenticationBeans::class
     ],
 )
 @ComponentScan(
     basePackages = [
         CoreKopringApplication.PACKAGE_NAME,
-        "${KopringApplication.PACKAGE_NAME}.advice"
+        "${KopringApplication.PACKAGE_NAME}.advice",
+        "${KopringApplication.PACKAGE_NAME}.interceptor",
     ]
 )
 @AutoConfigureMockMvc(addFilters = false)
