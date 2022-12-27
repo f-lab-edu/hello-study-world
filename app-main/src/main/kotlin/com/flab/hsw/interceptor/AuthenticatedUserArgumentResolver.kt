@@ -22,5 +22,5 @@ class AuthenticatedUserArgumentResolver: HandlerMethodArgumentResolver {
         mavContainer: ModelAndViewContainer?,
         webRequest: NativeWebRequest,
         binderFactory: WebDataBinderFactory?
-    ): Any? =  (webRequest.nativeRequest as HttpServletRequest).getAttribute(AUTHORIZED_USER_ID_ALIAS) as String
+    ): Any? =  (webRequest.nativeRequest as HttpServletRequest).getAttribute(AUTHORIZED_USER_ID_ALIAS) as? String
 }
