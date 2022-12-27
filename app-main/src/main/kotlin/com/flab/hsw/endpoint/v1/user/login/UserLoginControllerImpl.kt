@@ -11,6 +11,9 @@ internal class UserLoginControllerImpl(
     private val jwtTokenManager: JwtTokenManager
 ) : UserLoginController {
     override fun login(request: UserLoginRequest): UserLoginResponse {
-        return UserLoginResponse(jwtTokenManager.createBy(userLoginUseCase.loginProcess(request)))
+        return UserLoginResponse(
+            authorizedToken = jwtTokenManager.createBy(userLoginUseCase.loginProcess(request)),
+            expiredIn = jwtTokenManager.returnExpiredIn()
+        )
     }
 }

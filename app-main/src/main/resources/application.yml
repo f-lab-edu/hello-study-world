@@ -41,3 +41,7 @@ auth:
   rsa:
     public: ${PUBLIC_KEY}
     private: ${PRIVATE_KEY}
+
+jwt:
+  token:
+    expiredPeriod: 7200
