@@ -5,4 +5,4 @@ package com.flab.hsw.endpoint
  */
 @Target(AnnotationTarget.VALUE_PARAMETER)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class AuthenticatedUser()
+annotation class AuthenticatedUser
