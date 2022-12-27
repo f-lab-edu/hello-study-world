@@ -45,6 +45,6 @@ class JwtTokenManager(
         const val AUTHORIZATION_HEADER = "Authorization"
         const val BEARER_PREFIX = "Bearer "
 
-        val expireTime: Instant = Instant.now().plusSeconds(7200L)
+        private val expireTime: Instant = Instant.now().plusSeconds(7200L)
     }
 }
