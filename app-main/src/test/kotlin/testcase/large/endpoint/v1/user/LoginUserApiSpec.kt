@@ -102,11 +102,7 @@ class LoginUserApiSpec : EndpointLargeTestBase() {
                 loginId = preparedUser.loginId,
                 password = preparedPassword
             )
-<<<<<<< HEAD
         ).expect2xx(UserLoginResponse::class)
-=======
-        )
->>>>>>> test/#32-add-auth-check-interceptor-testcase
 
         // and:
         val issuedToken = getAuthorizationHeaderFrom(response)
