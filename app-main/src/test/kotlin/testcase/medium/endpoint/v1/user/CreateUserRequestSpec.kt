@@ -121,7 +121,7 @@ class CreateUserRequestSpec : UserControllerMediumTestBase() {
     }
 
     @JsonDeserialize
-    private data class FakeCreateUserRequest(
+    data class FakeCreateUserRequest(
         val nickname: String?,
         val email: String?,
         val loginId: String,
