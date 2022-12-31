@@ -36,6 +36,7 @@ import org.springframework.restdocs.payload.ResponseFieldsSnippet
 import org.springframework.restdocs.restassured3.RestAssuredRestDocumentation
 import org.springframework.restdocs.snippet.Snippet
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.TestPropertySource
 import test.endpoint.v1.JsonRequestAssertionsMixin
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.reflect.KClass
@@ -50,6 +51,7 @@ import kotlin.reflect.KClass
     ]
 )
 @ExtendWith(RestDocumentationExtension::class)
+@TestPropertySource("classpath:application.yml")
 @ActiveProfiles("largeTest")
 @LargeTest
 class RestAssuredLargeTestBase : JsonRequestAssertionsMixin {
