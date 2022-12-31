@@ -14,8 +14,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.springframework.http.HttpStatus
 import test.endpoint.v1.user.*
-import test.endpoint.v1.user.decodeKeyFrom
-import test.endpoint.v1.user.getAuthorizationHeaderFrom
+import test.endpoint.v1.user.getAuthorizedTokenFrom
 import test.endpoint.v1.user.getClaimsFrom
 import testcase.large.endpoint.EndpointLargeTestBase
 import java.util.*
@@ -105,7 +104,7 @@ class LoginUserApiSpec : EndpointLargeTestBase() {
         ).expect2xx(UserLoginResponse::class)
 
         // and:
-        val issuedToken = getAuthorizationHeaderFrom(response)
+        val issuedToken = getAuthorizedTokenFrom(response)
         val loginSuccessUser = getUserApi(preparedUser.id).expect2xx(UserResponse::class)
         val loginIdFromIssuedToken = getClaimsFrom(issuedToken, decodeKeyFrom(getPublicKeyApi()))?.body?.subject
 

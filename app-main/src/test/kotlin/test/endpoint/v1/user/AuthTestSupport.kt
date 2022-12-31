@@ -1,24 +1,20 @@
 package test.endpoint.v1.user
 
-import com.flab.hsw.util.JwtTokenManager.Companion.AUTHORIZATION_HEADER
+import com.flab.hsw.endpoint.v1.user.login.UserLoginResponse
 import com.github.javafaker.Faker
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jws
 import io.jsonwebtoken.Jwts
-import io.restassured.response.Response
-import java.security.*
-import java.security.spec.X509EncodedKeySpec
+import java.security.Key
+import java.security.KeyPairGenerator
+import java.security.PrivateKey
+import java.security.PublicKey
 import java.time.Instant
 import java.util.*
 
-fun decodeKeyFrom(
-    keyString: String,
-): Key = KeyFactory.getInstance("RSA")
-    .generatePublic(X509EncodedKeySpec(Base64.getDecoder().decode(keyString)))
-
-fun getAuthorizationHeaderFrom(
-    response: Response
-): String = response.headers.get(AUTHORIZATION_HEADER).value
+fun getAuthorizedTokenFrom(
+    response: UserLoginResponse
+): String = response.authorizedToken
 
 fun getClaimsFrom(
     issuedToken: String,
