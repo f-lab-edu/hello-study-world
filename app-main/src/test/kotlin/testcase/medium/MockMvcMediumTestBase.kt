@@ -19,11 +19,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.ComponentScan
+import org.springframework.context.annotation.PropertySource
+import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.mock.web.MockHttpSession
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.TestPropertySource
@@ -114,7 +115,7 @@ class MockMvcMediumTestBase : JsonRequestAssertionsMixin {
         endpoint: String,
         payload: Any? = null,
         vararg queryParams: Pair<String, String?>,
-        session: MockHttpSession = MockHttpSession()
+        headers: HttpHeaders = HttpHeaders()
     ): MockHttpServletRequestBuilder {
         fun String.urlEncode() = URLEncoder.encode(this, StandardCharsets.UTF_8.toString())
         val requestEndpoint = if (queryParams.isEmpty()) {
@@ -148,8 +149,8 @@ class MockMvcMediumTestBase : JsonRequestAssertionsMixin {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding(Charsets.UTF_8)
+                .headers(headers)
                 .content(jsonPayload)
-                .session(session)
         }
     }
 
