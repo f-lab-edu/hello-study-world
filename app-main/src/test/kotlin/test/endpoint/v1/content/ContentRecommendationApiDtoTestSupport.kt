@@ -16,5 +16,5 @@ fun randomCreateContentRecommendationRequest(
 ) : CreateContentRecommendationRequest = CreateContentRecommendationRequest(contentId)
 
 fun createMockSessionThatContainAuthorizedUser(): MockHttpSession = MockHttpSession().apply {
-    this.setAttribute(User.AUTHORIZED_USER_ALIAS, randomUser())
+    this.setAttribute(User.AUTHORIZED_USER_ID_ALIAS, randomUser())
 }
