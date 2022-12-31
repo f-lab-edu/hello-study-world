@@ -11,11 +11,12 @@ import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.springframework.http.HttpStatus
-import test.endpoint.v1.user.createRandomUser
-import test.endpoint.v1.user.getUserApi
-import test.endpoint.v1.user.loginUserApi
-import test.endpoint.v1.user.random
+import test.endpoint.v1.user.*
+import test.endpoint.v1.user.decodeKeyFrom
+import test.endpoint.v1.user.getAuthorizationHeaderFrom
+import test.endpoint.v1.user.getClaimsFrom
 import testcase.large.endpoint.EndpointLargeTestBase
 import java.util.*
 
@@ -87,7 +88,7 @@ class LoginUserApiSpec : EndpointLargeTestBase() {
         ).expect4xx(HttpStatus.UNAUTHORIZED)
     }
 
-    @DisplayName("사용자가 로그인에 성공한 경우, 정상적으로 'lastActiveAt' 프로퍼티가 업데이트되며, 세션에 유저가 저장됩니다.")
+    @DisplayName("사용자가 로그인에 성공한 경우, 정상적으로 'lastActiveAt' 프로퍼티가 업데이트되며, 인증 토큰이 발행됩니다.")
     @Test
     fun lastActiveAtPropertyIsUpdatedWhenNormalCase() {
         // given:
@@ -96,17 +97,27 @@ class LoginUserApiSpec : EndpointLargeTestBase() {
         val preparedLastActiveTime = preparedUser.lastActiveAt
 
         // when:
-        loginUserApi(
+        val response = loginUserApi(
             UserLoginRequest(
                 loginId = preparedUser.loginId,
                 password = preparedPassword
             )
+<<<<<<< HEAD
         ).expect2xx(UserLoginResponse::class)
+=======
+        )
+>>>>>>> test/#32-add-auth-check-interceptor-testcase
 
         // and:
+        val issuedToken = getAuthorizationHeaderFrom(response)
         val loginSuccessUser = getUserApi(preparedUser.id).expect2xx(UserResponse::class)
+        val loginIdFromIssuedToken = getClaimsFrom(issuedToken, decodeKeyFrom(getPublicKeyApi()))?.body?.subject
 
         // then:
-        assertThat(loginSuccessUser.lastActiveAt > preparedLastActiveTime,`is`(true))
+        assertAll(
+            { assertThat(response.statusCode, `is`(HttpStatus.OK.value())) },
+            { assertThat(loginSuccessUser.lastActiveAt > preparedLastActiveTime, `is`(true)) },
+            { assertThat(loginIdFromIssuedToken, `is`(preparedUser.loginId)) }
+        )
     }
 }
