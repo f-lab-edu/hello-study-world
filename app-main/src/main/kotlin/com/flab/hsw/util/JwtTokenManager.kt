@@ -2,13 +2,8 @@ package com.flab.hsw.util
 
 import com.flab.hsw.core.domain.user.User
 import io.jsonwebtoken.*
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.PropertySource
-import org.springframework.stereotype.Component
-import java.security.KeyFactory
 import java.security.PrivateKey
 import java.security.PublicKey
-import java.security.spec.X509EncodedKeySpec
 import java.time.Instant
 import java.util.*
 
@@ -21,14 +16,15 @@ import java.util.*
  */
 class JwtTokenManager(
     private val publicKey: PublicKey,
-    private val privateKey: PrivateKey
+    private val privateKey: PrivateKey,
+    private val expirePeriod: Long
 ) {
 
     fun createBy(loginSuccessUser: User): String {
         return Jwts.builder()
             .setSubject(loginSuccessUser.loginId)
             .setIssuedAt(Date.from(Instant.now()))
-            .setExpiration(Date.from(expireTime))
+            .setExpiration(Date.from(returnExpiredIn()))
             .signWith(privateKey)
             .compact()
     }
@@ -40,14 +36,11 @@ class JwtTokenManager(
             .parseClaimsJws(token.removePrefix(BEARER_PREFIX))
     }
 
-    fun returnEncodedPublicKey(): String = encoder.encodeToString(publicKey.encoded)
+    fun returnExpiredIn(): Instant = Instant.now().plusSeconds(expirePeriod)
 
     companion object {
 
         const val AUTHORIZATION_HEADER = "Authorization"
         const val BEARER_PREFIX = "Bearer "
-
-        private val expireTime: Instant = Instant.now().plusSeconds(7200L)
-        private val encoder: Base64.Encoder = Base64.getEncoder()
     }
 }

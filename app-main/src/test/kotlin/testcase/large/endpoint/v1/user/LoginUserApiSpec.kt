@@ -4,6 +4,7 @@ import com.flab.hsw.core.domain.user.User
 import com.flab.hsw.endpoint.v1.user.common.UserResponse
 import com.flab.hsw.endpoint.v1.user.create.CreateUserRequest
 import com.flab.hsw.endpoint.v1.user.login.UserLoginRequest
+import com.flab.hsw.endpoint.v1.user.login.UserLoginResponse
 import com.github.javafaker.service.FakeValuesService
 import com.github.javafaker.service.RandomService
 import org.hamcrest.CoreMatchers.`is`
@@ -101,7 +102,11 @@ class LoginUserApiSpec : EndpointLargeTestBase() {
                 loginId = preparedUser.loginId,
                 password = preparedPassword
             )
+<<<<<<< HEAD
+        ).expect2xx(UserLoginResponse::class)
+=======
         )
+>>>>>>> test/#32-add-auth-check-interceptor-testcase
 
         // and:
         val issuedToken = getAuthorizationHeaderFrom(response)

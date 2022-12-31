@@ -36,3 +36,12 @@ spring:
 logging:
   file:
     path: ${KOPRINGBOOT_APP_LOG_PATH:logs/}
+
+auth:
+  rsa:
+    public: ${PUBLIC_KEY}
+    private: ${PRIVATE_KEY}
+
+jwt:
+  token:
+    expiredPeriod: 7200

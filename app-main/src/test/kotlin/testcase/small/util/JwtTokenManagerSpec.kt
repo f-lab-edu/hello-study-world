@@ -18,7 +18,7 @@ class JwtTokenManagerSpec {
     @BeforeEach
     fun setup() {
         val keyPair = returnKeySet()
-        sut = JwtTokenManager(publicKey = keyPair.first, privateKey = keyPair.second)
+        sut = JwtTokenManager(publicKey = keyPair.first, privateKey = keyPair.second, expirePeriod = 7200L)
     }
 
     @DisplayName("정상적으로 토큰이 생성된 경우, 회원의 loginId가 subject에 주입됩니다.")
