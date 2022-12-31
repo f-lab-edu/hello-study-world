@@ -6,7 +6,6 @@ import com.flab.hsw.core.exception.ErrorCodes
 import com.flab.hsw.endpoint.v1.ApiPathsV1
 import org.hamcrest.MatcherAssert.*
 import org.hamcrest.Matchers
-import org.junit.Ignore
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -21,7 +20,7 @@ import test.endpoint.v1.content.createMockSessionThatContainAuthorizedUser
 import testcase.medium.CreateContentRecommendationControllerMediumTestBase
 import java.util.*
 
-class CreateCreateContentRecommendationRequestSpecRecommendation :
+class CreateCreateContentRecommendationRequestSpec :
     CreateContentRecommendationControllerMediumTestBase() {
 
     @Autowired

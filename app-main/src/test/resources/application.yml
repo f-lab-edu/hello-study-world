@@ -43,4 +43,3 @@ auth:
 jwt:
   token:
     expiredPeriod: 7200
-    
