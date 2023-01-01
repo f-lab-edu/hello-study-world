@@ -21,7 +21,7 @@ internal class UserLoginControllerImpl(
             jwtTokenManager.createRefreshToken(loginSuccessUser.loginId)))
 
         return UserLoginResponse(
-            authorizedToken = jwtTokenManager.createBy(userLoginUseCase.loginProcess(request)),
+            authorizedToken = jwtTokenManager.createAccessTokenBy(loginSuccessUser.loginId),
             expiredIn = jwtTokenManager.returnAccessTokenExpiredIn()
         )
     }

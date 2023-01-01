@@ -22,9 +22,9 @@ class JwtTokenManager(
     private val refreshTokenExpirePeriod: Long
 ) {
 
-    fun createBy(loginSuccessUser: User): String {
+    fun createAccessTokenBy(userLoginId: String): String {
         return Jwts.builder()
-            .setSubject(loginSuccessUser.loginId)
+            .setSubject(userLoginId)
             .setIssuedAt(Date.from(Instant.now()))
             .setExpiration(Date.from(returnAccessTokenExpiredIn()))
             .signWith(privateKey)
