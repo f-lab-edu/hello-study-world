@@ -17,14 +17,14 @@ import java.util.*
 class JwtTokenManager(
     private val publicKey: PublicKey,
     private val privateKey: PrivateKey,
-    private val expirePeriod: Long
+    private val accessTokenExpirePeriod: Long,
 ) {
 
     fun createBy(loginSuccessUser: User): String {
         return Jwts.builder()
             .setSubject(loginSuccessUser.loginId)
             .setIssuedAt(Date.from(Instant.now()))
-            .setExpiration(Date.from(returnExpiredIn()))
+            .setExpiration(Date.from(returnAccessTokenExpiredIn()))
             .signWith(privateKey)
             .compact()
     }
@@ -35,8 +35,8 @@ class JwtTokenManager(
             .build()
             .parseClaimsJws(token.removePrefix(BEARER_PREFIX))
     }
+    fun returnAccessTokenExpiredIn(): Instant = Instant.now().plusSeconds(accessTokenExpirePeriod)
 
-    fun returnExpiredIn(): Instant = Instant.now().plusSeconds(expirePeriod)
 
     companion object {
 

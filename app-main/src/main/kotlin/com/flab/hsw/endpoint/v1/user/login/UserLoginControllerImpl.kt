@@ -13,7 +13,7 @@ internal class UserLoginControllerImpl(
     override fun login(request: UserLoginRequest): UserLoginResponse {
         return UserLoginResponse(
             authorizedToken = jwtTokenManager.createBy(userLoginUseCase.loginProcess(request)),
-            expiredIn = jwtTokenManager.returnExpiredIn()
+            expiredIn = jwtTokenManager.returnAccessTokenExpiredIn()
         )
     }
 }
