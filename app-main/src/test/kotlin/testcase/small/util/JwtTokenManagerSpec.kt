@@ -33,7 +33,7 @@ class JwtTokenManagerSpec {
         val randomUser = randomUser()
 
         // when:
-        val returnClaimsBody = sut.validAndReturnClaims(sut.createBy(randomUser))?.body
+        val returnClaimsBody = sut.validAndReturnClaims(sut.createAccessTokenBy(randomUser.loginId)).body
 
         // then:
        assertThat(returnClaimsBody?.subject, `is`(randomUser.loginId))

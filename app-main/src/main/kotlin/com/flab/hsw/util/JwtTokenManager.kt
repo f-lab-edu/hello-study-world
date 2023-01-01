@@ -40,7 +40,7 @@ class JwtTokenManager(
             .compact()
     }
 
-    fun validAndReturnClaims(token: String): Jws<Claims>? {
+    fun validAndReturnClaims(token: String): Jws<Claims> {
         return Jwts.parserBuilder()
             .setSigningKey(publicKey)
             .build()

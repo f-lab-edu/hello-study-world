@@ -19,7 +19,7 @@ fun getAuthorizedTokenFrom(
 fun getClaimsFrom(
     issuedToken: String,
     publicKey: Key,
-): Jws<Claims>? {
+): Jws<Claims> {
     return Jwts.parserBuilder()
         .setSigningKey(publicKey)
         .build()
