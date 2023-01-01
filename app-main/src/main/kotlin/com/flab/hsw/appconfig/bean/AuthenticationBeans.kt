@@ -21,6 +21,9 @@ class AuthenticationBeans {
     @Value("\${jwt.token.expiredPeriod.access}")
     private lateinit var accessTokenExpiredTime: String
 
+    @Value("\${jwt.token.expiredPeriod.refresh}")
+    private lateinit var refreshTokenExpiredTime: String
+
     @Bean
     fun jwtTokenManager(): JwtTokenManager {
         val keyFactory = KeyFactory.getInstance("RSA")
@@ -28,6 +31,7 @@ class AuthenticationBeans {
             publicKey = keyFactory.generatePublic(X509EncodedKeySpec(Base64.getDecoder().decode(publicKey))),
             privateKey = keyFactory.generatePrivate(PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateKey))),
             accessTokenExpirePeriod = accessTokenExpiredTime.toLong(),
+            refreshTokenExpirePeriod = refreshTokenExpiredTime.toLong()
         )
     }
 }

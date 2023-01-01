@@ -44,3 +44,4 @@ jwt:
   token:
     expiredPeriod:
       access: 7200
+      refresh: 1209600
