@@ -18,7 +18,12 @@ class JwtTokenManagerSpec {
     @BeforeEach
     fun setup() {
         val keyPair = returnKeySet()
-        sut = JwtTokenManager(publicKey = keyPair.first, privateKey = keyPair.second, expirePeriod = 7200L)
+        sut = JwtTokenManager(
+            publicKey = keyPair.first,
+            privateKey = keyPair.second,
+            accessTokenExpirePeriod = 7200L,
+            refreshTokenExpirePeriod = 1209600L
+        )
     }
 
     @DisplayName("정상적으로 토큰이 생성된 경우, 회원의 loginId가 subject에 주입됩니다.")
@@ -28,7 +33,7 @@ class JwtTokenManagerSpec {
         val randomUser = randomUser()
 
         // when:
-        val returnClaimsBody = sut.validAndReturnClaims(sut.createBy(randomUser))?.body
+        val returnClaimsBody = sut.validAndReturnClaims(sut.createAccessTokenBy(randomUser.loginId)).body
 
         // then:
        assertThat(returnClaimsBody?.subject, `is`(randomUser.loginId))

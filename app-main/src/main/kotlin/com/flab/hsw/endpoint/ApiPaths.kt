@@ -15,7 +15,8 @@ object ApiPaths {
 
     /** Replace this to spring-actuator if needed */
     const val HEALTH = "/health"
-    const val PUBLIC_KEY = "/auth/key"
+
+    const val REFRESH_TOKEN = "/auth/refresh"
 
     const val LATEST_VERSION = ApiPathsV1.V1
 }

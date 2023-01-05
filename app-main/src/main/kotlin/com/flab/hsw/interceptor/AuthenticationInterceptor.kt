@@ -21,7 +21,7 @@ class AuthenticationInterceptor(
             val claims = jwtTokenManager.validAndReturnClaims(
                 request.getHeader(AUTHORIZATION_HEADER) ?: throw CredentialNotFoundException()
             )
-            request.setAttribute(AUTHORIZED_USER_ID_ALIAS, claims?.body?.subject)
+            request.setAttribute(AUTHORIZED_USER_ID_ALIAS, claims.body.subject)
         }
         return true
     }

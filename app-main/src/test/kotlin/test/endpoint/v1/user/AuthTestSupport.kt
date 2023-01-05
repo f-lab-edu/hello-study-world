@@ -16,10 +16,15 @@ fun getAuthorizedTokenFrom(
     response: UserLoginResponse
 ): String = response.authorizedToken
 
+fun getSubjectFrom(token: String, publicKey: PublicKey): String = getClaimsFrom(
+    issuedToken = token,
+    publicKey = publicKey
+).body.subject
+
 fun getClaimsFrom(
     issuedToken: String,
     publicKey: Key,
-): Jws<Claims>? {
+): Jws<Claims> {
     return Jwts.parserBuilder()
         .setSigningKey(publicKey)
         .build()
