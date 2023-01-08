@@ -71,7 +71,7 @@ image::https://s3.us-west-2.amazonaws.com/secure.notion-static.com/d2760779-9ee8
 
 Jeffrey Palermo의 Onion Architecture와 저희 프로젝트의 레이어 구조도를 나열한 이미지입니다. 어니언 아키텍쳐에서는 Application Core를 중심으로 변경될 수 있는 외부 레이어는 모두 밖으로 밀어냅니다. 그리고 이를 인터페이스 형태로 유지하고 **Dependency Injection**을 통해 실제 구현체를 주입받는 형태로 설계합니다. 이는 Application Core가 의존성 중 아주 강력한 의존성인 Type Dependency를 구현체들과 가지지 않아도 된다는 의미입니다. 
 
-이를 통해 Data Access(Infrastruture)를 변경해도 내부 Application Core에는 전혀 수정을 가하지 않는 유지보수를 가능케 하는 구조를 만들 수 있었습니다. @UseCase, @Infrastrcuture 어노테이션을 사용해 Application Service Layer와 Infrastructure Service Layer를 완벽하게 분리하여, 전통적인 Layered Architecture에서 겪을 수 있는 Service Layer의 @Service 어노테이션이 의미도 명시적으로 표현했습니다.
+이를 통해 Data Access(Infrastruture)를 변경해도 내부 Application Core에는 전혀 수정을 가하지 않는 유지보수를 가능케 하는 구조를 만들 수 있었습니다. 또한 `@UseCase`, `@Infrastrcuture` 어노테이션을 사용해 Application Service Layer와 Infrastructure Service Layer를 분리했습니다. 전통적인 Layered Architecture에서 겪을 수 있는 Service Layer의 link:https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/stereotype/Service.html[`@Service`]가 어떤 의도로 사용되었는지 명시적으로 분리해 표현했습니다.
 
 // Metadata:
 :description: Spring boot multimodule project with Kotlin language
