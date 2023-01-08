@@ -17,7 +17,7 @@
 
 > *프로젝트를 진행하며 고민했던 요소와 왜 선택하게 됐는지?*
 
-- *테스트를 Small, Medium, Large로 나눈 이유는 무엇인가요?*
+- *1. 테스트를 Small, Medium, Large로 나눈 이유는 무엇인가요?*
 
 Spring Boot에서 제공하는 슬라이스 테스트처럼 **계층별로 테스트를 격리하고, 병렬로 실행하여 개발 생산성을 향상시키려는 의도**가 담겨져 있습니다. 2010년에 작성된 link:https://testing.googleblog.com/2010/12/test-sizes.html[Google Testing Blog - Test Sizes]를 참고했습니다.
 
@@ -27,7 +27,7 @@ Spring Boot에서 제공하는 슬라이스 테스트처럼 **계층별로 테�
 
 ---
 
-- *Token 기반 로그인을 왜 선택하게 됐는지?*
+- *2. Token 기반 로그인을 왜 선택하게 됐는지?*
 
 로그인 기능에서 필요한 '상태 보관' 전략에는 `Session based`, `Token based` 두 가지 선택지가 존재했습니다. 두 선택지는 **보안**과 **수평 확장성(horizontal scalability)** 관점에서의 트레이드오프가 존재했습니다. 각 선택지의 로그인 상태 발급 절차는 아래와 같습니다. 
 
