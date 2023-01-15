@@ -23,6 +23,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter:$version_springBoot"
     implementation "org.springframework.boot:spring-boot-starter-validation:$version_springBoot"
     implementation "org.springframework.boot:spring-boot-starter-jdbc:$version_springBoot"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:$version_springBoot"
     implementation "org.springframework.boot:spring-boot-starter-logging:$version_springBoot"
 
     // Database
