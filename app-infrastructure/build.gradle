@@ -1,6 +1,7 @@
 version version_app
 
 apply plugin: "kotlin-spring"
+apply plugin: "kotlin-jpa"
 
 jar {
     enabled = true
