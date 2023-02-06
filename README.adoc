@@ -55,7 +55,7 @@ Session based 방식은 서버가 사용자의 로그인 상태를 보관하며 
 
 - *About Architecture*
 
-image::https://s3.us-west-2.amazonaws.com/secure.notion-static.com/d2760779-9ee8-48c9-844e-11b0c6c250a9/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230108%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230108T133107Z&X-Amz-Expires=86400&X-Amz-Signature=6f1405c9201c11b57dac5b3f323c746f4d847c7f60821da97cc37f097feb4279&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject[Architecture-img]
+image::/readme-img/hsw-onion.png[Architecture-img]
 
 이번 프로젝트의 목표 중 하나는**‘의존성을 잘 관리할 수 있는 아키텍쳐’**로 설계된 소프트웨어를 구축하는 것이었습니다. 실무에서 아키텍쳐 관련 실습은 어려움이 있어 사이드 프로젝트 레벨에서 실행하기로 결정했습니다.
 
