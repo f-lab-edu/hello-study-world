@@ -12,6 +12,7 @@ import com.flab.hsw.core.jdbc.LongIdentifiable.Companion.UNIDENTIFIABLE
 import com.flab.hsw.lib.util.toUUID
 import java.time.Instant
 import java.util.*
+import javax.persistence.*
 
 /**
  * [equals] and [hashCode] implementation is inspired by the article as follows:
@@ -20,16 +21,30 @@ import java.util.*
  * @since 2021-08-10
  */
 @SuppressWarnings("LongParameterList")  // 별도의 클래스로 추출할 프로퍼티가 존재하지 않습니다.
+@Entity
+@Table(
+    name = "USERS",
+    uniqueConstraints = [UniqueConstraint(name = "uk_users_identity", columnNames = ["nickname", "email"])]
+)
 internal class UserEntity(
+
+    @Column(unique = true, columnDefinition = "BINARY(16)")
     val uuid: UUID,
+
     var nickname: String,
+
+    @Column(unique = true)
     var email: String,
+
     var loginId: String,
     var password: String,
     var createdAt: Instant,
     var lastActiveAt: Instant,
     var deleted: Boolean
 ) : LongIdentifiable {
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = true)
     override var id: Long = UNIDENTIFIABLE
 
     var version: Long = 0L

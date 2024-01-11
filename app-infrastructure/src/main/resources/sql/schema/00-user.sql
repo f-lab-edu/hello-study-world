@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS `users`
     `deleted`        BOOLEAN     DEFAULT FALSE,
     `created_at`     DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`     DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `last_active_at` DATETIME    ,
     `version`        BIGINT      NOT NULL,
 
     CONSTRAINT `uk_users_uuid`     UNIQUE (`uuid`),
